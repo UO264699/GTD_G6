@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>SALUDO</title>
+<title>SALUDOs</title>
 </head>
 <body>
 
