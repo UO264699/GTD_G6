@@ -10,6 +10,8 @@
 
 	<h1>Bienvenido a la página principal</h1>
 
+	<p>This is a test</p>
+
 
 	<p>La hora actual del servidor es ${serverTime}</p>
 
