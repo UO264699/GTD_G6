@@ -1,5 +1,7 @@
 package com.capgemini.persistence;
 
+
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,30 +9,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.capgemini.persistence.dto.PizzaDto;
+import org.springframework.stereotype.Repository;
+
+import com.capgemini.model.User;
 import com.capgemini.persistence.dto.UserDto;
 import com.capgemini.persistence.jdbc.Jdbc;
-import com.sun.org.apache.xml.internal.security.keys.content.keyvalues.RSAKeyValue;
 
-public class UsersRepository implements Repository {
+@Repository
+public class UsersRepository implements com.capgemini.persistence.Repository {
 
 	public UsersRepository() {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
+	
 	public int add(Object o) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public void delete(int id) throws SQLException {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+	
 	public List<Object> findAll() throws SQLException {
 		
 		
@@ -51,13 +54,15 @@ public class UsersRepository implements Repository {
 			
 			while(rs.next()) {
 				
-				UserDto u = new UserDto();
-				
-				u.email = rs.getString("email");
-				u.isadmin = rs.getBoolean("isadmin");
-				u.login = rs.getString("login");
-				u.status = rs.getString("status");
+			
+				int id = rs.getInt("id");
+				String email = rs.getString("email");
+				boolean isadmin = rs.getBoolean("isadmin");
+				String login = rs.getString("login");
+				String status = rs.getString("status");
 
+				
+				User u = new User(id, login, email, null, isadmin, null, null, null);
 
 				
 				listUsers.add(u);
