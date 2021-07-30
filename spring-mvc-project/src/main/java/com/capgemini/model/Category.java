@@ -4,9 +4,9 @@ public class Category {
 
     public int id;
     public String name;
-    public String user_id;
+    public int user_id;
 
-    public Category(int id, String name, String user_id) {
+    public Category(int id, String name, int user_id) {
         this.id = id;
         this.name = name;
         this.user_id = user_id;
@@ -20,11 +20,11 @@ public class Category {
         this.id = id;
     }
 
-    public String getUser_id() {
+    public int getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
