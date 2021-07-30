@@ -88,5 +88,10 @@ public class User {
 		this.tasks = tasks;
 	}
 
+	public Object getUserName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
