@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-
+import com.capgemini.services.CategoriesService;
+import com.capgemini.services.TasksService;
 import com.capgemini.services.UsersService;
 
 @Controller
@@ -21,6 +22,12 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService usersService;
+	
+	@Autowired
+	private TasksService tasksService;
+	
+	@Autowired
+	private CategoriesService categoriesService;
 	
 	@RequestMapping(value = "/users/list")
 	public String getUsers(Model model) throws SQLException {
@@ -35,7 +42,8 @@ public class UsersController {
 	public String deleteUser(@PathVariable int id) throws SQLException {
 		
 		usersService.deleteUser(id);
-		
+		tasksService.deleteTask(id);
+		categoriesService.deleteCategory(id);
 		
 		return "redirect:/users/list";
 		

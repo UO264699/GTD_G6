@@ -13,6 +13,7 @@
 
 	<p>La hora actual del servidor es ${serverTime}</p>
 
+    <a href="/users/list"> Lista de usuarios </a>
 
 	<form action="user" method="post">
 
