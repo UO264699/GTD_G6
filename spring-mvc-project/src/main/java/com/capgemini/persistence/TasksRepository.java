@@ -5,9 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+
 import com.capgemini.persistence.jdbc.Jdbc;
 
-public class TasksRepository implements Repository {
+@Repository
+public class TasksRepository implements com.capgemini.persistence.Repository {
 
 	public TasksRepository() {
 		// TODO Auto-generated constructor stub
@@ -29,7 +33,7 @@ public class TasksRepository implements Repository {
 		try {
 			c = Jdbc.getConnection();
 			
-			pst = c.prepareStatement("DELETE FROM \"PUBLIC\".\"TUSERS\" WHERE user_id = ?");
+			pst = c.prepareStatement("DELETE FROM \"PUBLIC\".\"TTASKS\" WHERE user_id = ?");
 			
 
 			pst.setInt(1,id);
