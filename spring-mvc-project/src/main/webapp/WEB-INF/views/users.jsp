@@ -33,6 +33,10 @@
         				<td>
             				<c:out value="${user.login}" />
         				</td>
+        				
+        				<td>
+            				<a href=delete/${user.id} >Borrar</a>
+        				</td>
                    
                    </tr>
                     

@@ -13,18 +13,11 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.model.User;
-
+import com.capgemini.persistence.dto.UserDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
 @Repository
 public class UsersRepository implements com.capgemini.persistence.Repository {
-
-	public UsersRepository() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	
 
 	
 	public int add(Object o) throws SQLException {
@@ -33,7 +26,29 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 	}
 
 	public void delete(int id) throws SQLException {
-		// TODO Auto-generated method stub
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+    
+	
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("DELETE FROM \"PUBLIC\".\"TUSERS\" WHERE id = ?");
+			
+
+			pst.setInt(1,id);
+			
+			pst.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			pst.close();
+			c.close();
+		}
 
 	}
 
@@ -59,14 +74,14 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 			while(rs.next()) {
 				
 			
-				int id = rs.getInt("id");
-				String email = rs.getString("email");
-				boolean isadmin = rs.getBoolean("isadmin");
-				String login = rs.getString("login");
-				String status = rs.getString("status");
 
 				
-				User u = new User(id, login, email, null, isadmin, null, null, null);
+				UserDto u = new UserDto();
+				
+				u.id = rs.getInt("id");
+				u.email = rs.getString("email");
+				u.isAdmin = rs.getBoolean("isadmin");
+				u.login = rs.getString("login");
 
 				
 				listUsers.add(u);

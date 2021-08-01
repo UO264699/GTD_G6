@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.model.User;
 import com.capgemini.persistence.UsersRepository;
+import com.capgemini.persistence.dto.UserDto;
 
 
 @Service
@@ -31,7 +32,9 @@ public class UsersService {
 		
 		for(Object u : users1) {
 			
-			User user = (User) u;
+			UserDto udto = (UserDto) u;
+			
+			User user = new User(udto.id, udto.login, udto.email, udto.password, udto.isAdmin, udto.status,udto.tasks, udto.categories);
 			
 			users.add(user);
 		}

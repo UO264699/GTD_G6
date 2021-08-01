@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class Task {
 
-    public String tittle;
-    public String comments;
-    public Date created;
-    public Date planned;
-    public Date finished;
-    public int user_id;
-    public int category_id;
+    private String tittle;
+    private String comments;
+    private Date created;
+    private Date planned;
+    private Date finished;
+    private int user_id;
+    private int category_id;
 
     public Task(String tittle, String comments, Date created, Date planned, Date finished, int user_id, int category_id) {
         this.tittle = tittle;
