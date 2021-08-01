@@ -3,6 +3,7 @@ package com.capgemini.persistence;
 
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.model.User;
-import com.capgemini.persistence.dto.UserDto;
+
 import com.capgemini.persistence.jdbc.Jdbc;
 
 @Repository
@@ -21,6 +22,9 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 	public UsersRepository() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 
 	
 	public int add(Object o) throws SQLException {
@@ -76,8 +80,9 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		}
 		finally {
 		
-
 			c.close();
+			
+
 		}
 		
 		

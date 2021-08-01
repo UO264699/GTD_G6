@@ -1,7 +1,7 @@
 package com.capgemini.services;
 
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ public class UsersService {
 	@Autowired
 	private UsersRepository usersRepository;
 
+
 	public UsersService() {
 		// TODO Auto-generated constructor stub
 	}
@@ -25,19 +26,18 @@ public class UsersService {
 	public List<User> getUsers() throws SQLException{
 		
 
-		List<Object> users = usersRepository.findAll();
+		List<User> users = new ArrayList<User>();
+		List<Object> users1 = usersRepository.findAll();
 		
-		for(Object u : users) {
+		for(Object u : users1) {
 			
 			User user = (User) u;
 			
-			System.out.println(user.email);
-			
-			
+			users.add(user);
 		}
 	
 		
-		return null;
+		return users;
 		
 		
 	}

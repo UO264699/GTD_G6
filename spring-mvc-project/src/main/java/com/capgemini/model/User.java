@@ -4,14 +4,18 @@ import java.util.List;
 
 public class User {
 
-	public int id;
-	private String login;
-	public String email;
-	public String password;
-	public Boolean isAdmin;
-	public UserStatus status;
-	public List<Task> tasks;
-	public List<Category> categories;
+	private int id;
+	private Object login;
+	private String email;
+	private String password;
+	private Boolean isAdmin;
+	private UserStatus status;
+	private List<Task> tasks;
+	private List<Category> categories;
+	
+	public User() {
+		
+	}
 
 	public User(int id,String login, String email, String password, Boolean isAdmin, UserStatus status, List<Task> tasks, List<Category> categories) {
 		this.id = id;
@@ -32,7 +36,7 @@ public class User {
 		this.id = id;
 	}
 
-	public String getLogin() {
+	public 	Object getLogin() {
 		return login;
 	}
 
@@ -88,10 +92,7 @@ public class User {
 		this.tasks = tasks;
 	}
 
-	public Object getUserName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 }
