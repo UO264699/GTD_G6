@@ -45,6 +45,10 @@ public class UsersService {
 		
 	}
 	
+	public void deleteUser(int id) throws SQLException {
+		
+		usersRepository.delete(id);
+	}
 	
 
 }
