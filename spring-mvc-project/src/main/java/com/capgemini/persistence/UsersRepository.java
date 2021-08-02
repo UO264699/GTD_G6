@@ -82,6 +82,7 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 				u.email = rs.getString("email");
 				u.isAdmin = rs.getBoolean("isadmin");
 				u.login = rs.getString("login");
+			    u.status = rs.getString("status");
 
 				
 				listUsers.add(u);
@@ -102,6 +103,104 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		
 		
 		
+	}
+	
+	public UserDto findById(int id) throws SQLException {
+		
+		
+		List<Object> listUsers = new ArrayList<Object>();
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		
+
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TUSERS\" where id=?");
+			
+			pst.setInt(1, id);
+			
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+			
+
+				
+				UserDto u = new UserDto();
+				
+				u.id = rs.getInt("id");
+				u.email = rs.getString("email");
+				u.isAdmin = rs.getBoolean("isadmin");
+				u.login = rs.getString("login");
+			    u.status = rs.getString("status");
+		
+                
+				
+				listUsers.add(u);
+				
+			}
+			
+			return (UserDto) listUsers.get(0);
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+		
+			c.close();
+			
+
+		}
+		
+	}
+	
+	
+	
+	public void updateStatus(int id) throws SQLException {
+		
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+		
+		UserDto u = findById(id);
+	
+		
+	
+		try {
+			c = Jdbc.getConnection();
+		
+	
+			
+			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TUSERS\" SET status = "+ "'" + changeStatus(u) + "'" + " where id=?");
+			
+
+			pst.setInt(1,id);
+			
+			pst.executeUpdate();
+			
+			pst.close();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+		
+			c.close();
+		}
+
+		
+	}
+	
+	private String changeStatus(UserDto u) {
+		
+
+		if(u.status.equals("ENABLED"))
+			return "DISABLED";
+		else
+			return "ENABLED";
 	}
 
 }
