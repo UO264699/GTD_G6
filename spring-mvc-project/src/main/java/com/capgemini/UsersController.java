@@ -18,9 +18,6 @@ import com.capgemini.services.UsersService;
 @Controller
 public class UsersController {
 
-	public UsersController() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	@Autowired
 	private UsersService usersService;
@@ -57,5 +54,17 @@ public class UsersController {
 
 		return "redirect:/users/list";
 	}
+	
+
+	@RequestMapping(value = "users/changeStatus/{id}")
+	public String changeStatus(@PathVariable int id) throws SQLException {
+		
+		usersService.changeStatus(id);
+	
+		return "redirect:/users/list";
+		
+	}
+	
+	
 
 }

@@ -13,9 +13,6 @@ import com.capgemini.persistence.jdbc.Jdbc;
 @Repository
 public class TasksRepository implements com.capgemini.persistence.Repository {
 
-	public TasksRepository() {
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public int add(Object o) throws SQLException {
