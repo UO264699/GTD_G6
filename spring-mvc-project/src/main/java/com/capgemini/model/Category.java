@@ -2,9 +2,9 @@ package com.capgemini.model;
 
 public class Category {
 
-    public int id;
-    public String name;
-    public int user_id;
+    private int id;
+    private String name;
+    private int user_id;
 
     public Category(int id, String name, int user_id) {
         this.id = id;
