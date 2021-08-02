@@ -5,10 +5,10 @@ import java.util.List;
 public class User {
 
 	private int id;
-	private Object login;
+	private String login;
 	private String email;
 	private String password;
-	private Boolean isAdmin;
+	private boolean isAdmin;
 	private UserStatus status;
 	private List<Task> tasks;
 	private List<Category> categories;
@@ -22,7 +22,7 @@ public class User {
 		this.login = login;
 		this.email = email;
 		this.password = password;
-		this.isAdmin = isAdmin;
+		this.setAdmin(isAdmin);
 		this.status = status;
 		this.tasks = tasks;
 		this.categories = categories;
@@ -36,7 +36,7 @@ public class User {
 		this.id = id;
 	}
 
-	public 	Object getLogin() {
+	public 	String getLogin() {
 		return login;
 	}
 
@@ -60,16 +60,10 @@ public class User {
 		this.password = password;
 	}
 
-	public Boolean getAdmin() {
-		return isAdmin;
-	}
+	
 
-	public void setAdmin(Boolean admin) {
-		isAdmin = admin;
-	}
-
-	public UserStatus getStatus() {
-		return status;
+	public String getStatus() {
+		return status.toString();
 	}
 
 	public void setStatus(UserStatus status) {
@@ -92,6 +86,23 @@ public class User {
 		this.tasks = tasks;
 	}
 
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	
+	public String getAdmin() {
+		
+		if(isAdmin())
+			return "Sí";
+		else
+			return "No";
+		
+	}
 	
 
 

@@ -4,7 +4,8 @@ import java.util.List;
 
 import com.capgemini.model.Category;
 import com.capgemini.model.Task;
-import com.capgemini.model.UserStatus;
+
+
 
 public class UserDto {
 
@@ -13,7 +14,7 @@ public class UserDto {
 	public String email;
 	public String password;
 	public Boolean isAdmin;
-	public UserStatus status;
+	public String status;
 	public List<Task> tasks;
 	public List<Category> categories;
 
