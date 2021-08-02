@@ -21,7 +21,31 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 
 	
 	public int add(Object o) throws SQLException {
-		// TODO Auto-generated method stub
+		UserDto u = (UserDto) o;
+
+		Connection c = null;
+		PreparedStatement pst = null;
+
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("INSERT INTO TUSERS (ID,EMAIL,ISADMIN,LOGIN,PASSWORD,STATUS) VALUES (?,?,?,?,?,?)");
+
+			pst.setInt(1, u.id);
+			pst.setString(2, u.email);
+			pst.setBoolean(3, u.isAdmin);
+			pst.setString(4, u.login);
+			pst.setString(5, u.password);
+//			pst.setString(6, u.status);
+
+			pst.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			pst.close();
+			c.close();
+		}
 		return 0;
 	}
 

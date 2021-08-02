@@ -22,11 +22,15 @@ public class UsersService {
 	public UsersService() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public User createNewUser(User newUser) throws SQLException {
+		usersRepository.add(newUser);
+
+		return newUser;
+	}
 	
 	
 	public List<User> getUsers() throws SQLException{
-		
-
 		List<User> users = new ArrayList<User>();
 		List<Object> users1 = usersRepository.findAll();
 		

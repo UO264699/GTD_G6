@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>HOME</title>
+</head>
+<body>
+
+	<h1>Bienvenido a la página principal</h1>
+
+
+	<p>La hora actual del servidor es ${serverTime}</p>
+
+    <a href="/users/list"> Lista de usuarios </a>
+
+	<form action="user" method="post">
+
+         <input type="text" name ="userName"/>
+         <input type="submit" value ="Login"/>
+
+</form>
+
+</body>
+</html>

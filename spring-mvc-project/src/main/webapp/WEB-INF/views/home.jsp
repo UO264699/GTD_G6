@@ -1,26 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>HOME</title>
+    <meta charset="ISO-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body>
-
-	<h1>Bienvenido a la página principal</h1>
 
 
-	<p>La hora actual del servidor es ${serverTime}</p>
+<body class="text-center">
 
-    <a href="/users/list"> Lista de usuarios </a>
+    <main class="form-signin">
+        <form class=" d-flex flex-column justify-content-center" method="post" action="users/add">
+          <h1 class="h3 mb-3 fw-normal w-90">Please register in</h1>
+      
+          <div class="form-floating m-1">
+            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="">
+          </div>
+          <!-- <div class="form-floating m-1">
+            <input type="text" class="form-control" id="floatingInput" name="login" placeholder="">
+          </div> -->
+          <div class="form-floating m-1">
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="">
+          </div>
+          <!-- 
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" name="isAdmin" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Dale si eres administrador</label>
+          </div>  -->
 
-	<form action="user" method="post">
+          <button class="btn btn-success m-1" type="submit">Register</button>
+         
+          <p class="mt-5 mb-3 text-muted">&copy; PM</p>
+        </form>
+      </main>
 
-         <input type="text" name ="userName"/>
-         <input type="submit" value ="Login"/>
 
-</form>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -2,12 +2,14 @@ package com.capgemini;
 
 import java.sql.SQLException;
 
+import com.capgemini.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.services.CategoriesService;
 import com.capgemini.services.TasksService;
@@ -46,7 +48,14 @@ public class UsersController {
 		categoriesService.deleteCategory(id);
 		
 		return "redirect:/users/list";
+	}
+
+	@RequestMapping(value = "users/add", method = RequestMethod.POST)
+	public String addNewUsers(@RequestBody User user) throws SQLException {
 		
+		usersService.createNewUser(user);
+
+		return "redirect:/users/list";
 	}
 
 }

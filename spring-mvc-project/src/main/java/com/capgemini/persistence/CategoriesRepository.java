@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.capgemini.model.Category;
+import com.capgemini.persistence.dto.UserDto;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.persistence.jdbc.Jdbc;
@@ -21,7 +22,6 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 
 	@Override
 	public int add(Object o) throws SQLException {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
