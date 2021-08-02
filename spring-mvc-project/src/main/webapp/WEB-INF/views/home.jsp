@@ -10,11 +10,10 @@
 
 	<h1>Bienvenido a la página principal</h1>
 
-	<p>This is a test</p>
-
 
 	<p>La hora actual del servidor es ${serverTime}</p>
 
+    <a href="/users/list"> Lista de usuarios </a>
 
 	<form action="user" method="post">
 
