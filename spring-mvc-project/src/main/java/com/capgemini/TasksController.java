@@ -1,11 +1,6 @@
 package com.capgemini;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,9 +34,9 @@ public class TasksController {
 	public String getTasks(Model model) throws SQLException {
 	
 		
-		model.addAttribute("todayList",tasksService.listTodayTasks());
+		model.addAttribute("todayTasks",tasksService.listTodayTasks(2));
 		
-		model.addAttribute("tasks",tasksService.listTasks());
+		model.addAttribute("tasks",tasksService.listTasks(2));
 		
 		return "tasks";
 		
