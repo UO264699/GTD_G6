@@ -3,7 +3,9 @@ package com.capgemini.persistence;
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,8 +36,13 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 
 			pst = c.prepareStatement("INSERT INTO \"PUBLIC\".\"TTASKS\"(comments,created,finished,planned,title,category_id,user_id) VALUES(?,?,?,?,?,?,?)");
 		
-			pst.setString(1, null);
-			pst.setDate(2, (java.sql.Date) new Date());
+			Date d = new Date();
+			
+			System.out.println(task.categoryId);
+			System.out.println(task.userId);
+			
+			pst.setString(1, "");
+			pst.setDate(2, new java.sql.Date(d.getTime()));
 			pst.setDate(3, null);
 			pst.setDate(4, null);
 			pst.setString(5, task.title);
@@ -87,12 +94,56 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 
 	}
 
-	
-	 
 	@Override
 	public List<Object> findAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Object> listTasks = new ArrayList<Object>();
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		
+
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TTASKS\"");
+			
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				
+				TaskDto t = new TaskDto();
+				
+				t.id = rs.getInt("id");
+				t.categoryId = rs.getInt("category_id");
+				t.userId = rs.getInt("user_id");
+				t.comments = rs.getString("comments");
+				t.created = rs.getDate("created");
+				t.finished = rs.getDate("finished");
+				t.planned = rs.getDate("planned");
+				t.title = rs.getString("title");
+				
+				
+
+				
+				listTasks.add(t);
+				
+			}
+			
+			return listTasks;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+		
+			c.close();
+			
+
+		}
+		
 	}
 
 }

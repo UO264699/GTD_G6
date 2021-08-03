@@ -11,5 +11,6 @@ public class TaskDto {
 	public Date finished;
 	public int categoryId;
 	public int userId;
+	public int id;
 
 }
