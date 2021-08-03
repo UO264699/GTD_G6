@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.capgemini.persistence.dto.TaskDto;
+
 import com.capgemini.persistence.jdbc.Jdbc;
 
 @Repository
@@ -38,8 +39,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		
 			Date d = new Date();
 			
-			System.out.println(task.categoryId);
-			System.out.println(task.userId);
+			
 			
 			pst.setString(1, "");
 			pst.setDate(2, new java.sql.Date(d.getTime()));
@@ -197,6 +197,39 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 			
 
 		}
+		
+	}
+	
+	
+public void updateFinished(int id) throws SQLException {
+		
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+	
+
+		try {
+			c = Jdbc.getConnection();
+		
+			Date d = new Date();
+	
+			
+			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TTASKS\" SET finished =? where id=?");
+			
+			pst.setDate(1,new java.sql.Date(d.getTime()));
+			pst.setInt(2,id);
+			
+			pst.executeUpdate();
+			
+			pst.close();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+		
+			c.close();
+		}
+
 		
 	}
 

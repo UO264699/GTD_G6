@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="task" items="${tasks}" >
+                <c:forEach var="task" items="${finishedTasks}" >
                     
                    <tr>
                    
@@ -54,6 +54,16 @@
         				<td>
             				<c:out value="${task.planned}" />
         				</td>
+        				
+        				
+        				
+						
+        				<td>
+        					<c:if test="${task.finished == null}">
+            					<a href=finish/${task.id} >Finalizar</a>
+            				</c:if>
+        				</td>
+        				
         				
                
                    </tr>

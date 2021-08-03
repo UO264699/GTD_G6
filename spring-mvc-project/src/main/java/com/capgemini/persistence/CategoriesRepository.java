@@ -28,6 +28,7 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 	@Override
 	public void delete(int id) throws SQLException {
 		
+		
 
 	}
 	

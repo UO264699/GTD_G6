@@ -122,5 +122,11 @@ public class TasksService {
 		return finishedTasks;
 		
 	}
+	
+	public void finishTask(int id) throws SQLException {
+		
+		tasksRepository.updateFinished(id);
+		
+	}
 
 }
