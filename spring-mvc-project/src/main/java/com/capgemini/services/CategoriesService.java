@@ -18,6 +18,7 @@ public class CategoriesService {
 	private CategoriesRepository categoriesRepository;
 	
 
+
 	public void deleteCategory(int id) throws SQLException {
 		categoriesRepository.delete(id);
 	}
@@ -30,7 +31,7 @@ public class CategoriesService {
 		for(Object u : categories) {
 			Category category = (Category) u;
 
-			Category category2 = new Category(category.id, category.name, category.user_id);
+			Category category2 = new Category(category.getId(), category.getName(), category.getUser_id());
 
 			categories1.add(category2);
 		}

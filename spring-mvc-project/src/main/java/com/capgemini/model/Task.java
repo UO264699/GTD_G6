@@ -4,23 +4,30 @@ import java.util.Date;
 
 public class Task {
 
-    private String tittle;
+	private int id;
+    private String title;
     private String comments;
     private Date created;
     private Date planned;
     private Date finished;
     private int user_id;
     private int category_id;
+    
+    public Task() {
+    	
+    }
 
-    public Task(String tittle, String comments, Date created, Date planned, Date finished, int user_id, int category_id) {
-        this.tittle = tittle;
+    public Task(int id,String title, String comments, Date created, Date planned, Date finished, int user_id, int category_id) {
+        this.title = title;
         this.comments = comments;
         this.created = created;
         this.planned = planned;
         this.finished = finished;
         this.user_id = user_id;
         this.category_id = category_id;
+        this.id = id;
     }
+    
 
     public int getUser_id() {
         return user_id;
@@ -38,12 +45,12 @@ public class Task {
         this.category_id = category_id;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getComments() {
@@ -77,4 +84,12 @@ public class Task {
     public void setFinished(Date finished) {
         this.finished = finished;
     }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }

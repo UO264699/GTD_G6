@@ -19,11 +19,6 @@ public class UsersService {
 	@Autowired
 	private UsersRepository usersRepository;
 
-
-	public UsersService() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	
 	public List<User> getUsers() throws SQLException{
 		
