@@ -18,27 +18,30 @@
           <h1 class="h3 mb-3 fw-normal w-90">Please register in</h1>
       
           <div class="form-floating m-1">
-            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Email">
+            <input type="email" class="form-control" id="floatingEmail" name="email" placeholder="Email">
+            <label for="floatingInput">Email address</label>
           </div>
           <div class="form-floating m-1">
-            <input type="text" class="form-control" id="floatingInput" name="login" placeholder="User Name">
+            <input type="text" class="form-control" id="floatingLogin" name="login" placeholder="User Name">
+            <label for="floatingLogin">User Name</label>
           </div>
           <div class="form-floating m-1">
             <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+            <label for="floatingPassword">Password</label>
           </div>
           
-          <div class="form-check form-switch text-center">
-            <input class="form-check-input" type="checkbox" name="isAdmin" id="flexSwitchCheckDefault" value="true">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Dale si eres administrador</label>
+          <div class="form-check form-switch d-flex justify-content-around">
+           <label class="form-check-label" for="flexSwitchCheckDefault">¿Eres administrador?</label>
+           <input class="form-check-input" type="checkbox" name="isAdmin" id="flexSwitchCheckDefault" value="true">
           </div> 
 
-          <button class="btn btn-success m-1" type="submit">Register</button>
+          <button class="btn btn-primary mt-2" type="submit">Register</button>
          
           <p class="mt-5 mb-3 text-muted">&copy; PM</p>
         </form>
       </main>
-
-
+	
+	<script src="/resources/user.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

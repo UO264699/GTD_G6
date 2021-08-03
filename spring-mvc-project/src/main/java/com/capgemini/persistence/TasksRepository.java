@@ -248,7 +248,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		
 	
 			
-			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TUSERS\" SET status = "+ "'" + changeStatus(u) + "'" + " where id=?");
+//			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TUSERS\" SET status = "+ "'" + changeStatus(u) + "'" + " where id=?");
 			
 
 			pst.setInt(1,id);

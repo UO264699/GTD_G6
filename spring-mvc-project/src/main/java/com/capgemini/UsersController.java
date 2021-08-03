@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.capgemini.services.CategoriesService;
 import com.capgemini.services.TasksService;
@@ -52,12 +53,11 @@ public class UsersController {
 
 	@RequestMapping(value = "users/add", method = RequestMethod.POST)
 	public String addNewUsers(User user) throws SQLException {
+	
+
 		
 		usersService.createNewUser(user);
 		
-		
-
-
 		return "redirect:/users/list";
 	}
 	

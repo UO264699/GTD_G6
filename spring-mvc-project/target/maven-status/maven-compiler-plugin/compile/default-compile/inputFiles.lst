@@ -1,8 +1,9 @@
-C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\Main.java
+C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\persistence\dto\TaskDto.java
 C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\persistence\jdbc\Jdbc.java
 C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\services\UsersService.java
 C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\model\Category.java
 C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\persistence\Repository.java
+C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\TasksController.java
 C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\HomeController.java
 C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\persistence\dto\CategoryDto.java
 C:\Users\ivamarqu\Desktop\GTD_G6\spring-mvc-project\src\main\java\com\capgemini\persistence\TasksRepository.java
