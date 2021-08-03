@@ -57,9 +57,23 @@ public class TasksController {
 		
 		model.addAttribute("tasks",tasksService.listTasks(2));
 		
-		return "tasks";
+		model.addAttribute("finishedTasks",tasksService.listFinishedTasks(2));
+		
+		return "tasksList";
 		
 	}
+	
+	@RequestMapping(value = "tasks/finish/{id}")
+	public String finishTask(@PathVariable int id) throws SQLException {
+		
+		
+		tasksService.finishTask(id);
+		
+		
+		return "redirect:/tasks/list";
+		
+	}
+	
 	
 	
 }
