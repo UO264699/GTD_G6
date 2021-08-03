@@ -11,23 +11,23 @@
 </head>
 
 
-<body class="text-center">
+<body class="text-center row d-flex justify-content-center align-items-center" style="height: 90vh;">
 
-    <main class="form-signin">
+    <main class="form-signin col-2">
         <form class=" d-flex flex-column justify-content-center" method="post" action="users/add">
           <h1 class="h3 mb-3 fw-normal w-90">Please register in</h1>
       
           <div class="form-floating m-1">
-            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="">
+            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Email">
           </div>
           <div class="form-floating m-1">
-            <input type="text" class="form-control" id="floatingInput" name="login" placeholder="">
+            <input type="text" class="form-control" id="floatingInput" name="login" placeholder="User Name">
           </div>
           <div class="form-floating m-1">
-            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="">
+            <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
           </div>
           
-          <div class="form-check form-switch">
+          <div class="form-check form-switch text-center">
             <input class="form-check-input" type="checkbox" name="isAdmin" id="flexSwitchCheckDefault" value="true">
             <label class="form-check-label" for="flexSwitchCheckDefault">Dale si eres administrador</label>
           </div> 
