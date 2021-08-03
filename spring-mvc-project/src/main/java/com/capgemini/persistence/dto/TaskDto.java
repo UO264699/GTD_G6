@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class TaskDto {
 
+	public int id;
 	public String title;
 	public String comments;
 	public Date created;
