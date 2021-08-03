@@ -37,7 +37,7 @@ public class TasksController {
 	}
 	
 
-	@RequestMapping(value = "tasks/add/{userid}/{categoryid}")
+	@RequestMapping(value = "tasks/add/{userid}/{categoryid}", method = RequestMethod.POST)
 	public String addTask(Task task,@PathVariable int userid,@PathVariable int categoryid) throws SQLException {
 		
 		
@@ -47,4 +47,19 @@ public class TasksController {
 		return "redirect:/tasks/list";
 		
 	}
+	
+	
+	@RequestMapping(value = "/tasks/list")
+	public String getTasks(Model model) throws SQLException {
+	
+		
+		model.addAttribute("todayTasks",tasksService.listTodayTasks(2));
+		
+		model.addAttribute("tasks",tasksService.listTasks(2));
+		
+		return "tasks";
+		
+	}
+	
+	
 }

@@ -10,4 +10,5 @@ public interface Repository {
 
 	public List<Object> findAll() throws SQLException;
 
+
 }
