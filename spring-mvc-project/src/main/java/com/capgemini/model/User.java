@@ -17,7 +17,7 @@ public class User {
 		
 	}
 
-	public User(int id,String login, String email, String password, Boolean isAdmin, UserStatus status, List<Task> tasks, List<Category> categories) {
+	public User(int id,String login, String email, String password, boolean isAdmin, UserStatus status, List<Task> tasks, List<Category> categories) {
 		this.id = id;
 		this.login = login;
 		this.email = email;

@@ -29,14 +29,13 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		try {
 			c = Jdbc.getConnection();
 
-			pst = c.prepareStatement("INSERT INTO TUSERS (ID,EMAIL,ISADMIN,LOGIN,PASSWORD,STATUS) VALUES (?,?,?,?,?,?)");
+			pst = c.prepareStatement("INSERT INTO TUSERS (EMAIL,ISADMIN,LOGIN,PASSWORD,STATUS) VALUES (?,?,?,?,?)");
 
-			pst.setInt(1, u.id);
-			pst.setString(2, u.email);
-			pst.setBoolean(3, u.isAdmin);
-			pst.setString(4, u.login);
-			pst.setString(5, u.password);
-//			pst.setString(6, u.status);
+			pst.setString(1, u.email);
+			pst.setBoolean(2, u.isAdmin);
+			pst.setString(3, u.login);
+			pst.setString(4, u.password);
+			pst.setString(5, u.status);
 
 			pst.executeUpdate();
 

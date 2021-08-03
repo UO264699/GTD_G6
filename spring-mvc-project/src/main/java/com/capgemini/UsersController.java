@@ -1,8 +1,11 @@
 package com.capgemini;
 
+import java.io.Console;
 import java.sql.SQLException;
 
 import com.capgemini.model.User;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,9 +51,12 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "users/add", method = RequestMethod.POST)
-	public String addNewUsers(@RequestBody User user) throws SQLException {
+	public String addNewUsers(User user) throws SQLException {
 		
 		usersService.createNewUser(user);
+		
+		
+
 
 		return "redirect:/users/list";
 	}
@@ -60,7 +66,8 @@ public class UsersController {
 	public String changeStatus(@PathVariable int id) throws SQLException {
 		
 		usersService.changeStatus(id);
-	
+
+		
 		return "redirect:/users/list";
 		
 	}

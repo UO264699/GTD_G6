@@ -25,7 +25,18 @@ public class UsersService {
 	}
 
 	public User createNewUser(User newUser) throws SQLException {
-		usersRepository.add(newUser);
+		
+		UserDto u = new UserDto();
+		
+		u.id = newUser.getId();
+		u.email = newUser.getEmail();
+		u.login = newUser.getLogin();
+		u.isAdmin = newUser.isAdmin();
+		u.password = newUser.getPassword();
+		u.status = "ENABLED";
+		
+		
+		usersRepository.add(u);
 
 		return newUser;
 	}
