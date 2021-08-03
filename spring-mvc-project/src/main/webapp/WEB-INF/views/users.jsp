@@ -32,7 +32,10 @@
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">Administrar Usuarios</a></li>
 				</ul>
-				<span class="navbar-text"> Beca </span>
+				<form action="/list">
+					<button type="submit" class="btn btn-light" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop">Ir al listado de tareas</button>
+				</form>
 			</div>
 		</div>
 	</nav>

@@ -13,7 +13,7 @@
 
 <body class="text-center row d-flex justify-content-center align-items-center" style="height: 90vh;">
 
-    <main class="form-signin col-2">
+    <main class="form-signin col-4">
         <form class=" d-flex flex-column justify-content-center" method="post" action="users/add">
           <h1 class="h3 mb-3 fw-normal w-90">Please register in</h1>
       

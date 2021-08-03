@@ -22,12 +22,8 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		
 		TaskDto task = (TaskDto) o;
 		  
-		
-		
 		Connection c = null;
-		PreparedStatement pst = null;
-  
-		
+		PreparedStatement pst = null;		
 	
 		try {
 			c = Jdbc.getConnection();
@@ -44,12 +40,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 			
 
 			pst.executeUpdate();
-			
-			
-			
-		
-
-			
+						
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
