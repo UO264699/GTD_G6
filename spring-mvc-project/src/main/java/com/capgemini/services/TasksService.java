@@ -2,6 +2,9 @@ package com.capgemini.services;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +58,32 @@ public class TasksService {
 	
 		
 		return tasks;
+	}
+	
+	
+	
+	
+	public List<Task> listTodayTasks() throws SQLException {
+		
+		List<Task> tasks = listTasks();
+		
+		List<Task> todayTasks = new ArrayList<Task>();
+		
+		tasks.forEach((t)-> {
+			
+			if(t.getPlanned().before(new Date()) || t.getPlanned().getTime() == new Date().getTime())
+				todayTasks.add(t);
+			
+		});
+		
+		Collections.sort(todayTasks, new Comparator<Task>(){
+	        @Override
+	        public int compare(Task o1, Task o2) {
+	            return o1.getCreated().compareTo(o2.getCreated());
+	        }
+	    });
+		return todayTasks;
+		
 	}
 
 }
