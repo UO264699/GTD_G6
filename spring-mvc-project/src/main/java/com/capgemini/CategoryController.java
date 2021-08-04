@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.model.Category;
 
@@ -19,7 +19,7 @@ public class CategoryController {
 	@Autowired
 	private CategoriesService categoriesService;
 
-	@RequestMapping(value = "categories/add")
+	@RequestMapping(value = "/tasks/categories/add")
 	public String addCategory(Category category) {
 		
 		
@@ -30,7 +30,7 @@ public class CategoryController {
 		
 	}
 	
-	@RequestMapping(value = "categories/delete/{id}")
+	@RequestMapping(value = "/categories/delete/{id}")
 	public String deleteCategory(@PathVariable int id)  {
 		
 		categoriesService.deleteCategory(id);

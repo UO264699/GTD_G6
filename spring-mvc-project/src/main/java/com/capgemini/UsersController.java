@@ -52,7 +52,7 @@ public class UsersController {
 
 		model.addAttribute("users", usersService.getUsers());
 
-		return "users";
+		return "usersList";
 
 	}
 
@@ -69,10 +69,8 @@ public class UsersController {
 	@RequestMapping(value = "users/add", method = RequestMethod.POST)
 	public String addNewUsers(@Validated User user, BindingResult result, Model model) throws SQLException {
 
-		model.addAttribute("user", new User());
-		
 		if (result.hasErrors()) {																																									
-			return "home";
+			return "redirect:/";
 		}
 
 		usersService.createNewUser(user);

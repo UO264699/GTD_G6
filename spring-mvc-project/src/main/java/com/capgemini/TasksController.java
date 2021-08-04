@@ -39,11 +39,11 @@ public class TasksController {
 	public String getTasks(Model model)  {
 	
 		
-		model.addAttribute("todayTasks",tasksService.listTodayTasks(2));
+		model.addAttribute("todayTasks",tasksService.listTodayTasks(38));
 		
-		model.addAttribute("tasks",tasksService.listTasks(2));
+		model.addAttribute("tasks",tasksService.listTasks(38));
 		
-		model.addAttribute("finishedTasks",tasksService.listFinishedTasks(2));
+		model.addAttribute("finishedTasks",tasksService.listFinishedTasks(38));
 		
 		return "tasksList";
 		

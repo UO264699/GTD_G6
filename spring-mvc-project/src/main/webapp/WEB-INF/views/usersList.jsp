@@ -13,32 +13,33 @@
 	rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
 </head>
-<header>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">[Nombre de Usuaro]</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarText"
-				aria-controls="navbarText" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">[Nombre de Usuaro]</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarText"
+					aria-controls="navbarText" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarText">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"></li>
 
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Administrar Usuarios</a></li>
-				</ul>
-				<form action="/spring-mvc-project/tasks/list">
-					<button type="submit" class="btn btn-light" data-bs-toggle="modal"
-						data-bs-target="#staticBackdrop">Ir al listado de tareas</button>
-				</form>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/spring-mvc-project/users/list">Administrar Usuarios</a></li>
+
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/spring-mvc-project/categories/list">Administrar Categorias</a></li>
+					</ul>
+					<a class="nav-link active text-light"aria-current="page" href="/spring-mvc-project/tasks/list#">Home</a>
+					<button type="button" class="btn btn-light" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop">Anadir</button>
+				</div>
 			</div>
-		</div>
-	</nav>
-</header>
+		</nav>
+	</header>
 
 <body class="row d-flex align-items-center justify-content-center">
 	<div class="col-10 mt-3">
