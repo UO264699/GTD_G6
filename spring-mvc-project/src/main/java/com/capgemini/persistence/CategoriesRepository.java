@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.capgemini.model.Category;
 import org.springframework.stereotype.Repository;
 
+import com.capgemini.persistence.dto.CategoryDto;
+import com.capgemini.persistence.dto.TaskDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
 @Repository
@@ -21,8 +24,40 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 
 	@Override
 	public int add(Object o) throws SQLException {
-		// TODO Auto-generated method stub
+		
+		CategoryDto category = (CategoryDto) o;
+		  
+		
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+  
+		
+	
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("INSERT INTO \"PUBLIC\".\"TCATEGORIES\"(name,user_id) VALUES(?,?)");
+	
+			
+			pst.setString(1, category.name);
+			pst.setString(2, "2");
+			
+			
+
+			pst.executeUpdate();
+			
+			
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			pst.close();
+		}
 		return 0;
+		
+		
+		
 	}
 
 	@Override

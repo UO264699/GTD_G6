@@ -31,7 +31,7 @@ public class UsersController {
 		
 		model.addAttribute("users",usersService.getUsers());
 		
-		return "users";
+		return "usersList";
 		
 	}
 	

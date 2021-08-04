@@ -12,7 +12,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.capgemini.model.User;
+
 import com.capgemini.persistence.dto.UserDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 

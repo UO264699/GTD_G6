@@ -200,6 +200,60 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		
 	}
 	
+	public List<Object> findByCategoryId(int category_id) throws SQLException {
+		List<Object> listTasks = new ArrayList<Object>();
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		
+
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TTASKS\" where category_id=?");
+			
+			
+			pst.setInt(1, category_id);
+			
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				
+				TaskDto t = new TaskDto();
+				
+				t.id = rs.getInt("id");
+				t.categoryId = rs.getInt("category_id");
+				t.userId = rs.getInt("user_id");
+				t.comments = rs.getString("comments");
+				t.created = rs.getDate("created");
+				t.finished = rs.getDate("finished");
+				t.planned = rs.getDate("planned");
+				t.title = rs.getString("title");
+				
+				
+
+				
+				listTasks.add(t);
+				
+			}
+			
+			return listTasks;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+		
+			c.close();
+			
+
+		}
+		
+	}
+	
 	
 public void updateFinished(int id) throws SQLException {
 		

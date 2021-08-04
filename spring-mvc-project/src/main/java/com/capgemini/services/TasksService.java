@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.model.Category;
 import com.capgemini.model.Task;
+import com.capgemini.persistence.CategoriesRepository;
 import com.capgemini.persistence.TasksRepository;
 import com.capgemini.persistence.dto.TaskDto;
 
@@ -20,6 +23,9 @@ public class TasksService {
 	
 	@Autowired
 	private TasksRepository tasksRepository;
+	
+	@Autowired
+	private CategoriesRepository categoriesRepository;
 
 	public void deleteTask(int id) throws SQLException {
 		
@@ -123,6 +129,52 @@ public class TasksService {
 		
 	}
 	
+	public List<Task> listTaskByCategory(int id, int categoryid) throws SQLException {
+		
+		List<Task> tasks = listTasks(id);
+		
+		List<Task> categoryTasks = new ArrayList<Task>();
+		
+		tasks.forEach((t)-> {
+			
+			if(t.getCategory_id() == categoryid)
+				categoryTasks.add(t);
+			
+		});
+		
+		return categoryTasks;
+		
+	}
+	
+	public List<List<Task>> getTaskByCategory(int id) throws SQLException{
+		
+		List<List<Task>>  tasksByCategory = new ArrayList<List<Task>>();
+		
+		List<Object> categories = this.categoriesRepository.findAll();
+		
+		for(Object category:categories) {
+			
+			List<Task> tasks = listTaskByCategory(((Category) category).getId(),id );
+			
+			tasksByCategory.add(tasks);
+		}
+			
+			
+		
+		
+		return tasksByCategory;
+		
+		
+		
+	}
+	
+	/**
+	 * 
+	 * Marca una tarea como finalizada
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 */
 	public void finishTask(int id) throws SQLException {
 		
 		tasksRepository.updateFinished(id);
