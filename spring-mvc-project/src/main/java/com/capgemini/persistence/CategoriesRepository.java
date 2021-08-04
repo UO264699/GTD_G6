@@ -5,35 +5,100 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.capgemini.model.Category;
-import com.capgemini.persistence.dto.UserDto;
 import org.springframework.stereotype.Repository;
 
+import com.capgemini.persistence.dto.CategoryDto;
+import com.capgemini.persistence.dto.TaskDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
 @Repository
 public class CategoriesRepository implements com.capgemini.persistence.Repository {
 
-	public CategoriesRepository() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	@Override
-	public int add(Object o) throws SQLException {
+	public int add(Object o) {
+		
+		CategoryDto category = (CategoryDto) o;
+		  
+		
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+  
+		
+	
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("INSERT INTO \"PUBLIC\".\"TCATEGORIES\"(name,user_id) VALUES(?,?)");
+	
+			
+			pst.setString(1, category.name);
+			pst.setString(2, "2");
+			
+			
+
+			pst.executeUpdate();
+			
+			
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return 0;
+		
+		
+		
 	}
 
 	@Override
-	public void delete(int id) throws SQLException {
+	public void delete(int id)  {
 		
-		
+		Connection c = null;
+		PreparedStatement pst = null;
+    
+	
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("DELETE FROM \"PUBLIC\".\"TCATEGORIES\" WHERE id = ?");
+			
+
+			pst.setInt(1,id);
+			
+			pst.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 
 	}
 	
 
-	public void deleteByUserId(int id) throws SQLException {
+	public void deleteByUserId(int id)  {
 		Connection c = null;
 		PreparedStatement pst = null;
     
@@ -53,13 +118,19 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			pst.close();
-			c.close();
+			
+			try {
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
-	public List<Object> findAll() throws SQLException {
+	public List<Object> findAll()  {
 		List<Object> listCategories = new ArrayList<Object>();
 
 		Connection c = null;
@@ -96,7 +167,12 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		finally {
 
 
-			c.close();
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

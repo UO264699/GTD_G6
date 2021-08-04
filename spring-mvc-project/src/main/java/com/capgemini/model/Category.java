@@ -5,6 +5,11 @@ public class Category {
     private int id;
     private String name;
     private int user_id;
+    
+    public Category() {
+    	
+    	
+    }
 
     public Category(int id, String name, int user_id) {
         this.id = id;

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.persistence.CategoriesRepository;
+import com.capgemini.persistence.TasksRepository;
+import com.capgemini.persistence.dto.CategoryDto;
 
 
 @Service
@@ -17,13 +19,15 @@ public class CategoriesService {
 	@Autowired
 	private CategoriesRepository categoriesRepository;
 	
+	@Autowired
+	private TasksRepository tasksRepository;
 
 
-	public void deleteCategory(int id) throws SQLException {
-		categoriesRepository.delete(id);
+	public void deleteCategoryByUserId(int id)  {
+		categoriesRepository.deleteByUserId(id);
 	}
 
-	public List<Category> getCategories() throws SQLException {
+	public List<Category> getCategories() {
 
 		List<Object> categories = categoriesRepository.findAll();
 		List<Category> categories1 = new ArrayList<>();
@@ -37,5 +41,24 @@ public class CategoriesService {
 		}
 		return categories1;
 	}
+	
+	public void addCategory(Category category)  {
+		
+		CategoryDto categoryDto = new CategoryDto();
+		
+		categoryDto.user_id = category.getId();
+		categoryDto.name = category.getName();
+		
+		this.categoriesRepository.add(categoryDto);
+		
+	}
+	
+	public void deleteCategory(int id)  {
+		
+		this.categoriesRepository.delete(id);
+		this.tasksRepository.deleteByCategoryId(id);
+		
+	}
+
 
 }

@@ -36,7 +36,7 @@ public class TasksController {
 	
 	
 	@RequestMapping(value = "/tasks/list")
-	public String getTasks(Model model) throws SQLException {
+	public String getTasks(Model model)  {
 	
 		
 		model.addAttribute("todayTasks",tasksService.listTodayTasks(2));
@@ -50,7 +50,7 @@ public class TasksController {
 	}
 	
 	@RequestMapping(value = "tasks/finish/{id}")
-	public String finishTask(@PathVariable int id) throws SQLException {
+	public String finishTask(@PathVariable int id)  {
 		
 		
 		tasksService.finishTask(id);
