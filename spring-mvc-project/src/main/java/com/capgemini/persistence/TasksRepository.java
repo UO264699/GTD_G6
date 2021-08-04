@@ -232,7 +232,7 @@ public void updateFinished(int id) throws SQLException {
 
 		}
 
-	}
+	
 
 	public TaskDto findById(int id) throws SQLException {
 		List<Object> listTasks = new ArrayList<Object>();

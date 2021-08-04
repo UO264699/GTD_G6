@@ -21,21 +21,7 @@ public class TasksController {
 	@Autowired
 	private TasksService tasksService;
 	
-	
-	@RequestMapping(value = "/tasks", method = RequestMethod.GET)
-	public String home(Locale locale,Model model) throws SQLException {
-		
-		Date date = new Date();
-		
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG,DateFormat.LONG,locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("tasks",formattedDate);
-		
-		return "tasks";
-	}
-	
+
 
 	@RequestMapping(value = "tasks/add/{userid}/{categoryid}", method = RequestMethod.POST)
 	public String addTask(Task task,@PathVariable int userid,@PathVariable int categoryid) throws SQLException {

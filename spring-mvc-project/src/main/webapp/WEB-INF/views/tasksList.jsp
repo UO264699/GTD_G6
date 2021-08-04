@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>  	
-	
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,38 +75,51 @@
 			</div>
 		</div>
 
-	
+
 
 		<!--CARD-->
 		<div class="my-3 p-3 bg-body rounded shadow-sm w-90">
 			<h6 class="border-bottom pb-2 mb-0">Tareas ya acabadas</h6>
 			<!--TASK-->
-			 <c:forEach var="task" items="${tasks}" >
-			<div class="d-flex text-muted pt-3 border-bottom">
-				<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded"
-					width="32" height="32" xmlns="http://www.w3.org/2000/svg"
-					role="img" aria-label="Placeholder: 32x32"
-					preserveAspectRatio="xMidYMid slice" focusable="false">
+			<c:forEach var="task" items="${tasks}">
+				<div class="d-flex text-muted pt-3 border-bottom">
+					<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+						width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+						role="img" aria-label="Placeholder: 32x32"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
 					<title>Placeholder</title><rect width="100%" height="100%"
-						fill="#6c5ce7" />
+							fill="#6c5ce7" />
 					<text x="50%" y="50%" fill="#6c5ce7" dy=".3em">32x32</text></svg>
-				<p class="pb-3 mb-0 small lh-sm ">
-					<strong class="d-block text-gray-dark"><c:out value="${task.title}" /></strong>
-				</p>
-				<div class="w-100 d-flex justify-content-around">
-					<p>Fecha de creación: <c:out value="${task.created}" /></p>
-					<p>Fecha planeada: <c:out value="${task.planned}" /></p>
-					<p>Comentarios: <c:out value="${task.comments}" /></p>
-					<p><c:out value="${task.category_id}" /></p>
-					<p><c:if test="${task.finished == null}">
-            					<a href=finish/${task.id} >Finalizar</a>
-            				</c:if>
-            		</p>		
+					<p class="pb-3 mb-0 small lh-sm ">
+						<strong class="d-block text-gray-dark"><c:out
+								value="${task.title}" /></strong>
+					</p>
+					<div class="w-100 d-flex justify-content-around">
+						<p>
+							Fecha de creación:
+							<c:out value="${task.created}" />
+						</p>
+						<p>
+							Fecha planeada:
+							<c:out value="${task.planned}" />
+						</p>
+						<p>
+							Comentarios:
+							<c:out value="${task.comments}" />
+						</p>
+						<p>
+							<c:out value="${task.category_id}" />
+						</p>
+						<p>
+							<c:if test="${task.finished == null}">
+								<a href=finish/${task.id}>Finalizar</a>
+							</c:if>
+						</p>
+					</div>
 				</div>
-				</div>
-				</c:forEach>
-				
-			</div>
+			</c:forEach>
+
+		</div>
 
 		<!--TITTLE-->
 		<div
@@ -118,43 +131,56 @@
 				<span class="material-icons" style="cursor: pointer;">expand_more</span>
 			</div>
 		</div>
-		
-		 
-		
+
+
+
 		<!--CARD-->
 		<div class="my-3 p-3 bg-body rounded shadow-sm w-90">
 			<h6 class="border-bottom pb-2 mb-0">Tareas ya acabadas</h6>
 			<!--TASK-->
-			<c:forEach var="task" items="${todayTasks}" >
-			<div class="d-flex text-muted pt-3 border-bottom">
-				<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded"
-					width="32" height="32" xmlns="http://www.w3.org/2000/svg"
-					role="img" aria-label="Placeholder: 32x32"
-					preserveAspectRatio="xMidYMid slice" focusable="false">
+			<c:forEach var="task" items="${todayTasks}">
+				<div class="d-flex text-muted pt-3 border-bottom">
+					<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+						width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+						role="img" aria-label="Placeholder: 32x32"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
 					<title>Placeholder</title><rect width="100%" height="100%"
-						fill="#6c5ce7" />
+							fill="#6c5ce7" />
 					<text x="50%" y="50%" fill="#6c5ce7" dy=".3em">32x32</text></svg>
-				<p class="pb-3 mb-0 small lh-sm ">
-					<strong class="d-block text-gray-dark"><c:out value="${task.title}" /></strong>
-				</p>
-				<div class="w-100 d-flex justify-content-around">
-					<p>Fecha de creación: <c:out value="${task.created}" /></p>
-					<p>Fecha planeada: <c:out value="${task.planned}" /></p>
-					<p>Comentarios: <c:out value="${task.comments}" /></p>
-					<p><c:out value="${task.category_id}" /></p>
-					<p><c:if test="${task.finished == null}">
-            					<a href=finish/${task.id} >Finalizar</a>
-            				</c:if>
-            		</p>		
+					<p class="pb-3 mb-0 small lh-sm ">
+						<strong class="d-block text-gray-dark"><c:out
+								value="${task.title}" /></strong>
+					</p>
+					<div class="w-100 d-flex justify-content-around">
+						<p>
+							Fecha de creación:
+							<c:out value="${task.created}" />
+						</p>
+						<p>
+							Fecha planeada:
+							<c:out value="${task.planned}" />
+						</p>
+						<p>
+							Comentarios:
+							<c:out value="${task.comments}" />
+						</p>
+						<p>
+							<c:out value="${task.category_id}" />
+						</p>
+						<p>
+							<c:if test="${task.finished == null}">
+								<a href=finish/${task.id}>Finalizar</a>
+							</c:if>
+						</p>
+					</div>
 				</div>
-				</div>
-				</c:forEach>
-				
-			</div>
-			
-	   	
-			 
-			
+			</c:forEach>
+
+		</div>
+
+
+
+
 
 		<!--TITTLE-->
 		<div
@@ -166,39 +192,57 @@
 				<span class="material-icons" style="cursor: pointer;">expand_more</span>
 			</div>
 		</div>
-		
-		 
-		
+
+
+
 		<!--CARD-->
 		<div class="my-3 p-3 bg-body rounded shadow-sm w-90">
 			<h6 class="border-bottom pb-2 mb-0">Tareas ya acabadas</h6>
 			<!--TASK-->
-			<c:forEach var="task" items="${finishedTasks}" >
-			<div class="d-flex text-muted pt-3 border-bottom">
-				<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded"
-					width="32" height="32" xmlns="http://www.w3.org/2000/svg"
-					role="img" aria-label="Placeholder: 32x32"
-					preserveAspectRatio="xMidYMid slice" focusable="false">
+			<c:forEach var="task" items="${finishedTasks}">
+				<div class="d-flex text-muted pt-3 border-bottom">
+					<svg class="bd-placeholder-img flex-shrink-0 me-2 rounded"
+						width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+						role="img" aria-label="Placeholder: 32x32"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
 					<title>Placeholder</title><rect width="100%" height="100%"
-						fill="#6c5ce7" />
+							fill="#6c5ce7" />
 					<text x="50%" y="50%" fill="#6c5ce7" dy=".3em">32x32</text></svg>
-				<p class="pb-3 mb-0 small lh-sm ">
-					<strong class="d-block text-gray-dark"><c:out value="${task.title}" /></strong>
-				</p>
-				<div class="w-100 d-flex justify-content-around">
-					<p>Fecha de creación: <c:out value="${task.created}" /></p>
-					<p>Fecha planeada: <c:out value="${task.planned}" /></p>
-					<p>Fecha finalización: <c:out value="${task.finished}" /></p>
-					<p>Comentarios: <c:out value="${task.comments}" /></p>
-					<p><c:out value="${task.category_id}" /></p>
+					<p class="pb-3 mb-0 small lh-sm ">
+						<strong class="d-block text-gray-dark"><c:out
+								value="${task.title}" /></strong>
+					</p>
+					<div class="w-100 d-flex justify-content-around">
+						<p>
+							Fecha de creación:
+							<c:out value="${task.created}" />
+						</p>
+						<p>
+							Fecha planeada:
+							<c:out value="${task.planned}" />
+						</p>
+						<p>
+							Fecha finalización:
+							<c:out value="${task.finished}" />
+						</p>
+						<p>
+							Comentarios:
+							<c:out value="${task.comments}" />
+						</p>
+						<p>
+							<c:out value="${task.category_id}" />
+						</p>
+					</div>
 				</div>
-				</div>
-				</c:forEach>
-				
-			</div>
-			 
+			</c:forEach>
+
+		</div>
+
 	</main>
 
+
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/user.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

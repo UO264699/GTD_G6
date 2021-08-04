@@ -90,6 +90,8 @@
 			</tbody>
 		</table>
 	</div>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script.js"></script>
 </body>
 </html>
 

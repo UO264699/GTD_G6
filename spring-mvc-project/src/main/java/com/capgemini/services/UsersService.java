@@ -30,7 +30,7 @@ public class UsersService {
 		u.id = newUser.getId();
 		u.email = newUser.getEmail();
 		u.login = newUser.getLogin();
-		u.isAdmin = newUser.isAdmin();
+		u.isAdmin = newUser.isIsAdmin();
 		u.password = newUser.getPassword();
 		u.status = "ENABLED";
 
@@ -73,5 +73,12 @@ public class UsersService {
 			return UserStatus.DISABLED;
 		else
 			return UserStatus.ENABLED;
+	}
+	
+	public UserDto getUserById(int id) throws SQLException {
+		
+		UserDto user = usersRepository.findById(id);
+		
+		return user;
 	}
 }
