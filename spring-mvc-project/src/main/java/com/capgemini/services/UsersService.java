@@ -29,7 +29,7 @@ public class UsersService {
 
 
 	
-	public List<User> getUsers() throws SQLException{
+	public List<User> getUsers() {
 		
 
 		List<User> users = new ArrayList<User>();
@@ -53,14 +53,14 @@ public class UsersService {
 	
 
 	
-	public void deleteUser(int id) throws SQLException {
+	public void deleteUser(int id)  {
 		
 		usersRepository.delete(id);
 		categoriesRepository.delete(id);
 		tasksRepository.delete(id);
 	}
 	
-	public void changeStatus(int id) throws SQLException {
+	public void changeStatus(int id) {
 		
 		usersRepository.updateStatus(id);
 	}

@@ -18,12 +18,10 @@ import com.capgemini.persistence.jdbc.Jdbc;
 @Repository
 public class CategoriesRepository implements com.capgemini.persistence.Repository {
 
-	public CategoriesRepository() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	@Override
-	public int add(Object o) throws SQLException {
+	public int add(Object o) {
 		
 		CategoryDto category = (CategoryDto) o;
 		  
@@ -52,7 +50,12 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			pst.close();
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return 0;
 		
@@ -61,7 +64,7 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 	}
 
 	@Override
-	public void delete(int id) throws SQLException {
+	public void delete(int id)  {
 		
 		Connection c = null;
 		PreparedStatement pst = null;
@@ -82,14 +85,20 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			pst.close();
-			c.close();
+			try {
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 	}
 	
 
-	public void deleteByUserId(int id) throws SQLException {
+	public void deleteByUserId(int id)  {
 		Connection c = null;
 		PreparedStatement pst = null;
     
@@ -109,13 +118,19 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			pst.close();
-			c.close();
+			
+			try {
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
-	public List<Object> findAll() throws SQLException {
+	public List<Object> findAll()  {
 		List<Object> listCategories = new ArrayList<Object>();
 
 		Connection c = null;
@@ -152,7 +167,12 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		finally {
 
 
-			c.close();
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

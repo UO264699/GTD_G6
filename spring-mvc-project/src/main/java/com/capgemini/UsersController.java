@@ -27,7 +27,7 @@ public class UsersController {
 	private CategoriesService categoriesService;
 	
 	@RequestMapping(value = "/users/list")
-	public String getUsers(Model model) throws SQLException {
+	public String getUsers(Model model)  {
 		
 		model.addAttribute("users",usersService.getUsers());
 		
@@ -36,7 +36,7 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = "users/delete/{id}")
-	public String deleteUser(@PathVariable int id) throws SQLException {
+	public String deleteUser(@PathVariable int id)  {
 		
 		usersService.deleteUser(id);
 		tasksService.deleteTask(id);
@@ -48,7 +48,7 @@ public class UsersController {
 	
 
 	@RequestMapping(value = "users/changeStatus/{id}")
-	public String changeStatus(@PathVariable int id) throws SQLException {
+	public String changeStatus(@PathVariable int id)  {
 		
 		usersService.changeStatus(id);
 	

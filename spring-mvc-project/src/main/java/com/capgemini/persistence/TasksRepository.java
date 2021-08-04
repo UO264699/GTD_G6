@@ -21,7 +21,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 
 
 	@Override
-	public int add(Object o) throws SQLException {
+	public int add(Object o)  {
 		
 		TaskDto task = (TaskDto) o;
 		  
@@ -61,13 +61,18 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			pst.close();
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return 0;
 	}
 	
 	@Override
-	public void delete(int id) throws SQLException {
+	public void delete(int id) {
 		
 		Connection c = null;
 		PreparedStatement pst = null;
@@ -88,14 +93,20 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			pst.close();
-			c.close();
+			try {
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 	}
 	
 
-	public void deleteByCategoryId(int categoryid) throws SQLException {
+	public void deleteByCategoryId(int categoryid)  {
 		
 		Connection c = null;
 		PreparedStatement pst = null;
@@ -116,15 +127,21 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			pst.close();
-			c.close();
+			
+			try {
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 
 	@Override
-	public List<Object> findAll() throws SQLException {
+	public List<Object> findAll()  {
 		List<Object> listTasks = new ArrayList<Object>();
 
 		Connection c = null;
@@ -168,7 +185,12 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		}
 		finally {
 		
-			c.close();
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 
 		}
@@ -176,7 +198,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 	}
 	
 
-	public List<Object> findByUserId(int id) throws SQLException {
+	public List<Object> findByUserId(int id)  {
 		List<Object> listTasks = new ArrayList<Object>();
 
 		Connection c = null;
@@ -222,14 +244,19 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		}
 		finally {
 		
-			c.close();
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 
 		}
 		
 	}
 	
-	public List<Object> findByCategoryId(int category_id) throws SQLException {
+	public List<Object> findByCategoryId(int category_id) {
 		List<Object> listTasks = new ArrayList<Object>();
 
 		Connection c = null;
@@ -276,7 +303,12 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		}
 		finally {
 		
-			c.close();
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 
 		}
@@ -284,7 +316,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 	}
 	
 	
-public void updateFinished(int id) throws SQLException {
+public void updateFinished(int id){
 		
 		
 		Connection c = null;
@@ -310,7 +342,12 @@ public void updateFinished(int id) throws SQLException {
 			throw new RuntimeException(e);
 		} finally {
 		
-			c.close();
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		

@@ -23,11 +23,11 @@ public class CategoriesService {
 	private TasksRepository tasksRepository;
 
 
-	public void deleteCategoryByUserId(int id) throws SQLException {
+	public void deleteCategoryByUserId(int id)  {
 		categoriesRepository.deleteByUserId(id);
 	}
 
-	public List<Category> getCategories() throws SQLException {
+	public List<Category> getCategories() {
 
 		List<Object> categories = categoriesRepository.findAll();
 		List<Category> categories1 = new ArrayList<>();
@@ -42,7 +42,7 @@ public class CategoriesService {
 		return categories1;
 	}
 	
-	public void addCategory(Category category) throws SQLException {
+	public void addCategory(Category category)  {
 		
 		CategoryDto categoryDto = new CategoryDto();
 		
@@ -53,7 +53,7 @@ public class CategoriesService {
 		
 	}
 	
-	public void deleteCategory(int id) throws SQLException {
+	public void deleteCategory(int id)  {
 		
 		this.categoriesRepository.delete(id);
 		this.tasksRepository.deleteByCategoryId(id);

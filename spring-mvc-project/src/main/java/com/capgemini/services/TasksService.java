@@ -26,12 +26,12 @@ public class TasksService {
 	@Autowired
 	private CategoriesRepository categoriesRepository;
 
-	public void deleteTask(int id) throws SQLException {
+	public void deleteTask(int id)  {
 		
 		tasksRepository.delete(id);
 	}
 	
-	public void addTask(Task t,int userid, int categoryid) throws SQLException {
+	public void addTask(Task t,int userid, int categoryid)  {
 		
 		TaskDto taskDto = new TaskDto();
 		
@@ -52,7 +52,7 @@ public class TasksService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Task> listTasks(int id) throws SQLException {
+	public List<Task> listTasks(int id)  {
 		
 		List<Task> tasks = new ArrayList<Task>();
 		List<Object> tasks1 = this.tasksRepository.findByUserId(id);
@@ -81,7 +81,7 @@ public class TasksService {
 	 * @throws SQLException
 	 */
 	
-	public List<Task> listTodayTasks(int id) throws SQLException {
+	public List<Task> listTodayTasks(int id)  {
 		
 		List<Task> tasks = listTasks(id);
 		
@@ -111,7 +111,7 @@ public class TasksService {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<Task> listFinishedTasks(int id) throws SQLException {
+	public List<Task> listFinishedTasks(int id)  {
 		
 		List<Task> tasks = listTasks(id);
 		
@@ -128,7 +128,7 @@ public class TasksService {
 		
 	}
 	
-	public List<Task> listTaskByCategory(int id, int categoryid) throws SQLException {
+	public List<Task> listTaskByCategory(int id, int categoryid)  {
 		
 		List<Task> tasks = listTasks(id);
 		
@@ -145,7 +145,7 @@ public class TasksService {
 		
 	}
 	
-	public List<List<Task>> getTaskByCategory(int id) throws SQLException{
+	public List<List<Task>> getTaskByCategory(int id) {
 		
 		List<List<Task>>  tasksByCategory = new ArrayList<List<Task>>();
 		
@@ -174,7 +174,7 @@ public class TasksService {
 	 * @param id
 	 * @throws SQLException
 	 */
-	public void finishTask(int id) throws SQLException {
+	public void finishTask(int id)  {
 		
 		tasksRepository.updateFinished(id);
 		

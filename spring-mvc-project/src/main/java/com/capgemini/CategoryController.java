@@ -20,7 +20,7 @@ public class CategoryController {
 	private CategoriesService categoriesService;
 
 	@RequestMapping(value = "categories/add")
-	public String addCategory(Category category) throws SQLException {
+	public String addCategory(Category category) {
 		
 		
 		categoriesService.addCategory(category);
@@ -31,7 +31,7 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "categories/delete/{id}")
-	public String deleteCategory(@PathVariable int id) throws SQLException {
+	public String deleteCategory(@PathVariable int id)  {
 		
 		categoriesService.deleteCategory(id);
 		
@@ -41,7 +41,7 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/categories/list")
-	public String getCategories(Model model) throws SQLException {
+	public String getCategories(Model model) {
 		
 		model.addAttribute("categories",categoriesService.getCategories());
 		
