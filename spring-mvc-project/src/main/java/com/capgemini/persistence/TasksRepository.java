@@ -93,6 +93,35 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		}
 
 	}
+	
+
+	public void deleteByCategoryId(int categoryid) throws SQLException {
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+    
+	
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("DELETE FROM \"PUBLIC\".\"TTASKS\" WHERE category_id = ?");
+			
+
+			pst.setInt(1,categoryid);
+			
+			pst.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			pst.close();
+			c.close();
+		}
+
+	}
+
 
 	@Override
 	public List<Object> findAll() throws SQLException {

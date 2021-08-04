@@ -4,9 +4,10 @@ import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import com.capgemini.model.Category;
 
@@ -19,13 +20,32 @@ public class CategoryController {
 	private CategoriesService categoriesService;
 
 	@RequestMapping(value = "categories/add")
-	public String addCategorie(Category category) throws SQLException {
+	public String addCategory(Category category) throws SQLException {
 		
 		
 		categoriesService.addCategory(category);
 		
 		
-		return "redirect:/tasks/list";
+		return "redirect:/categories/list";
+		
+	}
+	
+	@RequestMapping(value = "categories/delete/{id}")
+	public String deleteCategory(@PathVariable int id) throws SQLException {
+		
+		categoriesService.deleteCategory(id);
+		
+		
+		return "redirect:/categories/list";
+		
+	}
+	
+	@RequestMapping(value = "/categories/list")
+	public String getCategories(Model model) throws SQLException {
+		
+		model.addAttribute("categories",categoriesService.getCategories());
+		
+		return "categoriesList";
 		
 	}
 

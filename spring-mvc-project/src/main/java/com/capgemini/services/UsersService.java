@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.model.User;
 import com.capgemini.model.UserStatus;
+import com.capgemini.persistence.CategoriesRepository;
+import com.capgemini.persistence.TasksRepository;
 import com.capgemini.persistence.UsersRepository;
 import com.capgemini.persistence.dto.UserDto;
 
@@ -18,6 +20,13 @@ public class UsersService {
 	
 	@Autowired
 	private UsersRepository usersRepository;
+	
+	@Autowired
+	private CategoriesRepository categoriesRepository;
+	
+	@Autowired
+	private TasksRepository tasksRepository;
+
 
 	
 	public List<User> getUsers() throws SQLException{
@@ -47,6 +56,8 @@ public class UsersService {
 	public void deleteUser(int id) throws SQLException {
 		
 		usersRepository.delete(id);
+		categoriesRepository.delete(id);
+		tasksRepository.delete(id);
 	}
 	
 	public void changeStatus(int id) throws SQLException {

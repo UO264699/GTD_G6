@@ -63,7 +63,28 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 	@Override
 	public void delete(int id) throws SQLException {
 		
-		
+		Connection c = null;
+		PreparedStatement pst = null;
+    
+	
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("DELETE FROM \"PUBLIC\".\"TCATEGORIES\" WHERE id = ?");
+			
+
+			pst.setInt(1,id);
+			
+			pst.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			pst.close();
+			c.close();
+		}
 
 	}
 	
