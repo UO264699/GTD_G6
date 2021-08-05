@@ -248,7 +248,7 @@
 			<div class="w-100 row  border-bottom">
 				<h6 class="pb-2 mb-0 col-2">Tareas</h6>
 				<h6 class="pb-2 mb-0 col-2">Fecha de creacion</h6>
-				<h6 class="pb-2 mb-0 col-4">Fecha planeada</h6>
+				<h6 class="pb-2 mb-0 col-4">Fecha finalizada</h6>
 				<h6 class="pb-2 mb-0 col-2">Comentarios</h6>
 				<h6 class="pb-2 mb-0 col-2">Categoria</h6>
 			</div>
@@ -267,8 +267,8 @@
 					</p>
 					<!--FECHA PLANEADA-->
 					<p class="col-4">
-						<c:if test="${task.planned == null}">?</c:if>
-						<c:out value="${task.planned}" />
+						<c:if test="${task.finished == null}">?</c:if>
+						<c:out value="${task.finished}" />
 					</p>
 					<!--COMENTARIO-->
 					<p class="col-2">

@@ -37,11 +37,14 @@
 			
 			<div class="form-floating m-1">
 				<form:input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" path="password" /> <label for="floatingPassword">Password</label>
-				
+			</div>
+
+			<div class="form-floating m-1">
+				<form:input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" path="password" /> <label for="floatingPassword">Confirm Password</label>
 			</div>
 
 			<div class="form-check form-switch d-flex justify-content-around">
-				<label class="form-check-label" for="flexSwitchCheckDefault">¿Eres
+				<label class="form-check-label" for="flexSwitchCheckDefault">ï¿½Eres
 					administrador?</label> <input class="form-check-input" type="checkbox"
 					name="isAdmin" id="flexSwitchCheckDefault" value="true">
 			</div>

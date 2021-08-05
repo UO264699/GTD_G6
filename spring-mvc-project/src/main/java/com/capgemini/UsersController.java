@@ -44,7 +44,7 @@ public class UsersController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcomePage(Model model) {
 		model.addAttribute("user", new User()); // the Category object is used as a template to generate the form
-		return "home";
+		return "register";
 	}
 
 	@RequestMapping(value = "/users/list")
