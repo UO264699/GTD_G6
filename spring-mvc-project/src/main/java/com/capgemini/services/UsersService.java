@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.capgemini.model.User;
 import com.capgemini.model.UserStatus;
@@ -18,12 +18,13 @@ public class UsersService {
 
 	@Autowired
 	private UsersRepository usersRepository;
+	private UsersRepository categoriesRepository;
+	private UsersRepository tasksRepository;
 
-	public UsersService() {
-		// TODO Auto-generated constructor stub
-	}
+	
 
-	public User createNewUser(User newUser) throws SQLException {
+	public User createNewUser(User newUser)  {
+
 
 		UserDto u = new UserDto();
 
@@ -34,12 +35,21 @@ public class UsersService {
 		u.password = newUser.getPassword();
 		u.status = "ENABLED";
 
-		usersRepository.add(u);
+		
+			usersRepository.add(u);
+		
 
 		return newUser;
 	}
 
-	public List<User> getUsers() throws SQLException {
+	/**
+	 * 
+	 * Obtiene un listado de todos los usuarios del sistema.
+	 * 
+	 * 
+	 * @return lista de todos los usuarios del sistema
+	 */
+	public List<User> getUsers() {
 		List<User> users = new ArrayList<User>();
 		List<Object> users1 = usersRepository.findAll();
 
@@ -52,17 +62,34 @@ public class UsersService {
 
 			users.add(user);
 		}
-
+		
 		return users;
 
 	}
-
-	public void deleteUser(int id) throws SQLException {
-
+	/**
+	 * 
+	 * Elimina un usuario del sistema
+	 * 
+	 * 
+	 * @param id id del usuario a eliminar
+	 */
+	public void deleteUser(int id)  {
+		
 		usersRepository.delete(id);
+		categoriesRepository.delete(id);
+		tasksRepository.delete(id);
+
 	}
 
-	public void changeStatus(int id) throws SQLException {
+	
+	/**
+	 * 
+	 * Actualiza el estado de un usuario.
+	 * 
+	 * @param id id del usuario a actualizar.
+	 */
+	public void changeStatus(int id)  {
+
 
 		usersRepository.updateStatus(id);
 	}
@@ -74,6 +101,7 @@ public class UsersService {
 		else
 			return UserStatus.ENABLED;
 	}
+
 	
 	public UserDto getUserById(int id) throws SQLException {
 		

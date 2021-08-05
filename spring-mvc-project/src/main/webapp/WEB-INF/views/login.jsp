@@ -22,18 +22,17 @@
 	style="height: 90vh;">
 
 	<main class="form-signin col-4">
-		<form:form class=" d-flex flex-column justify-content-center" method="post" action="users/add" modelAttribute="user">
+		<form:form class=" d-flex flex-column justify-content-center" method="post" action="login" modelAttribute="user">
 			<h1 class="h3 mb-3 fw-normal w-90">Please login in</h1>
 
-			<div class="form-floating m-1">
-				<form:input type="email" class="form-control" name="email" placeholder="Email" path="email" /> <label for="floatingInput">Email address</label>
-				<form:errors type="email" class="form-control" name="email" placeholder="Email" path="email" /> <label for="floatingInput">Email address</label>
+			<div class="form-floating m1">
+				<input type="text" class="form-control" name="login" placeholder="Nombre de usuario" /> <label for="floatingInput">Email address</label>
+				
 			</div>
 			
 			<div class="form-floating m-1">
-				<form:input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" path="password" /> <label for="floatingPassword">Password</label>
+				<input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"/> <label for="floatingPassword">Password</label>
 			</div>
-
 			<button class="btn btn-primary mt-2" type="submit">Login</button>
 
 			<p class="mt-5 mb-3 text-muted">&copy; PM</p>

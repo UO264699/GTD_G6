@@ -1,4 +1,4 @@
-package com.capgemini;
+package com.capgemini.controllers;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
