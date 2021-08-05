@@ -37,7 +37,7 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 	
 			
 			pst.setString(1, category.name);
-			pst.setString(2, "2");
+			pst.setInt(2, 38);
 			
 			
 

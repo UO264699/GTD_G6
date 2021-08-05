@@ -7,10 +7,11 @@
 <meta charset="ISO-8859-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista de Categorías</title>
+<title>Lista de Categorï¿½as</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
 </head>
 <header>
@@ -25,16 +26,19 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
+					<li class="nav-item"></li>
 
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Lista de Categorías</a></li>
+						aria-current="page" href="/spring-mvc-project/users/list">Administrar
+							Usuarios</a></li>
+
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="/spring-mvc-project/categories/list">Administrar
+							Categorias</a></li>
 				</ul>
-				<form action="/spring-mvc-project/tasks/list">
-					<button type="submit" class="btn btn-light" data-bs-toggle="modal"
-						data-bs-target="#staticBackdrop">Ir al listado de tareas</button>
-				</form>
+				<a class="nav-link active text-light" aria-current="page"
+					href="/spring-mvc-project/tasks/list#">Home</a>
+
 			</div>
 		</div>
 	</nav>
@@ -42,20 +46,20 @@
 
 <body class="row d-flex align-items-center justify-content-center">
 	<div class="col-10 mt-3">
-		<h1>Lista de Categorías</h1>
+		<h1>Lista de Categorias</h1>
 		<hr>
 		<table class="table table-striped table-hover text-center">
 			<thead>
-				<tr>
+				<tr class="text-center">
 					<th>ID</th>
-					<th>Nombre</th>
-					
+					<th>Nombre Categoria</th>
+					<th>Borrar</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="c" items="${categories}">
 
-					<tr>
+					<tr class="text-center">
 
 						<td><c:out value="${c.id}" /></td>
 						<td><c:out value="${c.name}" /></td>

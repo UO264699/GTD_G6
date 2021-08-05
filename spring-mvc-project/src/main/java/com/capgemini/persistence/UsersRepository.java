@@ -12,7 +12,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-
+import com.capgemini.model.User;
 import com.capgemini.persistence.dto.UserDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
@@ -21,11 +21,44 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 
 	
 	public int add(Object o)  {
-		// TODO Auto-generated method stub
+		UserDto u = (UserDto) o;
+
+		Connection c = null;
+		PreparedStatement pst = null;
+
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("INSERT INTO TUSERS (EMAIL,ISADMIN,LOGIN,PASSWORD,STATUS) VALUES (?,?,?,?,?)");
+
+			pst.setString(1, u.email);
+			pst.setBoolean(2, u.isAdmin);
+			pst.setString(3, u.login);
+			pst.setString(4, u.password);
+			pst.setString(5, u.status);
+
+			pst.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return 0;
 	}
 
-	public void delete(int id)  {
+	public void delete(int id) {
 		
 		Connection c = null;
 		PreparedStatement pst = null;
@@ -59,7 +92,7 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 	}
 
 	
-	public List<Object> findAll() {
+	public List<Object> findAll()  {
 		
 		
 		List<Object> listUsers = new ArrayList<Object>();
@@ -116,7 +149,7 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		
 	}
 	
-	public UserDto findById(int id)  {
+	public UserDto findById(int id) {
 		
 		
 		List<Object> listUsers = new ArrayList<Object>();

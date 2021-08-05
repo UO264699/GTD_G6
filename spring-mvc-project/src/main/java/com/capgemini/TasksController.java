@@ -1,6 +1,9 @@
 package com.capgemini;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +20,8 @@ public class TasksController {
 	
 	@Autowired
 	private TasksService tasksService;
+	
+
 
 	@RequestMapping(value = "tasks/add/{userid}/{categoryid}", method = RequestMethod.POST)
 	public String addTask(Task task,@PathVariable int userid,@PathVariable int categoryid) throws SQLException {
@@ -34,11 +39,11 @@ public class TasksController {
 	public String getTasks(Model model)  {
 	
 		
-		model.addAttribute("todayTasks",tasksService.listTodayTasks(2));
+		model.addAttribute("todayTasks",tasksService.listTodayTasks(38));
 		
-		model.addAttribute("tasks",tasksService.listTasks(2));
+		model.addAttribute("tasks",tasksService.listTasks(38));
 		
-		model.addAttribute("finishedTasks",tasksService.listFinishedTasks(2));
+		model.addAttribute("finishedTasks",tasksService.listFinishedTasks(38));
 		
 		return "tasksList";
 		
