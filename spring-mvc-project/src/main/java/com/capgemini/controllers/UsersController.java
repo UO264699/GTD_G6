@@ -1,7 +1,9 @@
-package com.capgemini;
+package com.capgemini.controllers;
 
 import java.io.Console;
 import java.sql.SQLException;
+
+import javax.servlet.http.HttpSession;
 
 import com.capgemini.model.User;
 
@@ -45,6 +47,25 @@ public class UsersController {
 	public String welcomePage(Model model) {
 		model.addAttribute("user", new User()); // the Category object is used as a template to generate the form
 		return "register";
+	}
+	
+
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model) {
+		
+		return "login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String authenticate(Model model,@RequestParam("login") String username,
+			@RequestParam("password") String password,
+			HttpSession session) {
+		
+		session.setAttribute("username", username);
+		
+		
+		return "redirect:/users/list";
 	}
 
 	@RequestMapping(value = "/users/list")

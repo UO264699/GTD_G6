@@ -4,4 +4,5 @@ public class CategoryDto {
 
     public String name;
     public int user_id;
+	public int id;
 }

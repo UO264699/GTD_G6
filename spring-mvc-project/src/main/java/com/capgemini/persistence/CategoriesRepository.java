@@ -11,6 +11,7 @@ import com.capgemini.model.Category;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.persistence.dto.CategoryDto;
+import com.capgemini.persistence.dto.UserDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
 @Repository
@@ -95,6 +96,7 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 
 	}
 	
+   
 
 	public void deleteByUserId(int id)  {
 		Connection c = null;
@@ -158,6 +160,55 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 			}
 
 			return listCategories;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+
+
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public CategoryDto findbyid(int id)  {
+		List<Object> listCategories = new ArrayList<Object>();
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+
+
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TCATEGORIES\" where id=?");
+			
+			pst.setInt(1, id);
+
+			rs = pst.executeQuery();
+
+			while(rs.next()) {
+
+
+				CategoryDto categoryDto = new CategoryDto();
+				
+				categoryDto.name = rs.getString("name");
+				categoryDto.user_id = rs.getInt("user_id");
+
+			
+
+				listCategories.add(categoryDto);
+
+			}
+
+			return (CategoryDto) listCategories.get(0);
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

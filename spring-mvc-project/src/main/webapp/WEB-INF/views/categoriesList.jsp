@@ -66,7 +66,7 @@
 						<td><a href=delete/${c.id} type="button"
 							class="btn btn btn-outline-dark">Borrar</a></td>
 
-
+					
 					</tr>
 
 				</c:forEach>
