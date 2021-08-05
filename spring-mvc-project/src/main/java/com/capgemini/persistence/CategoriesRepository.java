@@ -5,14 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.capgemini.model.Category;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.persistence.dto.CategoryDto;
-import com.capgemini.persistence.dto.TaskDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
 @Repository

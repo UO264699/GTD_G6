@@ -31,6 +31,14 @@ public class TasksService {
 		tasksRepository.delete(id);
 	}
 	
+	/**
+	 * 
+	 * Añade una tarea 
+	 * 
+	 * @param t Tarea a añadir
+	 * @param userid id del usuario en sesión
+	 * @param categoryid id de la categoría
+	 */
 	public void addTask(Task t,int userid, int categoryid)  {
 		
 		TaskDto taskDto = new TaskDto();
@@ -49,8 +57,8 @@ public class TasksService {
 	 * 
 	 * Lista todas las tareas del usuario
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return listado de todas las tareas del usuario
+	 * 
 	 */
 	public List<Task> listTasks(int id)  {
 		
@@ -77,8 +85,8 @@ public class TasksService {
 	 * Lista las tareas de hoy y las retrasadas
 	 * 
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return listado de las tareas de hoy y las retrasadas
+	 * 
 	 */
 	
 	public List<Task> listTodayTasks(int id)  {
@@ -108,8 +116,7 @@ public class TasksService {
 	 * 
 	 * Lista todas las tareas finalizadas
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return Listado de todas las tareas finalizadas
 	 */
 	public List<Task> listFinishedTasks(int id)  {
 		
@@ -128,6 +135,15 @@ public class TasksService {
 		
 	}
 	
+	/**
+	 * 
+	 * Lista las tareas de una categoría determinada cuyo id se pasa por parámetro
+	 * 
+	 * 
+	 * @param id id del usuario en sesión
+	 * @param categoryid id de la categoría
+	 * @return Listado de las tareas de una categoría determinada.
+	 */
 	public List<Task> listTaskByCategory(int id, int categoryid)  {
 		
 		List<Task> tasks = listTasks(id);
@@ -145,6 +161,13 @@ public class TasksService {
 		
 	}
 	
+	/**
+	 * 
+	 * Obtiene una lista de las listas de tareas por cada categoría
+	 * 
+	 * @param id id del usuario en sesión
+	 * @return Lista de las listas de tareas por cada categoría
+	 */
 	public List<List<Task>> getTaskByCategory(int id) {
 		
 		List<List<Task>>  tasksByCategory = new ArrayList<List<Task>>();

@@ -18,9 +18,29 @@
 	<form action="categories/add" method="post">
 
          <input type="text" name ="name"/>
-         <input type="submit" value ="add category"/>
+         <input type="submit" value ="Añadir categoría"/>
 
 </form>
+<form action="add/2/2"
+method="post">
+
+
+
+
+
+<input type="text"
+name ="title"/>
+
+
+<input type="submit"
+value ="Añadir Tarea"/>
+
+
+
+
+
+</form>
+
 
 </body>
 </html>

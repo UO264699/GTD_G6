@@ -1,6 +1,5 @@
 package com.capgemini.services;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,13 @@ public class UsersService {
 	private TasksRepository tasksRepository;
 
 
-	
+	/**
+	 * 
+	 * Obtiene un listado de todos los usuarios del sistema.
+	 * 
+	 * 
+	 * @return lista de todos los usuarios del sistema
+	 */
 	public List<User> getUsers() {
 		
 
@@ -52,7 +57,13 @@ public class UsersService {
 	}
 	
 
-	
+	/**
+	 * 
+	 * Elimina un usuario del sistema
+	 * 
+	 * 
+	 * @param id id del usuario a eliminar
+	 */
 	public void deleteUser(int id)  {
 		
 		usersRepository.delete(id);
@@ -60,6 +71,12 @@ public class UsersService {
 		tasksRepository.delete(id);
 	}
 	
+	/**
+	 * 
+	 * Actualiza el estado de un usuario.
+	 * 
+	 * @param id id del usuario a actualizar.
+	 */
 	public void changeStatus(int id) {
 		
 		usersRepository.updateStatus(id);

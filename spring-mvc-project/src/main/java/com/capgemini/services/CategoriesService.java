@@ -22,11 +22,23 @@ public class CategoriesService {
 	@Autowired
 	private TasksRepository tasksRepository;
 
-
+    /**
+     * 
+     * Elimina la categoría cuyo id se pasa por parámetro
+     * 
+     * 
+     * @param id id de la categoría a eliminar
+     */
 	public void deleteCategoryByUserId(int id)  {
 		categoriesRepository.deleteByUserId(id);
 	}
 
+	/**
+	 * 
+	 * Obtiene un listado de todas las categorías del sistema
+	 * 
+	 * @return listado de todas las categorías del sistema
+	 */
 	public List<Category> getCategories() {
 
 		List<Object> categories = categoriesRepository.findAll();
@@ -42,6 +54,12 @@ public class CategoriesService {
 		return categories1;
 	}
 	
+	/**
+	 * Añade una categoría
+	 * 
+	 * 
+	 * @param category categoría a añadir
+	 */
 	public void addCategory(Category category)  {
 		
 		CategoryDto categoryDto = new CategoryDto();
@@ -53,6 +71,12 @@ public class CategoriesService {
 		
 	}
 	
+	/**
+	 * Borra una categoría del sistema
+	 * 
+	 * 
+	 * @param id id de la categoría a borrar
+	 */
 	public void deleteCategory(int id)  {
 		
 		this.categoriesRepository.delete(id);
