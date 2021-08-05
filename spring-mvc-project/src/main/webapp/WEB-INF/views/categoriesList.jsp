@@ -67,12 +67,12 @@
 						<td><c:out value="${c.id}" /></td>
 						<td><c:out value="${c.name}" /></td>
 						<td><a href=delete/${c.id} type="button"
-							class="btn btn btn-outline-dark">Borrar</a></td>
+							class="btn btn-outline-dark">Borrar</a></td>
 						<td>
 							<button type="button" hidden class="btn btn-light"
 								data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="botonEditar">Editar</button>
 
-							<button type="button" class="btn btn-light" onclick="categoria(${c.id})">Editar</button>
+							<button type="button" class="btn btn-outline-dark" onclick="categoria(${c.id})">Editar</button>
 						</td>
 					</tr>
 

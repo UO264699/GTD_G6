@@ -46,6 +46,37 @@
 	</header>
 
 	<main class="container">
+
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Modal</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+
+						<form action="editTask" method="post">
+							<input type="text" name="title" class=""
+								placeholder="Escribe el nombre" id="title"> 
+							<input type="text" name="comments" class=""
+								placeholder="Escribe el comentario" id="comments"> 
+							<input type="date" name="datePlan" class=""
+								placeholder="Escribe la fecha" id="datePlan"> 
+							<input type="submit"
+								class="btn btn-dark" value="Editar">
+							<input
+								type="hidden" name="id" id="task">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 		<!--MODAL-->
 		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 			data-bs-keyboard="false" tabindex="-1"
@@ -59,7 +90,7 @@
 					</div>
 					<div class="modal-body">
 
-						<form action="add/38/6" method="post">
+						<form action="add/38/8" method="post">
 
 							<div class="d-flex flex-column justify-content-center aling-items-center">
 									<h5 class="form-label">Nombre de la tarea</h5>
@@ -137,14 +168,14 @@
 						<p class="col-2">
 							<c:if test="${task.comments == null}">?</c:if>
 							<c:out value="${task.comments}" />
-						</p class="col-2">
+						</p>
 						<!--ID-->
 						<p class="col-2">
 							<c:if test="${task.category_id == null}">?</c:if>
 							<c:out value="${task.category_id}" />
 						</p>
 						<!--FINALIZAR TAREA-->
-						<p class="col-2">
+						<p class="col-1">
 							<c:if test="${task.finished == null}">
 								<a href=finish/${task.id} type="button" class="btn btn-danger">Finalizar</a>
 							</c:if>
@@ -152,6 +183,12 @@
 							<c:if test="${task.finished == task.created}">
 								Tarea Finalizada
 							</c:if>
+						</p>
+						
+						<p class="col-1">
+							<button type="button" hidden class="btn btn-dark"
+								data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="botonEditar">Editar</button>
+							<button type="button" class="btn btn-outline-dark" onclick="task(${task.id})">Editar</button>
 						</p>
 					</div>
 				</div>
@@ -290,7 +327,7 @@
 
 
 	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/user.js"></script>
+	src="${pageContext.request.contextPath}/resources/taskScript.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

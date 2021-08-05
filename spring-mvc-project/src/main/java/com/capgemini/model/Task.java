@@ -12,6 +12,7 @@ public class Task {
     private Date finished;
     private int user_id;
     private int category_id;
+   
     
     public Task() {
     	

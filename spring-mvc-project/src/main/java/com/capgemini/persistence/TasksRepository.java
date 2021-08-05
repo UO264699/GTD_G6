@@ -353,5 +353,38 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 			
 		}
 
-	
+	public void updateTask(TaskDto task) {		
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TTASKS\" SET title =?, comments=?, planned=?  where id=?");
+			
+			
+			pst.setString(1, task.title);
+			pst.setString(2, task.comments);
+			pst.setDate(3, new java.sql.Date(task.planned.getTime()));
+			pst.setInt(4, task.id);
+
+
+			pst.executeUpdate();
+			
+			pst.close();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+		
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
 }

@@ -52,14 +52,21 @@ public class TasksController {
 	@RequestMapping(value = "tasks/finish/{id}")
 	public String finishTask(@PathVariable int id)  {
 		
-		
 		tasksService.finishTask(id);
-		
 		
 		return "redirect:/tasks/list";
 		
 	}
 	
+	
+	@RequestMapping(value = "/tasks/editTask")
+	public String editTask(Task task,String datePlan)  {
+		
+		tasksService.editTask(task, datePlan);
+		
+		return "redirect:/tasks/list";
+		
+	}
 	
 	
 }
