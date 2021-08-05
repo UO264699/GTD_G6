@@ -17,12 +17,12 @@ public class User {
 		
 	}
 
-	public User(int id,String login, String email, String password, Boolean isAdmin, UserStatus status, List<Task> tasks, List<Category> categories) {
+	public User(int id,String login, String email, String password, boolean isAdmin, UserStatus status, List<Task> tasks, List<Category> categories) {
 		this.id = id;
 		this.login = login;
 		this.email = email;
 		this.password = password;
-		this.setAdmin(isAdmin);
+		this.setIsAdmin(isAdmin);
 		this.status = status;
 		this.tasks = tasks;
 		this.categories = categories;
@@ -86,24 +86,20 @@ public class User {
 		this.tasks = tasks;
 	}
 
-	public boolean isAdmin() {
+	public boolean isIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
+	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 
 	
 	public String getAdmin() {
-		
-		if(isAdmin())
+		if(isIsAdmin())
 			return "Sí";
 		else
 			return "No";
-		
 	}
-	
-
 
 }
