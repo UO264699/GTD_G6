@@ -47,7 +47,7 @@
 
 	<main class="container">
 
-		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+		<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static"
 			data-bs-keyboard="false" tabindex="-1"
 			aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -104,17 +104,10 @@
 						</form>
 
 						
-						<form action="categories/add" method="post">
-			
-							<div class="d-flex flex-column justify-content-center aling-items-center">
-								<h5 class="form-label">Nombre de la categoria</h5>
-								<div class="md-form mb-5">
-									<i class="fas fa-envelope prefix grey-text"></i>
-									<input type="text" class="form-control" name="name" />
-									<input type="submit" class="btn btn-dark w-100 mt-1" value="Anadir categoria" />
-								</div>
-							</div>
-							 
+						<c:forEach var="category" items="${categories}">
+							<c:out value="${category.name}" />
+						</c:forEach>
+						
 
 						</form>
 					</div>
@@ -186,9 +179,14 @@
 						</p>
 						
 						<p class="col-1">
-							<button type="button" hidden class="btn btn-dark"
-								data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="botonEditar">Editar</button>
-							<button type="button" class="btn btn-outline-dark" onclick="task(${task.id})">Editar</button>
+							<c:if test="${task.finished == null}">
+								<button type="button" hidden class="btn btn-dark"
+								data-bs-toggle="modal" data-bs-target="#staticBackdrop2" id="botonEditar">Editar</button>
+							<button type="button" class="btn btn-success" onclick="task(${task.id})">Editar</button>
+							</c:if>
+							<c:if test="${task.finished == task.created}">
+								Tarea Finalizada
+							</c:if>
 						</p>
 					</div>
 				</div>

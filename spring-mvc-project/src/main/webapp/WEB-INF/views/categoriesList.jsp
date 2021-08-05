@@ -14,39 +14,66 @@
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
 </head>
-<header>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">[Nombre de Usuaro]</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarText"
-				aria-controls="navbarText" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"></li>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">[Nombre de Usuaro]</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarText"
+					aria-controls="navbarText" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarText">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item"></li>
 
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="/spring-mvc-project/users/list">Administrar
-							Usuarios</a></li>
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/spring-mvc-project/users/list">Administrar Usuarios</a></li>
 
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="/spring-mvc-project/categories/list">Administrar
-							Categorias</a></li>
-				</ul>
-				<a class="nav-link active text-light" aria-current="page"
-					href="/spring-mvc-project/tasks/list#">Home</a>
-
+						<li class="nav-item"><a class="nav-link active"
+							aria-current="page" href="/spring-mvc-project/categories/list">Administrar Categorias</a></li>
+					</ul>
+					<a class="nav-link active text-light"aria-current="page" href="/spring-mvc-project/tasks/list#">Home</a>
+					<button type="button" class="btn btn-light" data-bs-toggle="modal"
+						data-bs-target="#staticBackdrop">Crear Categoria</button>
+				</div>
 			</div>
-		</div>
-	</nav>
-</header>
+		</nav>
+	</header>
 
 <body class="row d-flex align-items-center justify-content-center">
 	<div class="col-10 mt-3">
+		
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Modal</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						
+						<form action="add" method="post">
+			
+							<div class="d-flex flex-column justify-content-center aling-items-center">
+								<h5 class="form-label">Nombre de la categoria</h5>
+								<div class="md-form mb-5">
+									<i class="fas fa-envelope prefix grey-text"></i>
+									<input type="text" class="form-control" name="name" />
+									<input type="submit" class="btn btn-dark w-100 mt-1" value="Anadir categoria" />
+								</div>
+							</div>
+							 
 
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<h1>Lista de Categorias</h1>
 		<hr>

@@ -20,7 +20,7 @@ public class CategoryController {
 	@Autowired
 	private CategoriesService categoriesService;
 
-	@RequestMapping(value = "/tasks/categories/add")
+	@RequestMapping(value = "/categories/add")
 	public String addCategory(Category category) {
 		
 		
