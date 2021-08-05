@@ -2,6 +2,7 @@ package com.capgemini;
 
 import java.sql.SQLException;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +48,14 @@ public class CategoryController {
 		
 		return "categoriesList";
 		
+	}
+	
+	@RequestMapping(value = "/categories/edit")
+	public String updateCategories(Category category) {
+		
+		categoriesService.editCategorie(category);
+		
+		return "redirect:/categories/list";
 	}
 
 }

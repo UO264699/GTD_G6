@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.capgemini.persistence.dto.CategoryDto;
 import com.capgemini.persistence.dto.TaskDto;
 import com.capgemini.persistence.jdbc.Jdbc;
+import com.capgemini.services.CategoriesService;
 
 @Repository
 public class CategoriesRepository implements com.capgemini.persistence.Repository {
@@ -176,4 +177,85 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		}
 	}
 
+	public Object getCategoryById(int id) {
+		List<Object> listCategories = new ArrayList<Object>();
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TCATEGORIES\" WHERE ID = ?");
+
+			rs = pst.executeQuery();
+
+			pst.setInt(1,id);
+
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				
+				
+				CategoryDto t = new CategoryDto();
+				
+				t.id = rs.getInt("id");
+				t.name = rs.getString("name");
+				t.user_id = rs.getInt("user_id");
+
+				listCategories.add(t);
+				
+			}
+			
+			return listCategories;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+
+
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	public void updateCategory(int id,String name) {		
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+
+
+		
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TCATEGORIES\" SET name =? where id=?");
+			
+			pst.setString(1, name);
+			pst.setInt(2, id);
+			
+			pst.executeUpdate();
+			
+			pst.close();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+		
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
 }

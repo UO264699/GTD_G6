@@ -46,6 +46,8 @@
 
 <body class="row d-flex align-items-center justify-content-center">
 	<div class="col-10 mt-3">
+
+
 		<h1>Lista de Categorias</h1>
 		<hr>
 		<table class="table table-striped table-hover text-center">
@@ -54,6 +56,7 @@
 					<th>ID</th>
 					<th>Nombre Categoria</th>
 					<th>Borrar</th>
+					<th>Editar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -65,13 +68,51 @@
 						<td><c:out value="${c.name}" /></td>
 						<td><a href=delete/${c.id} type="button"
 							class="btn btn btn-outline-dark">Borrar</a></td>
+						<td>
+							<button type="button" hidden class="btn btn-light"
+								data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="botonEditar">Editar</button>
 
-
+							<button type="button" class="btn btn-light" onclick="categoria(${c.id})">Editar</button>
+						</td>
 					</tr>
 
 				</c:forEach>
+
 			</tbody>
 		</table>
+
+
+		<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Modal</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+
+						<form action="edit" method="post">
+							<input type="text" name="name" class=""
+								placeholder="Escribe el nombre"> 
+							<input type="submit"
+								class="btn btn-dark" value="Editar">
+							<input
+								type="hidden" name="id" id="categoria">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
+
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/script.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
 </html>

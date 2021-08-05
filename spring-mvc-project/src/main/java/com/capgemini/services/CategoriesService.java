@@ -54,10 +54,14 @@ public class CategoriesService {
 	}
 	
 	public void deleteCategory(int id)  {
-		
-		this.categoriesRepository.delete(id);
 		this.tasksRepository.deleteByCategoryId(id);
+		this.categoriesRepository.delete(id);
 		
+		
+	}
+	
+	public void editCategorie(Category category) {	
+		this.categoriesRepository.updateCategory(category.getId(), category.getName());
 	}
 
 
