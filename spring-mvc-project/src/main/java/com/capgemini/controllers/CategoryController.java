@@ -1,6 +1,8 @@
 package com.capgemini.controllers;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +21,13 @@ public class CategoryController {
 	private CategoriesService categoriesService;
 
 	@RequestMapping(value = "/tasks/categories/add")
-	public String addCategory(Category category) {
+	public String addCategory(Category category, HttpSession httpSession) {
 		
+		if(httpSession.getAttribute("user") == null) {
+			
+			return "redirect:/login";
+		}
+
 		
 		categoriesService.addCategory(category);
 		
@@ -30,7 +37,13 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/categories/delete/{id}")
-	public String deleteCategory(@PathVariable int id)  {
+	public String deleteCategory(@PathVariable int id, HttpSession httpSession)  {
+		
+		if(httpSession.getAttribute("user") == null) {
+			
+			return "redirect:/login";
+		}
+
 		
 		categoriesService.deleteCategory(id);
 		
@@ -42,7 +55,13 @@ public class CategoryController {
 
 	
 	@RequestMapping(value = "/categories/list")
-	public String getCategories(Model model) {
+	public String getCategories(Model model, HttpSession httpSession) {
+		
+		if(httpSession.getAttribute("user") == null) {
+			
+			return "redirect:/login";
+		}
+
 		
 		model.addAttribute("categories",categoriesService.getCategories());
 		

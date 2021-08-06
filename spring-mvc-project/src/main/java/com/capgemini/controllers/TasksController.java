@@ -2,6 +2,7 @@ package com.capgemini.controllers;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +23,14 @@ public class TasksController {
 
 
 	@RequestMapping(value = "tasks/add/{userid}/{categoryid}", method = RequestMethod.POST)
-	public String addTask(Task task,@PathVariable int userid,@PathVariable int categoryid) throws SQLException {
+	public String addTask(Task task,@PathVariable int userid,@PathVariable int categoryid, HttpSession httpSession) throws SQLException {
 		
+		
+		if(httpSession.getAttribute("user") == null) {
+			
+			return "redirect:/login";
+		}
+
 		
 		tasksService.addTask(task, userid, categoryid);
 		
@@ -34,7 +41,13 @@ public class TasksController {
 	
 	
 	@RequestMapping(value = "/tasks/list")
-	public String getTasks(Model model)  {
+	public String getTasks(Model model, HttpSession httpSession)  {
+		
+		if(httpSession.getAttribute("user") == null) {
+			
+			return "redirect:/login";
+		}
+
 	
 		
 		model.addAttribute("todayTasks",tasksService.listTodayTasks(38));
@@ -48,7 +61,14 @@ public class TasksController {
 	}
 	
 	@RequestMapping(value = "tasks/finish/{id}")
-	public String finishTask(@PathVariable int id)  {
+	public String finishTask(@PathVariable int id,HttpSession httpSession)  {
+		
+		
+		if(httpSession.getAttribute("user") == null) {
+			
+			return "redirect:/login";
+		}
+
 		
 		
 		tasksService.finishTask(id);

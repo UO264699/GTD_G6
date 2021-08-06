@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.capgemini.services.CategoriesService;
 import com.capgemini.services.TasksService;
 import com.capgemini.services.UsersService;
@@ -53,20 +52,40 @@ public class UsersController {
 		return "login";
 	}
 	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		
+		session.setAttribute("user", null);
+		
+		return "redirect:/login";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String authenticate(Model model,User user,
 			HttpSession session) {
 		
 		User user2 = usersService.getUserByLogin(user.getLogin());
 		
-		session.setAttribute("user", user);
+		session.setAttribute("user", user2);
 		
 		
 		return "redirect:/users/list";
 	}
 
 	@RequestMapping(value = "/users/list")
-	public String getUsers(Model model) throws SQLException {
+	public String getUsers(Model model, HttpSession httpSession) throws SQLException {
+		
+		
+		User user = (User) httpSession.getAttribute("user");
+		
+		if(user == null) {
+			
+			return "redirect:/login";
+		}
+		else if(!user.isIsAdmin()) {
+			
+			return "redirect:/tasks/list";
+		}
 
 		model.addAttribute("users", usersService.getUsers());
 
@@ -75,7 +94,20 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "users/delete/{id}")
-	public String deleteUser(@PathVariable int id) throws SQLException {
+	public String deleteUser(@PathVariable int id,HttpSession httpSession) throws SQLException {
+		
+
+		User user = (User) httpSession.getAttribute("user");
+		
+		if(user == null) {
+			
+			return "redirect:/login";
+		}
+		else if(!user.isIsAdmin()) {
+			
+			return "redirect:/tasks/list";
+		}
+
 
 		usersService.deleteUser(id);
 		tasksService.deleteTask(id);
@@ -97,7 +129,20 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "users/changeStatus/{id}")
-	public String changeStatus(@PathVariable int id) throws SQLException {
+	public String changeStatus(@PathVariable int id,HttpSession httpSession) throws SQLException {
+		
+
+		User user = (User) httpSession.getAttribute("user");
+		
+		if(user == null) {
+			
+			return "redirect:/login";
+		}
+		else if(!user.isIsAdmin()) {
+			
+			return "redirect:/tasks/list";
+		}
+
 
 		usersService.changeStatus(id);
 
