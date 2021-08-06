@@ -38,18 +38,20 @@ public class TasksService {
 	 * Añade una tarea 
 	 * 
 	 * @param t Tarea a añadir
-	 * @param userid id del usuario en sesión
-	 * @param categoryid id de la categoría
 	 */
-	public void addTask(Task t,int userid, int categoryid)  {
+	public void addTask(Task t)  {
 		
 		TaskDto taskDto = new TaskDto();
 		
 		taskDto.id = t.getId();
 		taskDto.title = t.getTitle();
 		taskDto.userId = t.getUser_id();
-		taskDto.categoryId = categoryid;
-		taskDto.userId = userid;
+		taskDto.categoryId = t.getCategory_id();
+		
+		if(taskDto.categoryId <= 0)
+			
+			taskDto.categoryId = categoriesRepository.findbyname("Inbox").id;
+	
 		
 	    tasksRepository.add(taskDto);
 		
@@ -209,6 +211,8 @@ public class TasksService {
 		
 		TaskDto t = new TaskDto();
 		
+		TaskDto beforeTask = tasksRepository.findById(task.getId());
+		
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		
 		try {
@@ -219,12 +223,37 @@ public class TasksService {
 			e.printStackTrace();
 		}
 		
+		
+		
 		t.id = task.getId();
 		t.title = task.getTitle();
 		t.planned = task.getPlanned();
 		t.comments = task.getComments();
 		
+		
+		comprobarCamposVacios(t, beforeTask);	
+		
 		this.tasksRepository.updateTask(t);
+	}
+	
+	public void comprobarCamposVacios(TaskDto t, TaskDto t2) {
+		
+		if(t.planned == null) {
+			
+			t.planned = t2.planned;
+			
+		}
+		
+		if(t.comments == null) {
+			
+			t.comments = t2.comments;
+			
+		}
+		
+		if(t.title == null) {
+			
+			t.title = t2.title;
+		}
 	}
 
 }

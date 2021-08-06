@@ -22,30 +22,32 @@
 	style="height: 100vh;">
 
 	<main class="form-signin col-4">
-		<form:form class=" d-flex flex-column justify-content-center" method="post" action="users/add" modelAttribute="user">
+		<form:form class=" d-flex flex-column justify-content-center" method="post" action="register" modelAttribute="user">
 			<h1 class="h3 mb-3 fw-normal w-90">Please register in</h1>
 
 			<div class="form-floating m-1">
 				<form:input type="email" class="form-control" name="email" placeholder="Email" path="email" /> <label for="floatingInput">Email address</label>
-				<form:errors type="email" class="form-control" name="email" placeholder="Email" path="email" /> <label for="floatingInput">Email address</label>
+				<form:errors type="email" class="form-control" name="email" path="email" /> 
 			</div>
 			
 			<div class="form-floating m-1">
 				<form:input type="text" class="form-control" id="floatingLogin" name="login" placeholder="User Name" path="login" /> <label for="floatingLogin">User Name</label>
-				<form:errors type="text" class="form-control" name="login" placeholder="User Name" path="login" /> <label for="floatingInput">User Name</label>
+				<form:errors type="text" class="form-control" name="login" path="login" /> 
 			</div>
 			
 			<div class="form-floating m-1">
-				<form:input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" path="password" /> <label for="floatingPassword">Password</label>
+				<form:input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"  path="password" /> <label for="floatingPassword">Password</label>
+				<form:errors type="text" class="form-control" name="password" path="password" /> 
 			</div>
 
 			<div class="form-floating m-1">
-				<form:input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password" path="password" /> <label for="floatingPassword">Confirm Password</label>
+				<form:input type="password" class="form-control" id="floatingPassword" name="confirmPassword" placeholder="Password" path="confirmPassword" /> <label for="floatingPassword">Confirm Password</label>
+				<form:errors type="text" class="form-control" name="confirmPassword" path="confirmPassword" /> 
 			</div>
 
 			<div class="form-check form-switch d-flex justify-content-around">
-				<label class="form-check-label" for="flexSwitchCheckDefault">�Eres
-					administrador?</label> <input class="form-check-input" type="checkbox"
+				<label class="form-check-label" for="flexSwitchCheckDefault">
+					Administrador</label> <input class="form-check-input" type="checkbox"
 					name="isAdmin" id="flexSwitchCheckDefault" value="true">
 			</div>
 			

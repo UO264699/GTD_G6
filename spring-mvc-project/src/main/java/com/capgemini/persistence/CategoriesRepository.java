@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.capgemini.persistence.dto.CategoryDto;
 import com.capgemini.persistence.jdbc.Jdbc;
-import com.capgemini.services.CategoriesService;
+
 
 @Repository
 public class CategoriesRepository implements com.capgemini.persistence.Repository {
@@ -149,13 +149,14 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 			while(rs.next()) {
 
 
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				int user_id = rs.getInt("user_id");
+				CategoryDto categoryDto = new CategoryDto();
+				
+				categoryDto.name = rs.getString("name");
+				categoryDto.user_id = rs.getInt("user_id");
+				categoryDto.id = rs.getInt("id");
+			
 
-				Category u = new Category(id,name,user_id);
-
-				listCategories.add(u);
+				listCategories.add(categoryDto);
 
 			}
 
@@ -201,6 +202,105 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 				
 				categoryDto.name = rs.getString("name");
 				categoryDto.user_id = rs.getInt("user_id");
+
+			
+
+				listCategories.add(categoryDto);
+
+			}
+
+			return (CategoryDto) listCategories.get(0);
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+
+
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public List<Object> findbyUserid(int id)  {
+		List<Object> listCategories = new ArrayList<Object>();
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+
+
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TCATEGORIES\" where user_id=?");
+			
+			pst.setInt(1, id);
+
+			rs = pst.executeQuery();
+
+			while(rs.next()) {
+
+
+				CategoryDto categoryDto = new CategoryDto();
+				
+				categoryDto.name = rs.getString("name");
+				categoryDto.user_id = rs.getInt("user_id");
+				categoryDto.id = rs.getInt("id");
+			
+
+				listCategories.add(categoryDto);
+
+			}
+
+			return listCategories;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+
+
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public CategoryDto findbyname(String name)  {
+		List<Object> listCategories = new ArrayList<Object>();
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+
+
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TCATEGORIES\" where name=?");
+			
+			pst.setString(1, name);
+
+			rs = pst.executeQuery();
+
+			while(rs.next()) {
+
+
+				CategoryDto categoryDto = new CategoryDto();
+				
+				categoryDto.name = rs.getString("name");
+				categoryDto.user_id = rs.getInt("user_id");
+				categoryDto.id = rs.getInt("id");
 
 			
 

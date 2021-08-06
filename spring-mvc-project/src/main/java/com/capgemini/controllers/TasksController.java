@@ -1,7 +1,5 @@
 package com.capgemini.controllers;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.model.Task;
+import com.capgemini.model.User;
 import com.capgemini.services.CategoriesService;
 import com.capgemini.services.TasksService;
 
@@ -24,18 +23,21 @@ public class TasksController {
 	@Autowired
 	private CategoriesService categoriesService;
 	
-
-	@RequestMapping(value = "tasks/add/{userid}/{categoryid}", method = RequestMethod.POST)
-	public String addTask(Task task,@PathVariable int userid,@PathVariable int categoryid, HttpSession httpSession) throws SQLException {
+	
+	@RequestMapping(value = "tasks/add", method = RequestMethod.POST)
+	public String addTask(Task task, HttpSession httpSession)  {
 		
+		
+		User user = (User) httpSession.getAttribute("user") ;
 		
 		if(httpSession.getAttribute("user") == null) {
 			
 			return "redirect:/login";
 		}
 
+		task.setUser_id(user.getId());
 		
-		tasksService.addTask(task, userid, categoryid);
+		tasksService.addTask(task);
 		
 		
 		return "redirect:/tasks/list";
@@ -46,24 +48,29 @@ public class TasksController {
 	@RequestMapping(value = "/tasks/list")
 	public String getTasks(Model model, HttpSession httpSession)  {
 		
-		if(httpSession.getAttribute("user") == null) {
+		
+		User user = (User) httpSession.getAttribute("user");
+		
+		if(user == null) {
 			
 			return "redirect:/login";
 		}
 
 	
+		int id = user.getId();
 		
-		model.addAttribute("todayTasks",tasksService.listTodayTasks(38));
+		model.addAttribute("todayTasks",tasksService.listTodayTasks(id));
 		
-		model.addAttribute("tasks",tasksService.listTasks(38));
+		model.addAttribute("tasks",tasksService.listTasks(id));
 		
-		model.addAttribute("finishedTasks",tasksService.listFinishedTasks(38));
+		model.addAttribute("finishedTasks",tasksService.listFinishedTasks(id));
 		
-		model.addAttribute("categories",categoriesService.getCategories());
+		model.addAttribute("categories",categoriesService.getCategories(id));
 		
 		return "tasksList";
 		
 	}
+	
 	
 	@RequestMapping(value = "tasks/finish/{id}")
 	public String finishTask(@PathVariable int id,HttpSession httpSession)  {

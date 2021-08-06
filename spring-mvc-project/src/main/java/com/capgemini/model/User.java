@@ -12,6 +12,8 @@ public class User {
 	private UserStatus status;
 	private List<Task> tasks;
 	private List<Category> categories;
+	private String confirmPassword;
+
 	
 	public User() {
 		
@@ -93,8 +95,16 @@ public class User {
 	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-
 	
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
 	public String getAdmin() {
 		if(isIsAdmin())
 			return "Sí";

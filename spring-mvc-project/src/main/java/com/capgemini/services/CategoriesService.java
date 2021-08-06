@@ -38,15 +38,15 @@ public class CategoriesService {
 	 * 
 	 * @return listado de todas las categorías del sistema
 	 */
-	public List<Category> getCategories() {
+	public List<Category> getCategories(int userid) {
 
-		List<Object> categories = categoriesRepository.findAll();
+		List<Object> categories = categoriesRepository.findbyUserid(userid);
 		List<Category> categories1 = new ArrayList<>();
 
-		for(Object u : categories) {
-			Category category = (Category) u;
+		for(Object c : categories) {
+			CategoryDto category = (CategoryDto) c ;
 
-			Category category2 = new Category(category.getId(), category.getName(), category.getUser_id());
+			Category category2 = new Category(category.id, category.name, category.user_id);
 
 			categories1.add(category2);
 		}

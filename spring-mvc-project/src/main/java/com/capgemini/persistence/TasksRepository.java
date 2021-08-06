@@ -41,7 +41,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 			
 			
 			
-			pst.setString(1, "");
+			pst.setString(1, null);
 			pst.setDate(2, new java.sql.Date(d.getTime()));
 			pst.setDate(3, null);
 			pst.setDate(4, null);
@@ -256,6 +256,64 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		
 	}
 	
+	
+	public TaskDto findById(int id)  {
+		
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		
+
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TTASKS\" where id=?");
+			
+			pst.setInt(1, id);
+			
+			rs = pst.executeQuery();
+			TaskDto t = new TaskDto();
+			
+			while(rs.next()) {
+				
+				
+			
+				
+				t.id = rs.getInt("id");
+				t.categoryId = rs.getInt("category_id");
+				t.userId = rs.getInt("user_id");
+				t.comments = rs.getString("comments");
+				t.created = rs.getDate("created");
+				t.finished = rs.getDate("finished");
+				t.planned = rs.getDate("planned");
+				t.title = rs.getString("title");
+				
+				
+
+		
+			}
+			
+			return t;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+		
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+		}
+		
+	}
+	
 	public List<Object> findByCategoryId(int category_id) {
 		List<Object> listTasks = new ArrayList<Object>();
 
@@ -366,7 +424,13 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 			
 			pst.setString(1, task.title);
 			pst.setString(2, task.comments);
-			pst.setDate(3, new java.sql.Date(task.planned.getTime()));
+			if(task.planned != null) {
+				
+				pst.setDate(3, new java.sql.Date(task.planned.getTime()));
+			}else
+				
+				pst.setDate(3, null);
+			
 			pst.setInt(4, task.id);
 
 

@@ -13,19 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.capgemini.model.Category;
 import com.capgemini.model.User;
 import com.capgemini.services.CategoriesService;
+import com.capgemini.services.TasksService;
 
 @Controller
 public class CategoryController {
 	
 	@Autowired
 	private CategoriesService categoriesService;
+	
+	@Autowired
+	private TasksService tasksService;
 
 
-	@RequestMapping(value = "/tasks/categories/add")
+	@RequestMapping(value = "/categories/add")
 	public String addCategory(Category category, HttpSession httpSession) {
 
-
-		
 		User user = (User) httpSession.getAttribute("user");
 		
 		if(user == null) {
@@ -58,10 +60,31 @@ public class CategoryController {
 		
 	}
 	
+	@RequestMapping(value = "/categories/{id}")
+	public String taskCategories(Model model, @PathVariable int id, HttpSession httpSession) {
+		
+		User user = (User) httpSession.getAttribute("user");
+		
+		if(user == null) {
+			
+			return "redirect:/login";
+		}
+
+	
+		int idUser = user.getId();
+		
+		model.addAttribute("tasksList",tasksService.listTaskByCategory(idUser, id));
+		
+		
+		return "taskListCategories";
+	}
+	
 
 	
 	@RequestMapping(value = "/categories/list")
 	public String getCategories(Model model, HttpSession httpSession) {
+		
+		User user = (User) httpSession.getAttribute("user");
 		
 		if(httpSession.getAttribute("user") == null) {
 			
@@ -69,7 +92,7 @@ public class CategoryController {
 		}
 
 		
-		model.addAttribute("categories",categoriesService.getCategories());
+		model.addAttribute("categories",categoriesService.getCategories(user.getId()));
 		
 		return "categoriesList";
 		
@@ -83,4 +106,6 @@ public class CategoryController {
 		return "redirect:/categories/list";
 	}
 
+	
+	
 }

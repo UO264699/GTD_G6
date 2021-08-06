@@ -1,6 +1,5 @@
 package com.capgemini.services;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.model.User;
 import com.capgemini.model.UserStatus;
+import com.capgemini.persistence.CategoriesRepository;
+import com.capgemini.persistence.TasksRepository;
 import com.capgemini.persistence.UsersRepository;
+import com.capgemini.persistence.dto.CategoryDto;
 import com.capgemini.persistence.dto.UserDto;
 
 @Service
@@ -18,8 +20,12 @@ public class UsersService {
 
 	@Autowired
 	private UsersRepository usersRepository;
-	private UsersRepository categoriesRepository;
-	private UsersRepository tasksRepository;
+	
+	@Autowired
+	private CategoriesRepository categoriesRepository;
+	
+	@Autowired
+	private TasksRepository tasksRepository;
 
 	
 
@@ -33,11 +39,19 @@ public class UsersService {
 		u.login = newUser.getLogin();
 		u.isAdmin = newUser.isIsAdmin();
 		u.password = newUser.getPassword();
-		u.status = "ENABLED";
+		u.status = newUser.getStatus();
 
 		
-			usersRepository.add(u);
+		usersRepository.add(u);
 		
+		u = usersRepository.findByLogin(u.login);
+		
+		CategoryDto category = new CategoryDto();
+		
+		category.name = "Inbox";
+		category.user_id = u.id;
+		
+		categoriesRepository.add(category);
 
 		return newUser;
 	}
@@ -75,9 +89,10 @@ public class UsersService {
 	 */
 	public void deleteUser(int id)  {
 		
+		tasksRepository.delete(id);
 		usersRepository.delete(id);
 		categoriesRepository.delete(id);
-		tasksRepository.delete(id);
+		
 
 	}
 
@@ -95,6 +110,11 @@ public class UsersService {
 	}
 
 	public UserStatus getStatus(UserDto u) {
+		
+		if(u.status == null)
+			
+			return UserStatus.ENABLED;
+
 
 		if (u.status.equals("DISABLED"))
 			return UserStatus.DISABLED;
@@ -111,8 +131,23 @@ public class UsersService {
 
 			User user = new User(udto.id, udto.login, udto.email, udto.password, udto.isAdmin, getStatus(udto),
 					udto.tasks, udto.categories);
+			
+			user.setConfirmPassword("a");
 
 			
 		return user;
 	}
+	
+	public User getUserByEmail(String email) {
+		
+		UserDto udto = usersRepository.findByEmail(email);
+
+		User user = new User(udto.id, udto.login, udto.email, udto.password, udto.isAdmin, getStatus(udto),
+				udto.tasks, udto.categories);
+		
+		user.setConfirmPassword("a");
+
+		
+	return user;
+}
 }
