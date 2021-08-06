@@ -12,6 +12,7 @@ import com.capgemini.model.UserStatus;
 import com.capgemini.persistence.CategoriesRepository;
 import com.capgemini.persistence.TasksRepository;
 import com.capgemini.persistence.UsersRepository;
+import com.capgemini.persistence.dto.CategoryDto;
 import com.capgemini.persistence.dto.UserDto;
 
 @Service
@@ -41,8 +42,16 @@ public class UsersService {
 		u.status = newUser.getStatus();
 
 		
-			usersRepository.add(u);
+		usersRepository.add(u);
 		
+		u = usersRepository.findByLogin(u.login);
+		
+		CategoryDto category = new CategoryDto();
+		
+		category.name = "Inbox";
+		category.user_id = u.id;
+		
+		categoriesRepository.add(category);
 
 		return newUser;
 	}
@@ -103,7 +112,7 @@ public class UsersService {
 	public UserStatus getStatus(UserDto u) {
 
 
-		if (u.status=="DISABLED")
+		if (u.status.equals("DISABLED"))
 
 			return UserStatus.DISABLED;
 		else

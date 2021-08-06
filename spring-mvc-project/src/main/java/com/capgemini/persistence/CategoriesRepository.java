@@ -224,6 +224,56 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 			}
 		}
 	}
+	
+	public CategoryDto findbyname(String name)  {
+		List<Object> listCategories = new ArrayList<Object>();
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+
+
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TCATEGORIES\" where name=?");
+			
+			pst.setString(1, name);
+
+			rs = pst.executeQuery();
+
+			while(rs.next()) {
+
+
+				CategoryDto categoryDto = new CategoryDto();
+				
+				categoryDto.name = rs.getString("name");
+				categoryDto.user_id = rs.getInt("user_id");
+				categoryDto.id = rs.getInt("id");
+
+			
+
+				listCategories.add(categoryDto);
+
+			}
+
+			return (CategoryDto) listCategories.get(0);
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+
+
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public Object getCategoryById(int id) {
 		List<Object> listCategories = new ArrayList<Object>();

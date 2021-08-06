@@ -47,6 +47,10 @@ public class TasksService {
 		taskDto.title = t.getTitle();
 		taskDto.userId = t.getUser_id();
 		taskDto.categoryId = t.getCategory_id();
+		
+		if(taskDto.categoryId <= 0)
+			
+			taskDto.categoryId = categoriesRepository.findbyname("Inbox").id;
 	
 		
 	    tasksRepository.add(taskDto);
