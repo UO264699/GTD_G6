@@ -13,9 +13,11 @@ public class UserDto {
 	public String login;
 	public String email;
 	public String password;
-	public Boolean isAdmin;
+	public boolean isAdmin;
 	public String status;
 	public List<Task> tasks;
 	public List<Category> categories;
+	
+	
 
 }

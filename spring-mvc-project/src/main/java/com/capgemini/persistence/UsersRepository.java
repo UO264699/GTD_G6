@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.capgemini.model.User;
 import com.capgemini.persistence.dto.UserDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
@@ -20,12 +19,45 @@ import com.capgemini.persistence.jdbc.Jdbc;
 public class UsersRepository implements com.capgemini.persistence.Repository {
 
 	
-	public int add(Object o) throws SQLException {
-		// TODO Auto-generated method stub
+	public int add(Object o)  {
+		UserDto u = (UserDto) o;
+
+		Connection c = null;
+		PreparedStatement pst = null;
+
+		try {
+			c = Jdbc.getConnection();
+
+			pst = c.prepareStatement("INSERT INTO TUSERS (EMAIL,ISADMIN,LOGIN,PASSWORD,STATUS) VALUES (?,?,?,?,?)");
+
+			pst.setString(1, u.email);
+			pst.setBoolean(2, u.isAdmin);
+			pst.setString(3, u.login);
+			pst.setString(4, u.password);
+			pst.setString(5, u.status);
+
+			pst.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return 0;
 	}
 
-	public void delete(int id) throws SQLException {
+	public void delete(int id) {
 		
 		Connection c = null;
 		PreparedStatement pst = null;
@@ -46,14 +78,20 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
-			pst.close();
-			c.close();
+			try {
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 	}
 
 	
-	public List<Object> findAll() throws SQLException {
+	public List<Object> findAll()  {
 		
 		
 		List<Object> listUsers = new ArrayList<Object>();
@@ -96,7 +134,12 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		}
 		finally {
 		
-			c.close();
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 
 		}
@@ -105,11 +148,9 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		
 	}
 	
-	public UserDto findById(int id) throws SQLException {
+	public UserDto findById(int id) {
 		
 		
-		List<Object> listUsers = new ArrayList<Object>();
-
 		Connection c = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -125,33 +166,98 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 			
 			rs = pst.executeQuery();
 			
-			while(rs.next()) {
-				
 			
-
 				
-				UserDto u = new UserDto();
+			UserDto u = new UserDto();
+				while(rs.next()) {
+				
+				
+				
 				
 				u.id = rs.getInt("id");
 				u.email = rs.getString("email");
 				u.isAdmin = rs.getBoolean("isadmin");
 				u.login = rs.getString("login");
 			    u.status = rs.getString("status");
-		
-                
-				
-				listUsers.add(u);
 				
 			}
+                
+				
 			
-			return (UserDto) listUsers.get(0);
+				
+			
+			
+			
+			return u;
 			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		finally {
 		
-			c.close();
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+		}
+		
+	}
+	
+	public UserDto findByLogin(String login) {
+		
+		
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		
+
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TUSERS\" where login=?");
+			
+			pst.setString(1, login);
+			
+			rs = pst.executeQuery();
+			
+			UserDto u = new UserDto();
+			
+			while(rs.next()) {
+				
+				
+				
+				
+				u.id = rs.getInt("id");
+				u.email = rs.getString("email");
+				u.isAdmin = rs.getBoolean("isadmin");
+				u.login = rs.getString("login");
+			    u.status = rs.getString("status");
+				
+			}
+			
+			
+		
+                
+				
+			
+			return u;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+		
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 
 		}
@@ -160,7 +266,7 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 	
 	
 	
-	public void updateStatus(int id) throws SQLException {
+	public void updateStatus(int id)  {
 		
 		
 		Connection c = null;
@@ -175,10 +281,11 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		
 	
 			
-			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TUSERS\" SET status = "+ "'" + changeStatus(u) + "'" + " where id=?");
+			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TUSERS\" SET status =? where id=?");
 			
 
-			pst.setInt(1,id);
+			pst.setString(1, changeStatus(u));
+			pst.setInt(2,id);
 			
 			pst.executeUpdate();
 			
@@ -188,7 +295,12 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 			throw new RuntimeException(e);
 		} finally {
 		
-			c.close();
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		

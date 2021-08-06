@@ -1,6 +1,8 @@
 package com.capgemini.services;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,7 +12,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.model.Category;
 import com.capgemini.model.Task;
+import com.capgemini.persistence.CategoriesRepository;
 import com.capgemini.persistence.TasksRepository;
 import com.capgemini.persistence.dto.TaskDto;
 
@@ -20,13 +24,24 @@ public class TasksService {
 	
 	@Autowired
 	private TasksRepository tasksRepository;
+	
+	@Autowired
+	private CategoriesRepository categoriesRepository;
 
-	public void deleteTask(int id) throws SQLException {
+	public void deleteTask(int id)  {
 		
 		tasksRepository.delete(id);
 	}
 	
-	public void addTask(Task t,int userid, int categoryid) throws SQLException {
+	/**
+	 * 
+	 * Añade una tarea 
+	 * 
+	 * @param t Tarea a añadir
+	 * @param userid id del usuario en sesión
+	 * @param categoryid id de la categoría
+	 */
+	public void addTask(Task t,int userid, int categoryid)  {
 		
 		TaskDto taskDto = new TaskDto();
 		
@@ -44,10 +59,10 @@ public class TasksService {
 	 * 
 	 * Lista todas las tareas del usuario
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return listado de todas las tareas del usuario
+	 * 
 	 */
-	public List<Task> listTasks(int id) throws SQLException {
+	public List<Task> listTasks(int id)  {
 		
 		List<Task> tasks = new ArrayList<Task>();
 		List<Object> tasks1 = this.tasksRepository.findByUserId(id);
@@ -72,11 +87,11 @@ public class TasksService {
 	 * Lista las tareas de hoy y las retrasadas
 	 * 
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return listado de las tareas de hoy y las retrasadas
+	 * 
 	 */
 	
-	public List<Task> listTodayTasks(int id) throws SQLException {
+	public List<Task> listTodayTasks(int id)  {
 		
 		List<Task> tasks = listTasks(id);
 		
@@ -103,10 +118,9 @@ public class TasksService {
 	 * 
 	 * Lista todas las tareas finalizadas
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return Listado de todas las tareas finalizadas
 	 */
-	public List<Task> listFinishedTasks(int id) throws SQLException {
+	public List<Task> listFinishedTasks(int id)  {
 		
 		List<Task> tasks = listTasks(id);
 		
@@ -121,6 +135,96 @@ public class TasksService {
 		
 		return finishedTasks;
 		
+	}
+	
+	/**
+	 * 
+	 * Lista las tareas de una categoría determinada cuyo id se pasa por parámetro
+	 * 
+	 * 
+	 * @param id id del usuario en sesión
+	 * @param categoryid id de la categoría
+	 * @return Listado de las tareas de una categoría determinada.
+	 */
+	public List<Task> listTaskByCategory(int id, int categoryid)  {
+		
+		List<Task> tasks = listTasks(id);
+		
+		List<Task> categoryTasks = new ArrayList<Task>();
+		
+		tasks.forEach((t)-> {
+			
+			if(t.getCategory_id() == categoryid)
+				categoryTasks.add(t);
+			
+		});
+		
+		return categoryTasks;
+		
+	}
+	
+	/**
+	 * 
+	 * Obtiene una lista de las listas de tareas por cada categoría
+	 * 
+	 * @param id id del usuario en sesión
+	 * @return Lista de las listas de tareas por cada categoría
+	 */
+	public List<List<Task>> getTaskByCategory(int id) {
+		
+		List<List<Task>>  tasksByCategory = new ArrayList<List<Task>>();
+		
+		List<Object> categories = this.categoriesRepository.findAll();
+		
+		for(Object category:categories) {
+			
+			List<Task> tasks = listTaskByCategory(((Category) category).getId(),id );
+			
+			tasksByCategory.add(tasks);
+		}
+			
+			
+		
+		
+		return tasksByCategory;
+		
+		
+		
+	}
+	
+	/**
+	 * 
+	 * Marca una tarea como finalizada
+	 * 
+	 * @param id
+	 * @throws SQLException
+	 */
+	public void finishTask(int id)  {
+		
+		tasksRepository.updateFinished(id);
+		
+	}
+	
+	public void editTask(Task task,String datePlan) {	
+		
+		TaskDto t = new TaskDto();
+		
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			Date fecha = formato.parse(datePlan);
+			task.setPlanned(fecha);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		t.id = task.getId();
+		t.title = task.getTitle();
+		t.planned = task.getPlanned();
+		t.comments = task.getComments();
+		
+		this.tasksRepository.updateTask(t);
 	}
 
 }
