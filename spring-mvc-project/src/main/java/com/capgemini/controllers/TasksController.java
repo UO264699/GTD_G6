@@ -65,7 +65,7 @@ public class TasksController {
 		
 		model.addAttribute("finishedTasks",tasksService.listFinishedTasks(id));
 		
-		model.addAttribute("categories",categoriesService.getCategories());
+		model.addAttribute("categories",categoriesService.getCategories(id));
 		
 		return "tasksList";
 		

@@ -61,13 +61,15 @@ public class CategoryController {
 	@RequestMapping(value = "/categories/list")
 	public String getCategories(Model model, HttpSession httpSession) {
 		
+		User user = (User) httpSession.getAttribute("user");
+		
 		if(httpSession.getAttribute("user") == null) {
 			
 			return "redirect:/login";
 		}
 
 		
-		model.addAttribute("categories",categoriesService.getCategories());
+		model.addAttribute("categories",categoriesService.getCategories(user.getId()));
 		
 		return "categoriesList";
 		

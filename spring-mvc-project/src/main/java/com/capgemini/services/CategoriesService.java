@@ -38,9 +38,9 @@ public class CategoriesService {
 	 * 
 	 * @return listado de todas las categorías del sistema
 	 */
-	public List<Category> getCategories() {
+	public List<Category> getCategories(int userid) {
 
-		List<Object> categories = categoriesRepository.findAll();
+		List<Object> categories = categoriesRepository.findbyUserid(userid);
 		List<Category> categories1 = new ArrayList<>();
 
 		for(Object u : categories) {
