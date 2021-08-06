@@ -20,7 +20,7 @@
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">[Nombre de Usuaro]</a>
+				<a class="navbar-brand" href="#">${sessionScope.username }</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarText"
 					aria-controls="navbarText" aria-expanded="false"
@@ -60,16 +60,18 @@
 					<div class="modal-body">
 
 						<form action="editTask" method="post">
-							<input type="text" name="title" class=""
+						<div class="d-flex flex-column justify-content-center aling-items-center">
+							<input type="text" name="title" class="form-control m-1"
 								placeholder="Escribe el nombre" id="title"> 
-							<input type="text" name="comments" class=""
+							<input type="text" name="comments" class="form-control m-1"
 								placeholder="Escribe el comentario" id="comments"> 
-							<input type="date" name="datePlan" class=""
+							<input type="date" name="datePlan" class="form-control m-1"
 								placeholder="Escribe la fecha" id="datePlan"> 
 							<input type="submit"
-								class="btn btn-dark" value="Editar">
+								class="btn btn-dark w-100 mt-1" value="Editar">
 							<input
 								type="hidden" name="id" id="task">
+						</div>
 						</form>
 					</div>
 				</div>
@@ -100,16 +102,18 @@
 										<input type="submit" class="btn btn-dark w-100 mt-1" value="Anadir Tarea" />
 									</div>
 							</div>
-
-						</form>
-
 						
+
+						<select class="form-select">
+						<option selected="selected">Selecciona una categoria</option>
 						<c:forEach var="category" items="${categories}">
-							<c:out value="${category.name}" />
+							<option value="${category.id}"><c:out value="${category.name}"/></option>
 						</c:forEach>
-						
-
+						</select>
 						</form>
+						
+									
+					
 					</div>
 				</div>
 			</div>

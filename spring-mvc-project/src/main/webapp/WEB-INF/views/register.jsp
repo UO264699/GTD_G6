@@ -19,7 +19,7 @@
 
 <body
 	class="text-center row d-flex justify-content-center align-items-center"
-	style="height: 90vh;">
+	style="height: 100vh;">
 
 	<main class="form-signin col-4">
 		<form:form class=" d-flex flex-column justify-content-center" method="post" action="users/add" modelAttribute="user">
@@ -48,6 +48,8 @@
 					administrador?</label> <input class="form-check-input" type="checkbox"
 					name="isAdmin" id="flexSwitchCheckDefault" value="true">
 			</div>
+			
+			<a href="login" class="btn btn-success mt-1">¿Ya estas registrado?</a>
 
 			<button class="btn btn-primary mt-2" type="submit">Register</button>
 

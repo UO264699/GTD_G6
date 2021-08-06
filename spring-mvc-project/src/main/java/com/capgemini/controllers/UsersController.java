@@ -29,10 +29,8 @@ import com.capgemini.validators.UserValidators;
 @Controller
 public class UsersController {
 
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		binder.setValidator(new UserValidators());
-	}
+	@Autowired
+	private UserValidators userValidator;
 
 	@Autowired
 	private UsersService usersService;
@@ -42,6 +40,11 @@ public class UsersController {
 
 	@Autowired
 	private CategoriesService categoriesService;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.setValidator(userValidator);
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcomePage(Model model) {
@@ -58,9 +61,12 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String authenticate(Model model,@RequestParam("login") String username,
-			@RequestParam("password") String password,
-			HttpSession session) {
+	public String authenticate(Model model, @RequestParam("login") String username,
+			@RequestParam("password") String password, HttpSession session, BindingResult result) {
+		
+		if (result.hasErrors()) {																																									
+			return "redirect:/login";
+		}
 		
 		session.setAttribute("username", username);
 		

@@ -5,5 +5,5 @@ public class CategoryDto {
 	public int id;
     public String name;
     public int user_id;
-	public int id;
+
 }
