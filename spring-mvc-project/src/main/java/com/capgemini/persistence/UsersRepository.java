@@ -169,26 +169,88 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 			
 			rs = pst.executeQuery();
 			
-			while(rs.next()) {
-				
 			
-
 				
-				UserDto u = new UserDto();
+			UserDto u = new UserDto();
+				while(rs.next()) {
+				
+				
+				
 				
 				u.id = rs.getInt("id");
 				u.email = rs.getString("email");
 				u.isAdmin = rs.getBoolean("isadmin");
 				u.login = rs.getString("login");
 			    u.status = rs.getString("status");
-		
+				
+			}
                 
 				
-				listUsers.add(u);
+			
+				
+			
+			
+			
+			return u;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+		
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+		}
+		
+	}
+	
+	public UserDto findByLogin(String login) {
+		
+		
+		List<Object> listUsers = new ArrayList<Object>();
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		
+
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TUSERS\" where login=?");
+			
+			pst.setString(1, login);
+			
+			rs = pst.executeQuery();
+			
+			UserDto u = new UserDto();
+			
+			while(rs.next()) {
+				
+				
+				
+				
+				u.id = rs.getInt("id");
+				u.email = rs.getString("email");
+				u.isAdmin = rs.getBoolean("isadmin");
+				u.login = rs.getString("login");
+			    u.status = rs.getString("status");
 				
 			}
 			
-			return (UserDto) listUsers.get(0);
+			
+		
+                
+				
+			
+			return u;
 			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

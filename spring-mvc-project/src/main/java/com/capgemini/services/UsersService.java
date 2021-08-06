@@ -102,11 +102,17 @@ public class UsersService {
 			return UserStatus.ENABLED;
 	}
 
+
 	
-	public UserDto getUserById(int id) throws SQLException {
+	
+	public User getUserByLogin(String login) {
 		
-		UserDto user = usersRepository.findById(id);
-		
+			UserDto udto = usersRepository.findByLogin(login);
+
+			User user = new User(udto.id, udto.login, udto.email, udto.password, udto.isAdmin, getStatus(udto),
+					udto.tasks, udto.categories);
+
+			
 		return user;
 	}
 }

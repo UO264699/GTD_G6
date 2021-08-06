@@ -1,6 +1,5 @@
 package com.capgemini.controllers;
 
-import java.io.Console;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
@@ -15,12 +14,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.capgemini.services.CategoriesService;
 import com.capgemini.services.TasksService;
 import com.capgemini.services.UsersService;
@@ -45,24 +41,25 @@ public class UsersController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcomePage(Model model) {
-		model.addAttribute("user", new User()); // the Category object is used as a template to generate the form
+		model.addAttribute("user", new User());
 		return "register";
 	}
 	
 
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login() {
 		
 		return "login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String authenticate(Model model,@RequestParam("login") String username,
-			@RequestParam("password") String password,
+	public String authenticate(Model model,User user,
 			HttpSession session) {
 		
-		session.setAttribute("username", username);
+		User user2 = usersService.getUserByLogin(user.getLogin());
+		
+		session.setAttribute("user", user);
 		
 		
 		return "redirect:/users/list";
@@ -108,13 +105,6 @@ public class UsersController {
 
 	}
 
-	@RequestMapping(value = "users/{id}")
-	public String getUserById(@PathVariable int id) throws SQLException {
 
-		usersService.getUserById(id);
-
-		return "redirect:/users/list";
-
-	}
 
 }
