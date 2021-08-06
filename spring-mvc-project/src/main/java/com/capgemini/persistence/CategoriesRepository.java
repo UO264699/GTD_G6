@@ -11,7 +11,6 @@ import com.capgemini.model.Category;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.persistence.dto.CategoryDto;
-import com.capgemini.persistence.dto.UserDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
 @Repository
@@ -38,7 +37,7 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 	
 			
 			pst.setString(1, category.name);
-			pst.setInt(2, 38);
+			pst.setInt(2, category.user_id);
 			
 			
 

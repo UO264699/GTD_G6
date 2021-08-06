@@ -1,6 +1,5 @@
 package com.capgemini.services;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,8 +63,9 @@ public class CategoriesService {
 		
 		CategoryDto categoryDto = new CategoryDto();
 		
-		categoryDto.user_id = category.getId();
+		categoryDto.user_id = category.getUser_id();
 		categoryDto.name = category.getName();
+		categoryDto.id = category.getId();
 		
 		this.categoriesRepository.add(categoryDto);
 		

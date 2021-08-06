@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.capgemini.model.User;
 import com.capgemini.persistence.dto.UserDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
@@ -152,8 +151,6 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 	public UserDto findById(int id) {
 		
 		
-		List<Object> listUsers = new ArrayList<Object>();
-
 		Connection c = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -213,8 +210,6 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 	public UserDto findByLogin(String login) {
 		
 		
-		List<Object> listUsers = new ArrayList<Object>();
-
 		Connection c = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -286,10 +281,11 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		
 	
 			
-			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TCATEGORIES\" SET title =?, comments=?, planned=?  where id=?");
+			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TUSERS\" SET status =? where id=?");
 			
 
-			pst.setInt(1,id);
+			pst.setString(1, changeStatus(u));
+			pst.setInt(2,id);
 			
 			pst.executeUpdate();
 			

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import com.capgemini.model.Category;
-
+import com.capgemini.model.User;
 import com.capgemini.services.CategoriesService;
 
 @Controller
@@ -23,11 +23,14 @@ public class CategoryController {
 	@RequestMapping(value = "/tasks/categories/add")
 	public String addCategory(Category category, HttpSession httpSession) {
 		
-		if(httpSession.getAttribute("user") == null) {
+		User user = (User) httpSession.getAttribute("user");
+		
+		if(user == null) {
 			
 			return "redirect:/login";
 		}
 
+		category.setUser_id(user.getId());
 		
 		categoriesService.addCategory(category);
 		
