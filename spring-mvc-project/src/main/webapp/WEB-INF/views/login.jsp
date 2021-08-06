@@ -38,7 +38,10 @@
 				<input type="hidden" class="form-control" id="floatingPassword" name="confirmPassword" placeholder="Password"/>
 			</div>
 			<button class="btn btn-primary mt-2" type="submit">Login</button>
-
+			
+			
+			<a href="register" class="btn btn-danger mt-1">¿No estas registrado?</a>
+			
 			<p class="mt-5 mb-3 text-muted">&copy; PM</p>
 		</form:form>
 	</main>

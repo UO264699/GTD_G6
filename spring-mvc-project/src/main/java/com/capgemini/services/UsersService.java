@@ -110,10 +110,13 @@ public class UsersService {
 	}
 
 	public UserStatus getStatus(UserDto u) {
+		
+		if(u.status == null)
+			
+			return UserStatus.ENABLED;
 
 
 		if (u.status.equals("DISABLED"))
-
 			return UserStatus.DISABLED;
 		else
 			return UserStatus.ENABLED;
@@ -134,4 +137,17 @@ public class UsersService {
 			
 		return user;
 	}
+	
+	public User getUserByEmail(String email) {
+		
+		UserDto udto = usersRepository.findByEmail(email);
+
+		User user = new User(udto.id, udto.login, udto.email, udto.password, udto.isAdmin, getStatus(udto),
+				udto.tasks, udto.categories);
+		
+		user.setConfirmPassword("a");
+
+		
+	return user;
+}
 }

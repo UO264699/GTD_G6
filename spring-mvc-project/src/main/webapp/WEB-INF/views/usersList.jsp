@@ -79,10 +79,10 @@
 							class="btn btn btn-outline-dark">Borrar</a></td>
 
 						<td><c:if test="${user.getStatus() == 'ENABLED'}">
-								<a href=changeStatus/${user.id} type="button"
+								<a href="changeStatus/${user.id}" type="button"
 									class="btn btn-outline-dark">Bloquear</a>
 							</c:if> <c:if test="${user.getStatus() == 'DISABLED'}">
-								<a href=changeStatus/${user.id} type="button"
+								<a href="changeStatus/${user.id}" type="button"
 									class="btn btn-outline-dark">Activar</a>
 							</c:if></td>
 

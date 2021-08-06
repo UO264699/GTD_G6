@@ -46,8 +46,8 @@
 			</div>
 
 			<div class="form-check form-switch d-flex justify-content-around">
-				<label class="form-check-label" for="flexSwitchCheckDefault">�Eres
-					administrador?</label> <input class="form-check-input" type="checkbox"
+				<label class="form-check-label" for="flexSwitchCheckDefault">
+					Administrador</label> <input class="form-check-input" type="checkbox"
 					name="isAdmin" id="flexSwitchCheckDefault" value="true">
 			</div>
 			
