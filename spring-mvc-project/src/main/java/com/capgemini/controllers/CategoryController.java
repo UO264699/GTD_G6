@@ -1,7 +1,7 @@
 package com.capgemini.controllers;
 
-
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,8 +20,11 @@ public class CategoryController {
 	@Autowired
 	private CategoriesService categoriesService;
 
+
 	@RequestMapping(value = "/tasks/categories/add")
 	public String addCategory(Category category, HttpSession httpSession) {
+
+
 		
 		User user = (User) httpSession.getAttribute("user");
 		
@@ -70,6 +73,14 @@ public class CategoryController {
 		
 		return "categoriesList";
 		
+	}
+	
+	@RequestMapping(value = "/categories/edit")
+	public String updateCategories(Category category) {
+		
+		categoriesService.editCategorie(category);
+		
+		return "redirect:/categories/list";
 	}
 
 }

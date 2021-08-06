@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.capgemini.model.Task;
+import com.capgemini.services.CategoriesService;
 import com.capgemini.services.TasksService;
 
 @Controller
@@ -20,7 +21,9 @@ public class TasksController {
 	@Autowired
 	private TasksService tasksService;
 	
-
+	@Autowired
+	private CategoriesService categoriesService;
+	
 
 	@RequestMapping(value = "tasks/add/{userid}/{categoryid}", method = RequestMethod.POST)
 	public String addTask(Task task,@PathVariable int userid,@PathVariable int categoryid, HttpSession httpSession) throws SQLException {
@@ -56,6 +59,8 @@ public class TasksController {
 		
 		model.addAttribute("finishedTasks",tasksService.listFinishedTasks(38));
 		
+		model.addAttribute("categories",categoriesService.getCategories());
+		
 		return "tasksList";
 		
 	}
@@ -70,14 +75,21 @@ public class TasksController {
 		}
 
 		
-		
 		tasksService.finishTask(id);
-		
 		
 		return "redirect:/tasks/list";
 		
 	}
 	
+	
+	@RequestMapping(value = "/tasks/editTask")
+	public String editTask(Task task,String datePlan)  {
+		
+		tasksService.editTask(task, datePlan);
+		
+		return "redirect:/tasks/list";
+		
+	}
 	
 	
 }

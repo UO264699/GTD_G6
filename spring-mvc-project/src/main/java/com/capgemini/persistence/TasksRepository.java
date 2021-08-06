@@ -316,24 +316,60 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 	}
 	
 	
-public void updateFinished(int id){
+	public void updateFinished(int id){
+			
+			
+			Connection c = null;
+			PreparedStatement pst = null;
 		
+	
+			try {
+				c = Jdbc.getConnection();
+			
+				Date d = new Date();
+		
+				
+				pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TTASKS\" SET finished =? where id=?");
+				
+				pst.setDate(1,new java.sql.Date(d.getTime()));
+				pst.setInt(2,id);
+				
+				pst.executeUpdate();
+				
+				pst.close();
+				
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			} finally {
+			
+				try {
+					c.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	
+			
+		}
+
+	public void updateTask(TaskDto task) {		
 		
 		Connection c = null;
 		PreparedStatement pst = null;
-	
 
 		try {
 			c = Jdbc.getConnection();
-		
-			Date d = new Date();
-	
 			
-			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TTASKS\" SET finished =? where id=?");
+			pst = c.prepareStatement("UPDATE \"PUBLIC\".\"TTASKS\" SET title =?, comments=?, planned=?  where id=?");
 			
-			pst.setDate(1,new java.sql.Date(d.getTime()));
-			pst.setInt(2,id);
 			
+			pst.setString(1, task.title);
+			pst.setString(2, task.comments);
+			pst.setDate(3, new java.sql.Date(task.planned.getTime()));
+			pst.setInt(4, task.id);
+
+
 			pst.executeUpdate();
 			
 			pst.close();
@@ -349,8 +385,6 @@ public void updateFinished(int id){
 				e.printStackTrace();
 			}
 		}
-
 		
 	}
-
 }

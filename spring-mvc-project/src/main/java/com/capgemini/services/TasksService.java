@@ -1,6 +1,8 @@
 package com.capgemini.services;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -201,6 +203,28 @@ public class TasksService {
 		
 		tasksRepository.updateFinished(id);
 		
+	}
+	
+	public void editTask(Task task,String datePlan) {	
+		
+		TaskDto t = new TaskDto();
+		
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			Date fecha = formato.parse(datePlan);
+			task.setPlanned(fecha);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		t.id = task.getId();
+		t.title = task.getTitle();
+		t.planned = task.getPlanned();
+		t.comments = task.getComments();
+		
+		this.tasksRepository.updateTask(t);
 	}
 
 }
