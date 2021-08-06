@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +67,7 @@
 					</div>
 					<div class="modal-body">
 
-						<form action="editTask" method="post">
+						<form:form action="editTask" method="post">
 						<div class="d-flex flex-column justify-content-center aling-items-center">
 							<input type="text" name="title" class="form-control m-1"
 								placeholder="Escribe el nombre" id="title"> 
@@ -80,7 +80,7 @@
 							<input
 								type="hidden" name="id" id="task">
 						</div>
-						</form>
+						</form:form>
 					</div>
 				</div>
 			</div>
@@ -100,13 +100,13 @@
 					</div>
 					<div class="modal-body">
 
-						<form action="add" method="post">
+						<form:form action="add" method="post" modelAttribute="task">
 
 							<div class="d-flex flex-column justify-content-center aling-items-center">
 									<h5 class="form-label">Nombre de la tarea</h5>
 									<div class="md-form mb-5">
 										<i class="fas fa-envelope prefix grey-text"></i>
-										<input type="text" class="form-control" name="title" />
+										<form:input type="text" class="form-control" name="title" path="title"/>
 										<input type="submit" class="btn btn-dark w-100 mt-1" value="Anadir Tarea" />
 									</div>
 							</div>
@@ -118,7 +118,7 @@
 							<option value="${category.id}"><c:out value="${category.name}"/></option>
 						</c:forEach>
 						</select>
-						</form>
+						</form:form>
 						
 									
 					
