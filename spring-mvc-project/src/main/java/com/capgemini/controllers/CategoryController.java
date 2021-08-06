@@ -21,7 +21,7 @@ public class CategoryController {
 	private CategoriesService categoriesService;
 
 
-	@RequestMapping(value = "/tasks/categories/add")
+	@RequestMapping(value = "/categories/add")
 	public String addCategory(Category category, HttpSession httpSession) {
 
 

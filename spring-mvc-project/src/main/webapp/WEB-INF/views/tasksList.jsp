@@ -94,7 +94,7 @@
 					</div>
 					<div class="modal-body">
 
-						<form action="add/38/8" method="post">
+						<form action="add" method="post">
 
 							<div class="d-flex flex-column justify-content-center aling-items-center">
 									<h5 class="form-label">Nombre de la tarea</h5>
@@ -106,8 +106,8 @@
 							</div>
 						
 
-						<select class="form-select">
-						<option selected="selected">Selecciona una categoria</option>
+						<select name="category_id" class="form-select">
+						<option selected="selected" >Selecciona una categoria</option>
 						<c:forEach var="category" items="${categories}">
 							<option value="${category.id}"><c:out value="${category.name}"/></option>
 						</c:forEach>
