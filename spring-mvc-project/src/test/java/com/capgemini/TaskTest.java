@@ -118,6 +118,22 @@ class TaskTest {
 	}
 	
 	@Test
+	void testFinishTask() {
+		
+		UserDto u = usersRepository.findByLogin("prueba");
+		
+		
+		TaskDto task= (TaskDto) tasksRepository.findByUserId(u.id).get(0);
+		
+		tasksRepository.updateFinished(task.id);
+		
+		task= (TaskDto) tasksRepository.findByUserId(u.id).get(0);
+		
+		assertNotNull(task.finished);
+		
+	}
+	
+	@Test
 	void testDeleteTask() {
 		
 		UserDto u = usersRepository.findByLogin("prueba");
