@@ -16,7 +16,9 @@
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
+
 				<a class="navbar-brand" href="#">${sessionScope.user.login }</a>
+
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarText"
 					aria-controls="navbarText" aria-expanded="false"
@@ -32,17 +34,19 @@
 							aria-current="page" href="/spring-mvc-project/users/list">Administrar Usuarios</a></li>
 						</c:if>
 
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							aria-current="page" href="/spring-mvc-project/categories/list">Administrar Categorias</a></li>
+							
+						
 					</ul>
 					<a class="nav-link active text-light"aria-current="page" href="/spring-mvc-project/tasks/list#">Home</a>
-					<button type="button" class="btn btn-light" data-bs-toggle="modal"
-						data-bs-target="#staticBackdrop">Anadir</button>
+					
+						
+					<a class="btn btn-danger m-1" href="/spring-mvc-project/logout">Cerrar Sesion</a>
 				</div>
 			</div>
 		</nav>
 	</header>
-
 <body class="row d-flex align-items-center justify-content-center">
 	<div class="col-10 mt-3">
 		<h1>Lista de Usuarios</h1>

@@ -31,18 +31,21 @@
 					<li class="nav-item"></li>
 
 					<c:if test="${sessionScope.user.isAdmin == true}">
-						<li class="nav-item"><a class="nav-link active"
+						<li class="nav-item"><a class="nav-link"
 							aria-current="page" href="/spring-mvc-project/users/list">Administrar Usuarios</a></li>
 					</c:if>
 
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="/spring-mvc-project/categories/list">Administrar
 							Categorias</a></li>
+				
 				</ul>
 				<a class="nav-link active text-light" aria-current="page"
 					href="/spring-mvc-project/tasks/list#">Home</a>
-				<button type="button" class="btn btn-light" data-bs-toggle="modal"
+				<button type="button" class="btn btn-success" data-bs-toggle="modal"
 					data-bs-target="#staticBackdrop2">Crear Categoria</button>
+					
+				<a class="btn btn-danger m-1" href="/spring-mvc-project/logout">Cerrar Sesion</a>
 			</div>
 		</div>
 	</nav>
@@ -110,6 +113,8 @@
 							<button type="button" class="btn btn-outline-dark"
 								onclick="categoria(${c.id})">Editar</button>
 						</td>
+						<td><a href=${c.id} type="button"
+							class="btn btn-outline-dark">Ver tareas</a></td>
 					</tr>
 
 				</c:forEach>

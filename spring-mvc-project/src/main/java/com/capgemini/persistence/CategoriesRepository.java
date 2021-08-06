@@ -149,13 +149,14 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 			while(rs.next()) {
 
 
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				int user_id = rs.getInt("user_id");
+				CategoryDto categoryDto = new CategoryDto();
+				
+				categoryDto.name = rs.getString("name");
+				categoryDto.user_id = rs.getInt("user_id");
+				categoryDto.id = rs.getInt("id");
+			
 
-				Category u = new Category(id,name,user_id);
-
-				listCategories.add(u);
+				listCategories.add(categoryDto);
 
 			}
 

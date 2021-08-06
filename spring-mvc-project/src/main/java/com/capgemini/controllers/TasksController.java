@@ -23,7 +23,7 @@ public class TasksController {
 	@Autowired
 	private CategoriesService categoriesService;
 	
-
+	
 	@RequestMapping(value = "tasks/add", method = RequestMethod.POST)
 	public String addTask(Task task, HttpSession httpSession)  {
 		
@@ -70,6 +70,7 @@ public class TasksController {
 		return "tasksList";
 		
 	}
+	
 	
 	@RequestMapping(value = "tasks/finish/{id}")
 	public String finishTask(@PathVariable int id,HttpSession httpSession)  {
