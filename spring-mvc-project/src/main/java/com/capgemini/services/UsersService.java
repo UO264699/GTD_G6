@@ -1,6 +1,5 @@
 package com.capgemini.services;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.model.User;
 import com.capgemini.model.UserStatus;
+import com.capgemini.persistence.CategoriesRepository;
+import com.capgemini.persistence.TasksRepository;
 import com.capgemini.persistence.UsersRepository;
 import com.capgemini.persistence.dto.UserDto;
 
@@ -18,8 +19,12 @@ public class UsersService {
 
 	@Autowired
 	private UsersRepository usersRepository;
-	private UsersRepository categoriesRepository;
-	private UsersRepository tasksRepository;
+	
+	@Autowired
+	private CategoriesRepository categoriesRepository;
+	
+	@Autowired
+	private TasksRepository tasksRepository;
 
 	
 
@@ -75,9 +80,10 @@ public class UsersService {
 	 */
 	public void deleteUser(int id)  {
 		
+		tasksRepository.delete(id);
 		usersRepository.delete(id);
 		categoriesRepository.delete(id);
-		tasksRepository.delete(id);
+		
 
 	}
 
@@ -95,8 +101,13 @@ public class UsersService {
 	}
 
 	public UserStatus getStatus(UserDto u) {
+		
+		if(u.status == null)
+			
+			return UserStatus.ENABLED;
 
-		if (u.status == "DISABLED")
+
+		if (u.status.equals("DISABLED"))
 			return UserStatus.DISABLED;
 		else
 			return UserStatus.ENABLED;
@@ -117,4 +128,17 @@ public class UsersService {
 			
 		return user;
 	}
+	
+	public User getUserByEmail(String email) {
+		
+		UserDto udto = usersRepository.findByEmail(email);
+
+		User user = new User(udto.id, udto.login, udto.email, udto.password, udto.isAdmin, getStatus(udto),
+				udto.tasks, udto.categories);
+		
+		user.setConfirmPassword("a");
+
+		
+	return user;
+}
 }

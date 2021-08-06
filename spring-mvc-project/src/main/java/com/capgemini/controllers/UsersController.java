@@ -73,30 +73,22 @@ public class UsersController {
 	public String authenticate(User user,HttpSession session) {
 		
 		User user2 = usersService.getUserByLogin(user.getLogin());
-	
 		
-		
-
-		System.out.println(user.getLogin());
-		System.out.println(user2.getLogin());
-
-		
-		if(user.getLogin().equals(user2.getLogin())) {
-			if(user.getPassword().equals(user2.getPassword())) {
-				session.setAttribute("user", user2);
-				return "redirect:/users/list";
+		System.out.println(user2.getStatus());
+		if(user2.getStatus() == "ENABLED") {
+			
+			if(user.getLogin().equals(user2.getLogin())) {
+				if(user.getPassword().equals(user2.getPassword())) {
+					session.setAttribute("user", user2);
+					return "redirect:/users/list";
+				} else {
+					return "redirect:/login";
+				}
 			} else {
-				System.out.println("TONTISIMO");
 				return "redirect:/login";
 			}
-		} else {
-			System.out.println("TONTO");
-			return "redirect:/login";
-		}
+		} else return "redirect:/login";
 		
-
-		
-	
 	}
 
 	@RequestMapping(value = "/users/list")

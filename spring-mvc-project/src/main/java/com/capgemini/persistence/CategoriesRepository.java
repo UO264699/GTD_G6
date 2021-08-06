@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.capgemini.persistence.dto.CategoryDto;
 import com.capgemini.persistence.jdbc.Jdbc;
-import com.capgemini.services.CategoriesService;
+
 
 @Repository
 public class CategoriesRepository implements com.capgemini.persistence.Repository {
