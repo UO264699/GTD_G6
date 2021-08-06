@@ -171,14 +171,13 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 			UserDto u = new UserDto();
 				while(rs.next()) {
 				
-				
-				
-				
 				u.id = rs.getInt("id");
 				u.email = rs.getString("email");
 				u.isAdmin = rs.getBoolean("isadmin");
 				u.login = rs.getString("login");
+				u.password = rs.getString("password");
 			    u.status = rs.getString("status");
+			    u.confirmPassword = "a";
 				
 			}
                 
@@ -229,21 +228,15 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 			
 			while(rs.next()) {
 				
-				
-				
-				
 				u.id = rs.getInt("id");
 				u.email = rs.getString("email");
 				u.isAdmin = rs.getBoolean("isadmin");
+				u.password = rs.getString("password");
 				u.login = rs.getString("login");
 			    u.status = rs.getString("status");
+			    u.confirmPassword = "a";
 				
 			}
-			
-			
-		
-                
-				
 			
 			return u;
 			

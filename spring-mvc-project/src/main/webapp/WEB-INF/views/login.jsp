@@ -26,12 +26,16 @@
 			<h1 class="h3 mb-3 fw-normal w-90">Please login in</h1>
 
 			<div class="form-floating mb-1">
-				<input type="text" class="form-control" name="login" placeholder="Nombre de usuario" /> <label for="floatingInput">User Name</label>
+				<input type="text" class="form-control" name="login" placeholder="Nombre de usuario"  /> <label for="floatingInput">User Name</label>
 
 			</div>
 			
 			<div class="form-floating ">
 				<input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password"/> <label for="floatingPassword">Password</label>
+			</div>
+			
+			<div class="form-floating ">
+				<input type="hidden" class="form-control" id="floatingPassword" name="confirmPassword" placeholder="Password"/>
 			</div>
 			<button class="btn btn-primary mt-2" type="submit">Login</button>
 

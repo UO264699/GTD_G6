@@ -24,8 +24,6 @@ public class CategoryController {
 	@RequestMapping(value = "/categories/add")
 	public String addCategory(Category category, HttpSession httpSession) {
 
-
-		
 		User user = (User) httpSession.getAttribute("user");
 		
 		if(user == null) {

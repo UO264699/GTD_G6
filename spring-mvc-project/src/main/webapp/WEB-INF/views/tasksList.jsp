@@ -33,8 +33,10 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"></li>
 
+						<c:if test="${sessionScope.user.isAdmin == true}">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="/spring-mvc-project/users/list">Administrar Usuarios</a></li>
+						</c:if>
 
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="/spring-mvc-project/categories/list">Administrar Categorias</a></li>

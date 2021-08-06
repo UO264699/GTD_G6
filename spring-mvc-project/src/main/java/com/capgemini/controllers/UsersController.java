@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpSession;
 
 import com.capgemini.model.User;
+import com.capgemini.model.UserStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,17 +43,22 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String welcomePage(Model model) {
+	public String welcomePage() {
+		return "redirect:/login";
+	}
+	
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model) {
 		model.addAttribute("user", new User());
-		return "register";
+		return "login";
 	}
 	
 
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
-		
-		return "login";
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register(Model model) {
+		model.addAttribute("user", new User());
+		return "register";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -64,17 +70,33 @@ public class UsersController {
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-
-	public String authenticate(Model model,User user,
-			HttpSession session) {
-
+	public String authenticate(User user,HttpSession session) {
 		
 		User user2 = usersService.getUserByLogin(user.getLogin());
+	
 		
-		session.setAttribute("user", user2);
 		
+
+		System.out.println(user.getLogin());
+		System.out.println(user2.getLogin());
+
 		
-		return "redirect:/users/list";
+		if(user.getLogin().equals(user2.getLogin())) {
+			if(user.getPassword().equals(user2.getPassword())) {
+				session.setAttribute("user", user2);
+				return "redirect:/users/list";
+			} else {
+				System.out.println("TONTISIMO");
+				return "redirect:/login";
+			}
+		} else {
+			System.out.println("TONTO");
+			return "redirect:/login";
+		}
+		
+
+		
+	
 	}
 
 	@RequestMapping(value = "/users/list")
@@ -121,16 +143,17 @@ public class UsersController {
 		return "redirect:/users/list";
 	}
 
-	@RequestMapping(value = "users/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String addNewUsers(@Validated User user, BindingResult result, Model model) throws SQLException {
 
 		if (result.hasErrors()) {																																									
-			return "redirect:/";
+			return "register";
 		}
-
+		
+		user.setStatus(UserStatus.ENABLED);
 		usersService.createNewUser(user);
 
-		return "redirect:/users/list";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "users/changeStatus/{id}")

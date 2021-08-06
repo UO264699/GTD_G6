@@ -38,7 +38,7 @@ public class UsersService {
 		u.login = newUser.getLogin();
 		u.isAdmin = newUser.isIsAdmin();
 		u.password = newUser.getPassword();
-		u.status = "ENABLED";
+		u.status = newUser.getStatus();
 
 		
 			usersRepository.add(u);
@@ -102,7 +102,9 @@ public class UsersService {
 
 	public UserStatus getStatus(UserDto u) {
 
+
 		if (u.status=="DISABLED")
+
 			return UserStatus.DISABLED;
 		else
 			return UserStatus.ENABLED;
@@ -117,6 +119,8 @@ public class UsersService {
 
 			User user = new User(udto.id, udto.login, udto.email, udto.password, udto.isAdmin, getStatus(udto),
 					udto.tasks, udto.categories);
+			
+			user.setConfirmPassword("a");
 
 			
 		return user;
