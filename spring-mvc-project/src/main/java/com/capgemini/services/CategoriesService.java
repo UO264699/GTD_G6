@@ -11,7 +11,15 @@ import com.capgemini.persistence.CategoriesRepository;
 import com.capgemini.persistence.TasksRepository;
 import com.capgemini.persistence.dto.CategoryDto;
 
-
+/**
+ * 
+ * Clase que representa el servicio de Categorías con todos los métodos
+ * relacionados con las categorías.
+ * 
+ * 
+ * @author andrefer
+ *
+ */
 @Service
 public class CategoriesService {
 
@@ -85,7 +93,7 @@ public class CategoriesService {
 	}
 	
 	/**
-	 * Editar una categoría del sistema
+	 * Método que edita una categoría del sistema
 	 * 
 	 * 
 	 * @param id id de la categoría a borrar

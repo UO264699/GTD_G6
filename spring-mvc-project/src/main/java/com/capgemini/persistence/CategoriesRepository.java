@@ -7,18 +7,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.capgemini.model.Category;
 import org.springframework.stereotype.Repository;
 
 import com.capgemini.persistence.dto.CategoryDto;
 import com.capgemini.persistence.jdbc.Jdbc;
 
-
+/**
+ * 
+ * Clase que se encarga de realizar las transacciones con la base de datos relacionadas
+ * con las categorías
+ * 
+ * @author andrefer
+ *
+ */
 @Repository
 public class CategoriesRepository implements com.capgemini.persistence.Repository {
 
 	
 
+	/**
+	 * Método que inserta una categoría en la base de datos
+	 * 
+	 */
 	@Override
 	public int add(Object o) {
 		
@@ -62,6 +72,10 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		
 	}
 
+	/**
+	 * Método que borra una categoría de la base de datos
+	 * 
+	 */
 	@Override
 	public void delete(int id)  {
 		
@@ -97,7 +111,13 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 	}
 	
    
-
+    /**
+     * 
+     * Método que borra una categoría del usuario cuyo id se pasa por
+     * parámetro
+     * 
+     * @param id id del usuario
+     */
 	public void deleteByUserId(int id)  {
 		Connection c = null;
 		PreparedStatement pst = null;
@@ -129,6 +149,11 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		}
 	}
 
+	/**
+	 * 
+	 * Método que obtiene el listado de todas las categorías del sistema.
+	 * 
+	 */
 	@Override
 	public List<Object> findAll()  {
 		List<Object> listCategories = new ArrayList<Object>();
@@ -176,7 +201,12 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 			}
 		}
 	}
-	
+	/**
+	 * Método que devuelve la categoría cuyo id se pasa por parámetro
+	 * 
+	 * @param id id de la categoría 
+	 * @return categoría
+	 */
 	public CategoryDto findbyid(int id)  {
 		List<Object> listCategories = new ArrayList<Object>();
 
@@ -226,6 +256,14 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		}
 	}
 	
+	/**
+	 * 
+	 * Método que lista las categorías del usuario cuyo id se pasa
+	 * por parámetro
+	 * 
+	 * @param id id del usuario
+	 * @return lista de las categorías
+	 */
 	public List<Object> findbyUserid(int id)  {
 		List<Object> listCategories = new ArrayList<Object>();
 
@@ -274,7 +312,13 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 * Método que devuelve la categoria cuyo nombre se pasa por parámetro
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public CategoryDto findbyname(String name)  {
 
 		Connection c = null;
@@ -319,6 +363,7 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		}
 	}
 
+	
 	public Object getCategoryById(int id) {
 		List<Object> listCategories = new ArrayList<Object>();
 		
@@ -367,7 +412,12 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 		}
 	}
 	
-	
+	/**
+	 * Método que actualiza la categoría cuyo id se pasa por parámetro
+	 * 
+	 * @param id id de la categoría
+	 * @param name nombre nuevo de la categoría
+	 */
 	public void updateCategory(int id,String name) {		
 		
 		Connection c = null;

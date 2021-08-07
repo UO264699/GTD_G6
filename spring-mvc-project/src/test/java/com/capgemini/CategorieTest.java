@@ -6,10 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 import org.junit.FixMethodOrder;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
 
@@ -25,23 +22,12 @@ class CategorieTest {
 
 	private CategoriesRepository categoriesRepository = new CategoriesRepository();
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
 	
-	
+	/**
+	 * Método que crea un nuevo usuario 
+	 * 
+	 * @return usuario creado
+	 */
 	UserDto addUser() {
 		
 		UserDto userDto = new UserDto();
@@ -62,6 +48,11 @@ class CategorieTest {
 		
 	}
 	
+	/**
+	 * 
+	 * Edita una categoría y comprueba que ha sido actualizada
+	 * 
+	 */
 	@Test
 	void testEditCategorie() {
 		
@@ -83,6 +74,10 @@ class CategorieTest {
 		
 	}
 
+	/**
+	 * 
+	 * Añade una categoría y comprueba que ha sido añadida
+	 */
 	@Test
 	void testAddCategory() {
 		
@@ -103,6 +98,11 @@ class CategorieTest {
 	}
 	
 	
+	/**
+	 * 
+	 * Elimina una categoría y comprueba que ha sido eliminada
+	 * 
+	 */
 	@Test
 	void testRemoveCategory() {
 		

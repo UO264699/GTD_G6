@@ -1,7 +1,14 @@
 package com.capgemini.persistence;
 
 
-
+/**
+ * 
+ * Clase que se encarga de realizar las transacciones con la base de datos relacionadas
+ * con los usuarios
+ * 
+ * @author andrefer
+ *
+ */
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
@@ -18,7 +25,9 @@ import com.capgemini.persistence.jdbc.Jdbc;
 @Repository
 public class UsersRepository implements com.capgemini.persistence.Repository {
 
-	
+	/**
+	 *Método que inserta en la base de datos el usuario que se pasa por parámetro
+	 */
 	public int add(Object o)  {
 		UserDto u = (UserDto) o;
 
@@ -56,7 +65,10 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		}
 		return 0;
 	}
-
+    /**
+     * Método que borra el usuario cuyo id se pasa por parámetro
+     * 
+     */
 	public void delete(int id) {
 		
 		Connection c = null;
@@ -90,7 +102,9 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 
 	}
 
-	
+	/**
+	 * Método que devuelve la lista de todos los usuarios del sistema
+	 */
 	public List<Object> findAll()  {
 		
 		
@@ -148,6 +162,13 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		
 	}
 	
+	/**
+	 * 
+	 * Método que devuelve un usuario cuyo id se pasa por parámetro
+	 * 
+	 * @param id id del usuario
+	 * @return usuario
+	 */
 	public UserDto findById(int id) {
 		
 		
@@ -205,7 +226,12 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		}
 		
 	}
-	
+	/**
+	 * Método que devuelve el usuario cuyo nombre de usuario se pasa por parámetro
+	 * 
+	 * @param login nombre de usuario
+	 * @return usuario
+	 */
 	public UserDto findByLogin(String login) {
 		
 		
@@ -257,7 +283,13 @@ public class UsersRepository implements com.capgemini.persistence.Repository {
 		
 	}
 	
-public UserDto findByEmail(String email) {
+	/**
+	 * Método que devuelve el usuario cuyo email se pasa por parámetro
+	 * 
+	 * @param email email del usuario 
+	 * @return usuario
+	 */
+	public UserDto findByEmail(String email) {
 		
 		
 		Connection c = null;
@@ -309,7 +341,12 @@ public UserDto findByEmail(String email) {
 	}
 	
 	
-	
+	/**
+	 * Método que actualiza el estado del usuario cuyo id se pasa por
+	 * parámetro
+	 * 
+	 * @param id
+	 */
 	public void updateStatus(int id)  {
 		
 		

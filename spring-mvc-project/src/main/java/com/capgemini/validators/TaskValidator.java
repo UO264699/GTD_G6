@@ -6,7 +6,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.capgemini.model.Task;
-import com.capgemini.model.User;
 import com.capgemini.services.TasksService;
 
 @Component

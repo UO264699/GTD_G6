@@ -15,6 +15,15 @@ import com.capgemini.persistence.UsersRepository;
 import com.capgemini.persistence.dto.CategoryDto;
 import com.capgemini.persistence.dto.UserDto;
 
+/**
+ * 
+ * Clase que representa el servicio de Usuarios con todos los métodos
+ * relacionados con los usuarios.
+ * 
+ * 
+ * @author andrefer
+ *
+ */
 @Service
 public class UsersService {
 
@@ -29,6 +38,13 @@ public class UsersService {
 
 	
 
+	/**
+	 * 
+	 * Método que crea un nuevo usuario
+	 *  
+	 * @param newUser usuario a crear
+	 * @return usuario creado
+	 */
 	public User createNewUser(User newUser)  {
 
 
@@ -58,7 +74,7 @@ public class UsersService {
 
 	/**
 	 * 
-	 * Obtiene un listado de todos los usuarios del sistema.
+	 * Método que tiene un listado de todos los usuarios del sistema.
 	 * 
 	 * 
 	 * @return lista de todos los usuarios del sistema
@@ -82,7 +98,7 @@ public class UsersService {
 	}
 	/**
 	 * 
-	 * Elimina un usuario del sistema
+	 * Método que elimina un usuario del sistema
 	 * 
 	 * 
 	 * @param id id del usuario a eliminar
@@ -99,7 +115,7 @@ public class UsersService {
 	
 	/**
 	 * 
-	 * Actualiza el estado de un usuario.
+	 * Método que actualiza el estado de un usuario.
 	 * 
 	 * @param id id del usuario a actualizar.
 	 */
@@ -124,7 +140,13 @@ public class UsersService {
 
 
 	
-	
+	/**
+	 * Método que devuelve el usuario cuyo nombre de usuario se pasa
+	 * por parámetro
+	 * 
+	 * @param login nombre de usuario
+	 * @return usuario 
+	 */
 	public User getUserByLogin(String login) {
 		
 			UserDto udto = usersRepository.findByLogin(login);
@@ -138,6 +160,13 @@ public class UsersService {
 		return user;
 	}
 	
+	/**
+	 * 
+	 * Método que devuelve un usuario cuyo email se pasa  por parámetro
+	 * 
+	 * @param email email del usuario
+	 * @return usuario 
+	 */
 	public User getUserByEmail(String email) {
 		
 		UserDto udto = usersRepository.findByEmail(email);

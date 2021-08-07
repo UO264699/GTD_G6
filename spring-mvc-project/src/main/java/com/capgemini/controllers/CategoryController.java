@@ -37,6 +37,16 @@ public class CategoryController {
 		binder.setValidator(categoriesValidator);
 	}
 
+	/**
+	 * 
+	 * Método que añade una nueva categoría
+	 * 
+	 * @param category categoría a añadir
+	 * @param result resultado de las validaciones
+	 * @param httpSession sesión actual del usuario autenticado
+	 * @return
+	 */
+	
 	@RequestMapping(value = "/categories/add")
 	public String addCategory(@Validated Category category, BindingResult result, HttpSession httpSession) {
 		
@@ -60,6 +70,14 @@ public class CategoryController {
 		
 	}
 	
+	/**
+	 * 
+	 * Método que borra una categoría
+	 * 
+	 * @param id id de la categoría a borrar
+	 * @param httpSession sesión actual del usuario autenticado
+	 * @return
+	 */
 	@RequestMapping(value = "/categories/delete/{id}")
 	public String deleteCategory(@PathVariable int id, HttpSession httpSession)  {
 		
@@ -75,6 +93,16 @@ public class CategoryController {
 		return "redirect:/categories/list";
 		
 	}
+	/**
+	 * 
+	 * Método que devuelve la vista del listado de tareas de la categoría cuyo id
+	 * se pasa por parámetro
+	 * 
+	 * @param model
+	 * @param id id de la categoría de las tareas a listar
+	 * @param httpSession sesión actual del usuario autenticado
+	 * @return
+	 */
 	
 	@RequestMapping(value = "/categories/{id}")
 	public String taskCategories(Model model, @PathVariable int id, HttpSession httpSession) {
@@ -96,7 +124,14 @@ public class CategoryController {
 	}
 	
 
-	
+	/**
+	 * 
+	 * Método que devuelve la vista del listado de categorías
+	 * 
+	 * @param model
+	 * @param httpSession
+	 * @return
+	 */
 	@RequestMapping(value = "/categories/list")
 	public String getCategories(Model model, HttpSession httpSession) {
 		
@@ -114,7 +149,15 @@ public class CategoryController {
 		return "categoriesList";
 		
 	}
-	
+	/**
+	 * 
+	 * Método que edita la categoría que se pasa por parámetro
+	 * 
+	 * @param category categoría editada
+	 * @param result resultado de las validaciones
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/categories/edit")
 	public String updateCategories(@Validated Category category, BindingResult result, Model model) {
 		

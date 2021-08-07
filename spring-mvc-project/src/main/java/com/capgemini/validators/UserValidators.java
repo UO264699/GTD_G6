@@ -3,14 +3,11 @@ package com.capgemini.validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.capgemini.model.User;
-import com.capgemini.model.UserStatus;
-import com.capgemini.persistence.UsersRepository;
 import com.capgemini.services.UsersService;
 
 @Component
