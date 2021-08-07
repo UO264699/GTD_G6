@@ -24,7 +24,7 @@ public class TaskValidator implements Validator {
 		
 		if(task.getUser_id() == (taskService.getTaskById(task.getId()).getUser_id())) {
 			if(task.getTitle().equals(taskService.getTaskById(task.getId()).getTitle())) {
-				errors.rejectValue("title", "task.title", "Ya hay una task con ese titulo");
+				errors.rejectValue("title", "task.title", "Ya existe una tarea con ese titulo");
 			}
 		}
 		

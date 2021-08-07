@@ -238,11 +238,19 @@ public class TasksService {
 		
 		TaskDto beforeTask = tasksRepository.findById(task.getId());
 		
+		System.out.println(beforeTask.title);
+		System.out.println(beforeTask.comments);
+		System.out.println(beforeTask.planned);
+		
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		
 		try {
-			Date fecha = formato.parse(datePlan);
-			task.setPlanned(fecha);
+			
+			if(datePlan != "") {
+				Date fecha = formato.parse(datePlan);
+				task.setPlanned(fecha);
+			}
+		
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -256,7 +264,9 @@ public class TasksService {
 		t.comments = task.getComments();
 		
 		
-		comprobarCamposVacios(t, beforeTask);	
+		t = comprobarCamposVacios(t, beforeTask);	
+		
+		
 		
 		this.tasksRepository.updateTask(t);
 	}
@@ -271,7 +281,7 @@ public class TasksService {
 	 * @param tareaEditada
 	 * @param tareaSinEditar
 	 */
-	public void comprobarCamposVacios(TaskDto tareaEditada, TaskDto tareaSinEditar) {
+	public TaskDto comprobarCamposVacios(TaskDto tareaEditada, TaskDto tareaSinEditar) {
 		
 		if(tareaEditada.planned == null) {
 			
@@ -279,16 +289,18 @@ public class TasksService {
 			
 		}
 		
-		if(tareaEditada.comments == null) {
+		if(tareaEditada.comments == null|| tareaEditada.comments =="") {
 			
 			tareaEditada.comments = tareaSinEditar.comments;
 			
 		}
 		
-		if(tareaEditada.title == null) {
+		if(tareaEditada.title == null || tareaEditada.title =="") {
 			
 			tareaEditada.title = tareaSinEditar.title;
 		}
+		
+		return tareaEditada;
 	}
 
 }

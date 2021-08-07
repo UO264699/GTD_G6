@@ -41,7 +41,7 @@
 						<li class="nav-item"><a class="nav-link"
 							aria-current="page" href="/spring-mvc-project/categories/list">Administrar Categorias</a></li>
 							
-						<li><a class="nav-link" cursor="pointer" href="/spring-mvc-project/task/categories/list">Administrar tareas por categoria</a></li>
+		
 					</ul>
 					<a class="nav-link active text-light"aria-current="page" href="/spring-mvc-project/tasks/list#">Home</a>
 					<button type="button" class="btn btn-success" data-bs-toggle="modal"
