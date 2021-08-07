@@ -18,7 +18,15 @@ import com.capgemini.persistence.CategoriesRepository;
 import com.capgemini.persistence.TasksRepository;
 import com.capgemini.persistence.dto.TaskDto;
 
-
+/**
+ * 
+ * Clase que representa el servicio de Tareas con todos los métodos
+ * relacionados con las tareas.
+ * 
+ * 
+ * @author andrefer
+ *
+ */
 @Service
 public class TasksService {
 	
@@ -35,7 +43,7 @@ public class TasksService {
 	
 	/**
 	 * 
-	 * Añade una tarea 
+	 * Método que añade una tarea 
 	 * 
 	 * @param t Tarea a añadir
 	 */
@@ -59,7 +67,7 @@ public class TasksService {
 	
 	/**
 	 * 
-	 * Lista todas las tareas del usuario
+	 * Método que lista todas las tareas del usuario
 	 * 
 	 * @return listado de todas las tareas del usuario
 	 * 
@@ -86,7 +94,7 @@ public class TasksService {
 	
 	/**
 	 * 
-	 * Lista las tareas de hoy y las retrasadas
+	 * Método que lista las tareas de hoy y las retrasadas
 	 * 
 	 * 
 	 * @return listado de las tareas de hoy y las retrasadas
@@ -118,7 +126,7 @@ public class TasksService {
 	
 	/**
 	 * 
-	 * Lista todas las tareas finalizadas
+	 * Método que lista todas las tareas finalizadas
 	 * 
 	 * @return Listado de todas las tareas finalizadas
 	 */
@@ -141,7 +149,7 @@ public class TasksService {
 	
 	/**
 	 * 
-	 * Lista las tareas de una categoría determinada cuyo id se pasa por parámetro
+	 * Método que lista las tareas de una categoría determinada cuyo id se pasa por parámetro
 	 * 
 	 * 
 	 * @param id id del usuario en sesión
@@ -167,7 +175,7 @@ public class TasksService {
 	
 	/**
 	 * 
-	 * Obtiene una lista de las listas de tareas por cada categoría
+	 * Método que obtiene una lista de las listas de tareas por cada categoría
 	 * 
 	 * @param id id del usuario en sesión
 	 * @return Lista de las listas de tareas por cada categoría
@@ -188,6 +196,13 @@ public class TasksService {
 		return tasksByCategory;	
 	}
 	
+	/**
+	 * 
+	 * Método que obtiene una tarea por su id
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Task getTaskById(int id) {
 		
 		TaskDto taskDto = tasksRepository.findById(id);
@@ -220,17 +235,32 @@ public class TasksService {
 		
 	}
 	
+	/**
+	 * 
+	 * Método que edita la tarea que se pasa por parámetro
+	 * 
+	 * @param task Tarea editada
+	 * @param datePlan fecha planeada
+	 */
 	public void editTask(Task task,String datePlan) {	
 		
 		TaskDto t = new TaskDto();
 		
 		TaskDto beforeTask = tasksRepository.findById(task.getId());
 		
+		System.out.println(beforeTask.title);
+		System.out.println(beforeTask.comments);
+		System.out.println(beforeTask.planned);
+		
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 		
 		try {
-			Date fecha = formato.parse(datePlan);
-			task.setPlanned(fecha);
+			
+			if(datePlan != "") {
+				Date fecha = formato.parse(datePlan);
+				task.setPlanned(fecha);
+			}
+		
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -244,29 +274,43 @@ public class TasksService {
 		t.comments = task.getComments();
 		
 		
-		comprobarCamposVacios(t, beforeTask);	
+		t = comprobarCamposVacios(t, beforeTask);	
+		
+		
 		
 		this.tasksRepository.updateTask(t);
 	}
 	
-	public void comprobarCamposVacios(TaskDto t, TaskDto t2) {
+	
+	/**
+	 * 
+	 * Método que comprueba si los campos en la actualización de una tarea
+	 * están vacíos. Si están vacíos, se les asigna los valores que ya tenía
+	 * la tarea.
+	 * 
+	 * @param tareaEditada
+	 * @param tareaSinEditar
+	 */
+	public TaskDto comprobarCamposVacios(TaskDto tareaEditada, TaskDto tareaSinEditar) {
 		
-		if(t.planned == null) {
+		if(tareaEditada.planned == null) {
 			
-			t.planned = t2.planned;
+			tareaEditada.planned = tareaSinEditar.planned;
 			
 		}
 		
-		if(t.comments == null) {
+		if(tareaEditada.comments == null|| tareaEditada.comments =="") {
 			
-			t.comments = t2.comments;
+			tareaEditada.comments = tareaSinEditar.comments;
 			
 		}
 		
-		if(t.title == null) {
+		if(tareaEditada.title == null || tareaEditada.title =="") {
 			
-			t.title = t2.title;
+			tareaEditada.title = tareaSinEditar.title;
 		}
+		
+		return tareaEditada;
 	}
 
 }

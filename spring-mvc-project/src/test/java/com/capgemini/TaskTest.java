@@ -9,10 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 
 import com.capgemini.persistence.CategoriesRepository;
@@ -28,23 +25,12 @@ class TaskTest {
 	private TasksRepository tasksRepository = new TasksRepository();
 	private CategoriesRepository categoriesRepository = new CategoriesRepository();
 
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-	}
-
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
 	
-	
+	/**
+	 * Método que crea un nuevo usuario 
+	 * 
+	 * @return usuario creado
+	 */
 	UserDto addUser() {
 		
 		UserDto userDto = new UserDto();
@@ -70,6 +56,10 @@ class TaskTest {
 		
 	}
 
+	/**
+	 * 
+	 * Añade una tarea y comprueba ha sido añadida.
+	 */
 	@Test
 	void testAddTask() {
 		
@@ -92,7 +82,11 @@ class TaskTest {
 	    
 	}
 	
-	
+	/**
+	 * 
+	 * Actualiza una tarea y comprueba que ha sido actualizada
+	 * 
+	 */
 	@Test
 	void testUpdateTask() {
 		
@@ -115,6 +109,11 @@ class TaskTest {
 		assertNotNull(t.planned);
 	}
 	
+	
+	/**
+	 * 
+	 * Marca una tarea como finalizada y comprueba que ha sido así
+	 */
 	@Test
 	void testFinishTask() {
 		
@@ -131,6 +130,9 @@ class TaskTest {
 		
 	}
 	
+	/**
+	 * Borra una tarea y comprueba que ha sido borrada
+	 */
 	@Test
 	void testDeleteTask() {
 		

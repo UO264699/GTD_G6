@@ -3,14 +3,11 @@ package com.capgemini.validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.capgemini.model.User;
-import com.capgemini.model.UserStatus;
-import com.capgemini.persistence.UsersRepository;
 import com.capgemini.services.UsersService;
 
 @Component
@@ -38,18 +35,18 @@ public class UserValidators implements Validator {
 	
 		
 		if(!user.getConfirmPassword().equals(user.getPassword())) {
-			errors.rejectValue("confirmPassword", "user.confirmPassword", "La contraseña tiene que ser igual");
+			errors.rejectValue("confirmPassword", "user.confirmPassword", "Las contraseñas no coinciden");
 		}
 		
 		if(user.getLogin() != "") {
 			if(userServices.getUserByLogin(user.getLogin()).getLogin() != null) {
-				errors.rejectValue("login", "user.login", "Ya hay un usuario con ese userName");
+				errors.rejectValue("login", "user.login", "Ya existe un usuario con ese usuario");
 			}
 		}
 		
 		if(user.getEmail() != "") {
 			if(userServices.getUserByEmail(user.getEmail()).getEmail() != null) {
-				errors.rejectValue("email", "user.email", "Ya hay un usuario con ese email");
+				errors.rejectValue("email", "user.email", "Ya existe un usuario con ese email");
 			}	
 		}
 

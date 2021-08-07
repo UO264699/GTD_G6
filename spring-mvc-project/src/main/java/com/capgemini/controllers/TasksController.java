@@ -37,6 +37,15 @@ public class TasksController {
 		binder.setValidator(taskValidator);
 	}
 	
+	/**
+	 * 
+	 * Método que añade una tarea
+	 * 
+	 * @param task Tarea a añadir
+	 * @param result Resultado de las validaciones
+	 * @param httpSession Sesión actual del usuario autenticado
+	 * @return vistas del listado de tareas
+	 */
 	@RequestMapping(value = "tasks/add", method = RequestMethod.POST)
 	public String addTask(@Validated Task task,BindingResult result,HttpSession httpSession)  {
 		
@@ -61,7 +70,16 @@ public class TasksController {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * Método que devuelve la vista del listado de tareas del usuario
+	 * en sesión.
+	 * 
+	 * 
+	 * @param model
+	 * @param httpSession Sesión actual del usuario autenticado
+	 * @return las vistas del listado de tareas
+	 */
 	@RequestMapping(value = "/tasks/list")
 	public String getTasks(Model model, HttpSession httpSession)  {
 		
@@ -90,7 +108,15 @@ public class TasksController {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * Método que finaliza la tarea cuyo id se pasa por parámetro
+	 * en la url.
+	 * 
+	 * @param id
+	 * @param httpSession
+	 * @return las vistas del listado de tareas
+	 */
 	@RequestMapping(value = "tasks/finish/{id}")
 	public String finishTask(@PathVariable int id,HttpSession httpSession)  {
 		
@@ -107,7 +133,14 @@ public class TasksController {
 		
 	}
 	
-	
+	/**
+	 * 
+	 * Método que edita una tarea 
+	 * 
+	 * @param task Tarea editada
+	 * @param datePlan Nueva fecha planeada
+	 * @return
+	 */
 	@RequestMapping(value = "/tasks/editTask")
 	public String editTask(Task task,String datePlan)  {
 		

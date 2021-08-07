@@ -1,0 +1,7 @@
+com.capgemini.controllers
+com.capgemini.model
+com.capgemini.persistence
+com.capgemini.persistence.dto
+com.capgemini.persistence.jdbc
+com.capgemini.services
+com.capgemini.validators

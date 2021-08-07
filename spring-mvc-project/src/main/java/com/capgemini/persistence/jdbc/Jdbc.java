@@ -7,6 +7,11 @@ import java.sql.SQLException;
 public class Jdbc {
 
 
+	/**
+	 * Método que realiza la conexión con la base de datos
+	 * 
+	 * @return conexión
+	 */
 	public static Connection getConnection() {
 
 
@@ -24,6 +29,12 @@ public class Jdbc {
 		return con;
 	}
 	
+	/**
+	 * Método que cierra la conexión
+	 * 
+	 * @param c conexión 
+	 * @throws SQLException
+	 */
 	public void close(Connection c) throws SQLException {
 		
 		c.close();
