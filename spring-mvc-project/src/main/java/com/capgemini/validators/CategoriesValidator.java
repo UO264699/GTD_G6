@@ -26,7 +26,7 @@ public class CategoriesValidator implements Validator {
 			
 			if(categories.getUser_id() == (categoriesService.getCategoryByName(categories.getName()).getUser_id())) {
 				if(categories.getName().equals(categoriesService.getCategoryByName(categories.getName()).getName())) {
-					errors.rejectValue("name", "category.name", "Ya hay una Categoria con ese nombre");
+					errors.rejectValue("name", "category.name", "Ya hay una categoría con ese nombre");
 				}
 			}
 		
