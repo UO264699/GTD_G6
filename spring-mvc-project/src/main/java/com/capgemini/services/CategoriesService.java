@@ -43,10 +43,10 @@ public class CategoriesService {
 		List<Object> categories = categoriesRepository.findbyUserid(userid);
 		List<Category> categories1 = new ArrayList<>();
 
-		for(Object u : categories) {
-			Category category = (Category) u;
+		for(Object c : categories) {
+			CategoryDto category = (CategoryDto) c ;
 
-			Category category2 = new Category(category.getId(), category.getName(), category.getUser_id());
+			Category category2 = new Category(category.id, category.name, category.user_id);
 
 			categories1.add(category2);
 		}
@@ -84,11 +84,29 @@ public class CategoriesService {
 		
 	}
 	
+	/**
+	 * Editar una categoría del sistema
+	 * 
+	 * 
+	 * @param id id de la categoría a borrar
+	 */
 	public void editCategorie(Category category) {	
 		this.categoriesRepository.updateCategory(category.getId(), category.getName());
 	}
 	
-
-
+	/**
+	 * Obtiene una categoría del sistema
+	 * 
+	 * 
+	 * @param id id de la categoría a borrar
+	 */
+	public Category getCategoryByName(String name) {
+		
+		CategoryDto categoryDto = categoriesRepository.findbyname(name);
+		
+		Category category = new Category(categoryDto.id, categoryDto.name, categoryDto.user_id);
+		
+		return category;
+	}
 
 }

@@ -5,6 +5,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +17,7 @@ import com.capgemini.model.Task;
 import com.capgemini.model.User;
 import com.capgemini.services.CategoriesService;
 import com.capgemini.services.TasksService;
+import com.capgemini.validators.TaskValidator;
 
 @Controller
 public class TasksController {
@@ -23,9 +28,20 @@ public class TasksController {
 	@Autowired
 	private CategoriesService categoriesService;
 	
-
+	@Autowired
+	private TaskValidator taskValidator;
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.setValidator(taskValidator);
+	}
+	
 	@RequestMapping(value = "tasks/add", method = RequestMethod.POST)
-	public String addTask(Task task, HttpSession httpSession)  {
+	public String addTask(@Validated Task task,BindingResult result,HttpSession httpSession)  {
+		
+		if (result.hasErrors()) {																																									
+			return "redirect:/tasks/list";
+		}
 		
 		
 		User user = (User) httpSession.getAttribute("user") ;
@@ -48,6 +64,7 @@ public class TasksController {
 	@RequestMapping(value = "/tasks/list")
 	public String getTasks(Model model, HttpSession httpSession)  {
 		
+		model.addAttribute("task", new Task());
 		
 		User user = (User) httpSession.getAttribute("user");
 		
@@ -70,6 +87,7 @@ public class TasksController {
 		return "tasksList";
 		
 	}
+	
 	
 	@RequestMapping(value = "tasks/finish/{id}")
 	public String finishTask(@PathVariable int id,HttpSession httpSession)  {

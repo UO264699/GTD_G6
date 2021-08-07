@@ -185,13 +185,16 @@ public class TasksService {
 			tasksByCategory.add(tasks);
 		}
 			
-			
+		return tasksByCategory;	
+	}
+	
+	public Task getTaskById(int id) {
 		
+		TaskDto taskDto = tasksRepository.findById(id);
 		
-		return tasksByCategory;
-		
-		
-		
+		Task task = new Task(taskDto.id,taskDto.title, taskDto.comments, taskDto.created, taskDto.planned, taskDto.finished,taskDto.userId, taskDto.categoryId);
+	
+		return task;
 	}
 	
 	/**

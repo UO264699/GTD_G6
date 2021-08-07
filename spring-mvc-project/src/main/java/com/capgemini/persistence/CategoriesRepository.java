@@ -149,13 +149,14 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 			while(rs.next()) {
 
 
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				int user_id = rs.getInt("user_id");
+				CategoryDto categoryDto = new CategoryDto();
+				
+				categoryDto.name = rs.getString("name");
+				categoryDto.user_id = rs.getInt("user_id");
+				categoryDto.id = rs.getInt("id");
+			
 
-				Category u = new Category(id,name,user_id);
-
-				listCategories.add(u);
+				listCategories.add(categoryDto);
 
 			}
 
@@ -275,7 +276,6 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 	}
 	
 	public CategoryDto findbyname(String name)  {
-		List<Object> listCategories = new ArrayList<Object>();
 
 		Connection c = null;
 		PreparedStatement pst = null;
@@ -292,22 +292,17 @@ public class CategoriesRepository implements com.capgemini.persistence.Repositor
 
 			rs = pst.executeQuery();
 
+			CategoryDto categoryDto = new CategoryDto();
+			
 			while(rs.next()) {
-
-
-				CategoryDto categoryDto = new CategoryDto();
 				
 				categoryDto.name = rs.getString("name");
 				categoryDto.user_id = rs.getInt("user_id");
 				categoryDto.id = rs.getInt("id");
 
-			
-
-				listCategories.add(categoryDto);
-
 			}
 
-			return (CategoryDto) listCategories.get(0);
+			return categoryDto;
 
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
