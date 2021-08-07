@@ -23,11 +23,11 @@ public class TaskValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Task task = (Task) target;
 		
-		if(task.getUser_id() == (taskService.getTaskById(task.getId()).getUser_id())) {
-			if(task.getTitle().equals(taskService.getTaskById(task.getId()).getTitle())) {
+		if(task.getUser_id() == (taskService.getTaskByName(task.getTitle()).getUser_id())) {
+			if(task.getTitle().equals(taskService.getTaskByName(task.getTitle()).getTitle())) {
 				errors.rejectValue("title", "task.title", "Ya hay una task con ese titulo");
-			}
-		}
+			} else System.out.println("1");
+		} else System.out.println("2");
 		
 	}
 }

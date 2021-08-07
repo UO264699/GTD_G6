@@ -197,6 +197,16 @@ public class TasksService {
 		return task;
 	}
 	
+	public Task getTaskByName(String name) {
+		
+		TaskDto taskDto = tasksRepository.findByName(name);
+		
+		Task task = new Task(taskDto.id,taskDto.title, taskDto.comments, taskDto.created, taskDto.planned, taskDto.finished,taskDto.userId, taskDto.categoryId);
+	
+		return task;
+	}
+	
+	
 	/**
 	 * 
 	 * Marca una tarea como finalizada

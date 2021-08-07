@@ -314,6 +314,63 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		
 	}
 	
+public TaskDto findByName(String name)  {
+		
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		
+
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TTASKS\" where title=?");
+			
+			pst.setString(1, name);
+			
+			rs = pst.executeQuery();
+			TaskDto t = new TaskDto();
+			
+			while(rs.next()) {
+				
+				
+			
+				
+				t.id = rs.getInt("id");
+				t.categoryId = rs.getInt("category_id");
+				t.userId = rs.getInt("user_id");
+				t.comments = rs.getString("comments");
+				t.created = rs.getDate("created");
+				t.finished = rs.getDate("finished");
+				t.planned = rs.getDate("planned");
+				t.title = rs.getString("title");
+				
+				
+
+		
+			}
+			
+			return t;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+		
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+		}
+		
+	}
+	
 	public List<Object> findByCategoryId(int category_id) {
 		List<Object> listTasks = new ArrayList<Object>();
 

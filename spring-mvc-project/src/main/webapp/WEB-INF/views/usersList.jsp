@@ -27,7 +27,8 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarText">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"></li>
+						<li class="nav-item"><a class="nav-link active text-light" aria-current="page"
+					href="/spring-mvc-project/tasks/list#">Administrar tareas</a></li>
 
 						<c:if test="${sessionScope.user.isAdmin == true}">
 						<li class="nav-item"><a class="nav-link active"
@@ -39,7 +40,7 @@
 							
 						
 					</ul>
-					<a class="nav-link active text-light"aria-current="page" href="/spring-mvc-project/tasks/list#">Home</a>
+		
 					
 						
 					<a class="btn btn-danger m-1" href="/spring-mvc-project/logout">Cerrar Sesion</a>

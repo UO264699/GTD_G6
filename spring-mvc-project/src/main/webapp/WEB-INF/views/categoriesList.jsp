@@ -30,7 +30,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"></li>
+					<li class="nav-item"><li class="nav-item"><a class="nav-link text-light"aria-current="page" href="/spring-mvc-project/tasks/list#">Administrar Tareas</a></li></li>
 
 					<c:if test="${sessionScope.user.isAdmin == true}">
 						<li class="nav-item"><a class="nav-link"
@@ -42,8 +42,7 @@
 							Categorias</a></li>
 				
 				</ul>
-				<a class="nav-link active text-light" aria-current="page"
-					href="/spring-mvc-project/tasks/list#">Home</a>
+				
 				<button type="button" class="btn btn-success" data-bs-toggle="modal"
 					data-bs-target="#staticBackdrop2">Crear Categoria</button>
 					
@@ -103,13 +102,15 @@
 			</thead>
 			<tbody>
 				<c:forEach var="c" items="${categories}">
-
+				<c:if test="${c.name != 'Inbox'}">
 					<tr class="text-center">
 
 						<td><c:out value="${c.id}" /></td>
 						<td><c:out value="${c.name}" /></td>
+						
 						<td><a href=delete/${c.id} type="button"
 							class="btn btn-outline-dark">Borrar</a></td>
+						
 						<td>
 							<button type="button" hidden class="btn btn-light"
 								data-bs-toggle="modal" data-bs-target="#staticBackdrop"
@@ -121,7 +122,7 @@
 						<td><a href=${c.id} type="button"
 							class="btn btn-outline-dark">Ver tareas</a></td>
 					</tr>
-
+					</c:if>
 				</c:forEach>
 
 			</tbody>
@@ -145,6 +146,8 @@
 								<form:input type="text" name="name" path="name" class="form-control m-1" placeholder="Escribe el nombre" />
 								<input type="submit" class="btn btn-dark w-100 mt-1" value="Editar">
 								<input type="hidden" name="id" id="categoria">
+								
+									<form:input type="hidden" class="form-control" name="user_id" path="user_id" value="${sessionScope.user.id }"/>
 							</div>
 						</form:form>
 						
