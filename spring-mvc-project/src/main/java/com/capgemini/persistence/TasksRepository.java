@@ -16,21 +16,10 @@ import com.capgemini.persistence.dto.TaskDto;
 
 import com.capgemini.persistence.jdbc.Jdbc;
 
-/**
- * 
- * Clase que se encarga de realizar las transacciones con la base de datos relacionadas
- * con las tareas
- * 
- * @author andrefer
- *
- */
 @Repository
 public class TasksRepository implements com.capgemini.persistence.Repository {
 
 
-	/**
-	 * Método que inserta una tarea en la base de datos
-	 */
 	@Override
 	public int add(Object o)  {
 		
@@ -82,10 +71,6 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		return 0;
 	}
 	
-	/**
-	 * 
-	 * Método que elimina la tarea de la base de datos cuyo id se pasa por parámetro
-	 */
 	@Override
 	public void delete(int id) {
 		
@@ -120,11 +105,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 
 	}
 	
-    /**
-     * Elimina las tareas de la categoría cuyo id se pasa por parámetro
-     * 
-     * @param categoryid id de la categoría
-     */
+
 	public void deleteByCategoryId(int categoryid)  {
 		
 		Connection c = null;
@@ -159,9 +140,6 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 	}
 
 
-	/**
-	 * Método que devuelve la lista de todas las tareas del sistema
-	 */
 	@Override
 	public List<Object> findAll()  {
 		List<Object> listTasks = new ArrayList<Object>();
@@ -220,12 +198,6 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 	}
 	
 
-	/**
-	 * Método que devuelve las tareas del usuario cuyo id se pasa por parámetro
-	 * 
-	 * @param id id del usuario
-	 * @return lista de tareas
-	 */
 	public List<Object> findByUserId(int id)  {
 		List<Object> listTasks = new ArrayList<Object>();
 
@@ -284,11 +256,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		
 	}
 	
-	/**
-	 * Método que devuelve la tarea cuyo id se pasa por parámetro
-	 * @param id id de la tarea
-	 * @return tarea
-	 */
+	
 	public TaskDto findById(int id)  {
 		
 
@@ -345,13 +313,64 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		}
 		
 	}
-	/**
-	 * Método que devuelve la lista de tareas de la categoría cuyo id
-	 * se pasa por parámetro
-	 * 
-	 * @param category_id
-	 * @return
-	 */
+	
+public TaskDto findByName(String name)  {
+		
+
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		
+
+		try {
+			c = Jdbc.getConnection();
+			
+			pst = c.prepareStatement("SELECT * FROM \"PUBLIC\".\"TTASKS\" where title=?");
+			
+			pst.setString(1, name);
+			
+			rs = pst.executeQuery();
+			TaskDto t = new TaskDto();
+			
+			while(rs.next()) {
+				
+				
+			
+				
+				t.id = rs.getInt("id");
+				t.categoryId = rs.getInt("category_id");
+				t.userId = rs.getInt("user_id");
+				t.comments = rs.getString("comments");
+				t.created = rs.getDate("created");
+				t.finished = rs.getDate("finished");
+				t.planned = rs.getDate("planned");
+				t.title = rs.getString("title");
+				
+				
+
+		
+			}
+			
+			return t;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+		
+			try {
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+
+		}
+		
+	}
+	
 	public List<Object> findByCategoryId(int category_id) {
 		List<Object> listTasks = new ArrayList<Object>();
 
@@ -411,12 +430,7 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 		
 	}
 	
-	/**
-	 * Método que actualiza la fecha de finalización de una tarea cuyo id
-	 * se pasa por parámetro
-	 * 
-	 * @param id de la tarea
-	 */
+	
 	public void updateFinished(int id){
 			
 			
@@ -454,11 +468,6 @@ public class TasksRepository implements com.capgemini.persistence.Repository {
 			
 		}
 
-	/**
-	 * Método que actualiza la tarea que es pasada por parámetro
-	 * 
-	 * @param task tarea a actualizar
-	 */
 	public void updateTask(TaskDto task) {		
 		
 		Connection c = null;

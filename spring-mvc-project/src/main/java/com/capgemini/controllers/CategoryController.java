@@ -54,7 +54,6 @@ public class CategoryController {
 			return "redirect:/categories/list";
 		}
 		
-		
 		User user = (User) httpSession.getAttribute("user");
 		
 		if(user == null) {
@@ -66,6 +65,7 @@ public class CategoryController {
 		categoriesService.addCategory(category);
 		
 
+		
 		return "redirect:/categories/list";
 		
 	}

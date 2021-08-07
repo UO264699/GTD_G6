@@ -31,7 +31,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarText">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item"></li>
+						<li class="nav-item"><a class="nav-link active text-light"aria-current="page" href="/spring-mvc-project/tasks/list#">Administrar Tareas</a></li>
 
 						<c:if test="${sessionScope.user.isAdmin == true}">
 						<li class="nav-item"><a class="nav-link "
@@ -41,11 +41,11 @@
 						<li class="nav-item"><a class="nav-link"
 							aria-current="page" href="/spring-mvc-project/categories/list">Administrar Categorias</a></li>
 							
-		
+					
 					</ul>
-					<a class="nav-link active text-light"aria-current="page" href="/spring-mvc-project/tasks/list#">Home</a>
+					
 					<button type="button" class="btn btn-success" data-bs-toggle="modal"
-						data-bs-target="#staticBackdrop">Anadir</button>
+						data-bs-target="#staticBackdrop">Crear Tarea</button>
 						
 					<a class="btn btn-danger m-1" href="/spring-mvc-project/logout">Cerrar Sesion</a>
 				</div>
@@ -67,7 +67,7 @@
 					</div>
 					<div class="modal-body">
 
-						<form:form action="editTask" method="post">
+						<form action="editTask" method="post">
 						<div class="d-flex flex-column justify-content-center aling-items-center">
 							<input type="text" name="title" class="form-control m-1"
 								placeholder="Escribe el nombre" id="title"> 
@@ -80,7 +80,22 @@
 							<input
 								type="hidden" name="id" id="task">
 						</div>
-						</form:form>
+						</form>
+						
+						<!--<form:form action="editTask" method="post" modelAttribute="taskEdit">
+							<div class="d-flex flex-column justify-content-center aling-items-center">
+								<form:input type="text" name="title" class="form-control m-1"
+									placeholder="Escribe el nombre" id="title" path="title" /> 
+								<form:input type="text" name="comments" class="form-control m-1"
+									placeholder="Escribe el comentario" id="comments" path="comments"/> 
+								<form:input type="date" name="planned" class="form-control m-1"
+									placeholder="Escribe la fecha" id="datePlan" path="planned"/> 
+								<input type="submit"
+									class="btn btn-dark w-100 mt-1" value="Editar">
+								<input
+									type="hidden" name="id" id="task">
+							</div>
+						</form:form>-->
 					</div>
 				</div>
 			</div>
@@ -108,6 +123,8 @@
 										<i class="fas fa-envelope prefix grey-text"></i>
 										<form:input type="text" class="form-control" name="title" path="title"/>
 										<input type="submit" class="btn btn-dark w-100 mt-1" value="Anadir Tarea" />
+										
+										<form:input type="hidden" class="form-control" name="user_id" path="user_id" value="${sessionScope.user.id }"/>
 									</div>
 							</div>
 						

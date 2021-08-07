@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.capgemini.model.Category;
 import com.capgemini.model.Task;
 import com.capgemini.model.User;
 import com.capgemini.services.CategoriesService;
@@ -82,6 +83,7 @@ public class TasksController {
 	@RequestMapping(value = "/tasks/list")
 	public String getTasks(Model model, HttpSession httpSession)  {
 		
+		model.addAttribute("taskEdit", new Task());
 		model.addAttribute("task", new Task());
 		
 		User user = (User) httpSession.getAttribute("user");
@@ -141,6 +143,7 @@ public class TasksController {
 	 */
 	@RequestMapping(value = "/tasks/editTask")
 	public String editTask(Task task,String datePlan)  {
+		
 		
 		tasksService.editTask(task, datePlan);
 		
