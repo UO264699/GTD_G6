@@ -11,7 +11,15 @@ import com.capgemini.persistence.CategoriesRepository;
 import com.capgemini.persistence.TasksRepository;
 import com.capgemini.persistence.dto.CategoryDto;
 
-
+/**
+ * 
+ * Clase que representa el servicio de Categorías con todos los métodos
+ * relacionados con las categorías.
+ * 
+ * 
+ * @author andrefer
+ *
+ */
 @Service
 public class CategoriesService {
 
@@ -84,11 +92,29 @@ public class CategoriesService {
 		
 	}
 	
+	/**
+	 * Método que edita una categoría del sistema
+	 * 
+	 * 
+	 * @param id id de la categoría a borrar
+	 */
 	public void editCategorie(Category category) {	
 		this.categoriesRepository.updateCategory(category.getId(), category.getName());
 	}
 	
-
-
+	/**
+	 * Obtiene una categoría del sistema
+	 * 
+	 * 
+	 * @param id id de la categoría a borrar
+	 */
+	public Category getCategoryByName(String name) {
+		
+		CategoryDto categoryDto = categoriesRepository.findbyname(name);
+		
+		Category category = new Category(categoryDto.id, categoryDto.name, categoryDto.user_id);
+		
+		return category;
+	}
 
 }

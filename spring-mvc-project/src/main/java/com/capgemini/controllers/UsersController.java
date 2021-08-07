@@ -1,7 +1,5 @@
 package com.capgemini.controllers;
 
-import java.sql.SQLException;
-
 import javax.servlet.http.HttpSession;
 
 import com.capgemini.model.User;
@@ -42,25 +40,48 @@ public class UsersController {
 		binder.setValidator(userValidator);
 	}
 
+	
+	/**
+	 * Método que devuelve las vistas de la página inicial
+	 * 
+	 * @return vistas de la página inicial
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcomePage() {
 		return "redirect:/login";
 	}
 	
-	
+	/**
+	 * Método que devuelve las vistas del login.
+	 * 
+	 * @param model
+	 * @return las vistas de la pantalla de login
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
 		model.addAttribute("user", new User());
 		return "login";
 	}
 	
-
+	/**
+	 * Método que devuelve las vistas de la pantalla de registro
+	 * 
+	 * @param model las vistas de la pantalla de registro
+	 * @return
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
 		model.addAttribute("user", new User());
 		return "register";
 	}
 	
+	
+	/**
+	 * Método que termina la sesión del usuario autenticado
+	 * 
+	 * @param session Sesión actual del usuario autenticado
+	 * @return
+	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		
@@ -69,6 +90,14 @@ public class UsersController {
 		return "redirect:/login";
 	}
 	
+	/**
+	 * 
+	 * Método que autentica a un usuario.
+	 * 
+	 * @param user Usuario a autenticar
+	 * @param session Sesión actual del usuario autenticado
+	 * @return
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String authenticate(User user,HttpSession session) {
 		
@@ -90,9 +119,16 @@ public class UsersController {
 		} else return "redirect:/login";
 		
 	}
-
+	
+    /**
+     * Método que devuelve las vistas del listado de usuarios
+     * 
+     * @param model
+     * @param httpSession sesión actual del usuario autenticado
+     * @return las vistas del listado de usuarios
+     */
 	@RequestMapping(value = "/users/list")
-	public String getUsers(Model model, HttpSession httpSession) throws SQLException {
+	public String getUsers(Model model, HttpSession httpSession)  {
 		
 		
 		User user = (User) httpSession.getAttribute("user");
@@ -111,9 +147,17 @@ public class UsersController {
 		return "usersList";
 
 	}
-
+    
+	/**
+	 * 
+	 * Método que borra el usuario cuyo id se pasa por parámetro en la URL
+	 * 
+	 * @param id id del usuario a borrar
+	 * @param httpSession sesión actual del usuario autenticado
+	 * @return las vistas del listado de usuario
+	 */
 	@RequestMapping(value = "users/delete/{id}")
-	public String deleteUser(@PathVariable int id,HttpSession httpSession) throws SQLException {
+	public String deleteUser(@PathVariable int id,HttpSession httpSession)  {
 		
 
 		User user = (User) httpSession.getAttribute("user");
@@ -135,8 +179,17 @@ public class UsersController {
 		return "redirect:/users/list";
 	}
 
+	/**
+	 * 
+	 * Método que registra un nuevo usuario en el sistema
+	 * 
+	 * @param user Usuario a registrar
+	 * @param result Resultado de las validaciones
+	 * @param model
+	 * @return las vistas de la página inicial del sistema
+	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String addNewUsers(@Validated User user, BindingResult result, Model model) throws SQLException {
+	public String addNewUsers(@Validated User user, BindingResult result, Model model)  {
 
 		if (result.hasErrors()) {																																									
 			return "register";
@@ -148,8 +201,17 @@ public class UsersController {
 		return "redirect:/";
 	}
 
+	/**
+	 * 
+	 * Método que modifica el estado del usuario cuyo id se pasa por
+	 * parámetro en la url
+	 * 
+	 * @param id id del usuario a modificar
+	 * @param httpSession sesión actual del usuario autenticado
+	 * @return vistas del listado de usuarios
+	 */
 	@RequestMapping(value = "users/changeStatus/{id}")
-	public String changeStatus(@PathVariable int id,HttpSession httpSession) throws SQLException {
+	public String changeStatus(@PathVariable int id,HttpSession httpSession)  {
 		
 
 		User user = (User) httpSession.getAttribute("user");

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,20 +68,20 @@
 					</div>
 					<div class="modal-body">
 
-						<form action="add" method="post">
+						<form:form action="add" method="post" modelAttribute="category">
 
 							<div class="d-flex flex-column justify-content-center aling-items-center">
 								<h5 class="form-label">Nombre de la categoria</h5>
 								<div class="md-form mb-5">
-									<i class="fas fa-envelope prefix grey-text"></i> <input
-										type="text" class="form-control" name="name" /> <input
-										type="submit" class="btn btn-dark w-100 mt-1"
-										value="Anadir categoria" />
+									<i class="fas fa-envelope prefix grey-text"></i>
+									 <form:input type="text" class="form-control" name="name" path="name" />
+									 <form:errors type="text" class="form-control" name="name" path="name" />  
+									 <input type="submit" class="btn btn-dark w-100 mt-1" value="Anadir categoria" />
 								</div>
 							</div>
 
 
-						</form>
+						</form:form>
 					</div>
 				</div>
 			</div>
@@ -94,6 +96,7 @@
 					<th>Nombre Categoria</th>
 					<th>Borrar</th>
 					<th>Editar</th>
+					<th>Ver Tareas</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -135,13 +138,13 @@
 					</div>
 					<div class="modal-body">
 
-						<form action="edit" method="post">
+						<form:form action="edit" method="post" modelAttribute="categoryEdit">
 							<div class="d-flex flex-column justify-content-center aling-items-center">
-								<input type="text" name="name" class="form-control m-1" placeholder="Escribe el nombre">
+								<form:input type="text" name="name" path="name" class="form-control m-1" placeholder="Escribe el nombre" />
 								<input type="submit" class="btn btn-dark w-100 mt-1" value="Editar">
 								<input type="hidden" name="id" id="categoria">
 							</div>
-						</form>
+						</form:form>
 						
 					</div>
 				</div>
