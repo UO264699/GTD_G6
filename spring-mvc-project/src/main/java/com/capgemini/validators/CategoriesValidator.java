@@ -26,11 +26,19 @@ public class CategoriesValidator implements Validator {
 		
 		if(categories.getName() != "") {
 			
-			if(categories.getUser_id() == (categoriesService.getCategoryByName(categories.getName()).getUser_id())) {
+
+//			System.out.println(categories.getUser_id());
+//			System.out.println("----");
+//			System.out.println(categoriesService.getCategoryByName(categories.getName()).getUser_id());
+			
+			System.out.println(categories.getName());
+			System.out.println(categoriesService.getCategoryByName(categories.getName()).getName());
+			
+			if(categories.getUser_id() == categoriesService.getCategoryByName(categories.getName()).getUser_id()) {
 				if(categories.getName().equals(categoriesService.getCategoryByName(categories.getName()).getName())) {
 					errors.rejectValue("name", "category.name", "Ya hay una Categoria con ese nombre");
-				}
-			}
+				} else System.out.println("TONTOO");
+			} else System.out.println("TONTO");
 		
 		}
 		

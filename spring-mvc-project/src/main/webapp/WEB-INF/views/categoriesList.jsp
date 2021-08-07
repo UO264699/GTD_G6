@@ -76,6 +76,8 @@
 									<i class="fas fa-envelope prefix grey-text"></i>
 									 <form:input type="text" class="form-control" name="name" path="name" />
 									 <form:errors type="text" class="form-control" name="name" path="name" />  
+									 
+									 <form:input type="hidden" class="form-control" name="user_id" path="user_id" value="${sessionScope.user.id }"/>
 									 <input type="submit" class="btn btn-dark w-100 mt-1" value="Anadir categoria" />
 								</div>
 							</div>
