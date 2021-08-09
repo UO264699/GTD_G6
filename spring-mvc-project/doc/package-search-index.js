@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.capgemini.controllers"},{"l":"com.capgemini.model"},{"l":"com.capgemini.persistence"},{"l":"com.capgemini.persistence.dto"},{"l":"com.capgemini.persistence.jdbc"},{"l":"com.capgemini.services"},{"l":"com.capgemini.validators"}];updateSearchResults();
