@@ -113,7 +113,7 @@
 						
 
 						<select name="category_id" class="form-select">
-						<option selected="selected" >Selecciona una categoria</option>
+						
 						<c:forEach var="category" items="${categories}">
 							<option value="${category.id}"><c:out value="${category.name}"/></option>
 						</c:forEach>

@@ -1,6 +1,5 @@
 package com.capgemini.validators;
 
-import org.junit.experimental.categories.Categories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -23,9 +22,9 @@ public class CategoriesValidator implements Validator {
 	
 	public void validate(Object target, Errors errors) {
 		Category categories = (Category) target;
-		
+		   ValidationUtils.rejectIfEmpty(errors, "name", "category.name", "El campo nombre no puede estar vacio");
 		if(categories.getName() != "") {
-			
+			   
 			if(categories.getUser_id() == categoriesService.getCategoryByName(categories.getName()).getUser_id()) {
 				if(categories.getName().equals(categoriesService.getCategoryByName(categories.getName()).getName())) {
 					errors.rejectValue("name", "category.name", "Ya hay una Categoria con ese nombre");

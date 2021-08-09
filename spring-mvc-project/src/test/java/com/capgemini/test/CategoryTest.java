@@ -1,4 +1,4 @@
-package com.capgemini;
+package com.capgemini.test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,18 +17,21 @@ import com.capgemini.persistence.dto.CategoryDto;
 import com.capgemini.persistence.dto.UserDto;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-class CategorieTest {
+public class CategoryTest {
 	private UsersRepository usersRepository = new UsersRepository();
 
 	private CategoriesRepository categoriesRepository = new CategoriesRepository();
 
+	public CategoryTest() {
+		
+	}
 	
 	/**
 	 * Método que crea un nuevo usuario 
 	 * 
 	 * @return usuario creado
 	 */
-	UserDto addUser() {
+	public UserDto addUser() {
 		
 		UserDto userDto = new UserDto();
 		
@@ -54,7 +57,7 @@ class CategorieTest {
 	 * 
 	 */
 	@Test
-	void testEditCategorie() {
+	public void testEditCategorie() {
 		
 		UserDto u = usersRepository.findByLogin("prueba");
 		
@@ -79,7 +82,7 @@ class CategorieTest {
 	 * Añade una categoría y comprueba que ha sido añadida
 	 */
 	@Test
-	void testAddCategory() {
+	public void testAddCategory() {
 		
 		UserDto u = addUser();
 		
@@ -104,7 +107,7 @@ class CategorieTest {
 	 * 
 	 */
 	@Test
-	void testRemoveCategory() {
+	public void testRemoveCategory() {
 		
 		UserDto u = usersRepository.findByLogin("prueba");
 		

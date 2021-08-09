@@ -1,4 +1,4 @@
-package com.capgemini;
+package com.capgemini.test;
 
 
 
@@ -19,19 +19,23 @@ import com.capgemini.persistence.dto.CategoryDto;
 import com.capgemini.persistence.dto.TaskDto;
 import com.capgemini.persistence.dto.UserDto;
 
-class TaskTest {
+public class TaskTest {
 	
 	private UsersRepository usersRepository = new UsersRepository();
 	private TasksRepository tasksRepository = new TasksRepository();
 	private CategoriesRepository categoriesRepository = new CategoriesRepository();
 
 	
+	public TaskTest() {
+		
+	}
+	
 	/**
 	 * Método que crea un nuevo usuario 
 	 * 
 	 * @return usuario creado
 	 */
-	UserDto addUser() {
+	public UserDto addUser() {
 		
 		UserDto userDto = new UserDto();
 		
@@ -61,7 +65,7 @@ class TaskTest {
 	 * Añade una tarea y comprueba ha sido añadida.
 	 */
 	@Test
-	void testAddTask() {
+	public void testAddTask() {
 		
 		UserDto u = addUser();
 		
@@ -88,7 +92,7 @@ class TaskTest {
 	 * 
 	 */
 	@Test
-	void testUpdateTask() {
+	public void testUpdateTask() {
 		
 		UserDto u = usersRepository.findByLogin("prueba");
 		
@@ -115,7 +119,7 @@ class TaskTest {
 	 * Marca una tarea como finalizada y comprueba que ha sido así
 	 */
 	@Test
-	void testFinishTask() {
+	public void testFinishTask() {
 		
 		UserDto u = usersRepository.findByLogin("prueba");
 		
@@ -134,7 +138,7 @@ class TaskTest {
 	 * Borra una tarea y comprueba que ha sido borrada
 	 */
 	@Test
-	void testDeleteTask() {
+	public void testDeleteTask() {
 		
 		UserDto u = usersRepository.findByLogin("prueba");
 		

@@ -1,34 +1,27 @@
-package com.capgemini;
+package com.capgemini.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.List;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import com.capgemini.persistence.UsersRepository;
 import com.capgemini.persistence.dto.UserDto;
 
-class UserTest {
+public class UserTest {
 	
 
 	private UsersRepository usersRepository = new UsersRepository();
 	
 	public UserTest() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
-		
-		
-		
-	}
 
 	@Test
-	void testAddUser() {
+	public void testAddUser() {
 		
 
 		UserDto userDto = new UserDto();
@@ -49,7 +42,7 @@ class UserTest {
 	}
 	
 	@Test
-	void updateUser() {
+	public void updateUser() {
 		
 
 		UserDto userDto = usersRepository.findByLogin("admin");
@@ -69,7 +62,7 @@ class UserTest {
 	}
 	
 	@Test
-	void testDeleteUser() {
+	public void testDeleteUser() {
 		
 
 		UserDto userDto = usersRepository.findByLogin("admin");

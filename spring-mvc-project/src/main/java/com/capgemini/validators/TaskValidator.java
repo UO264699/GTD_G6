@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.capgemini.model.Task;
-import com.capgemini.model.User;
+
 import com.capgemini.services.TasksService;
 
 @Component
@@ -28,6 +28,9 @@ public class TaskValidator implements Validator {
 				errors.rejectValue("title", "task.title", "Ya hay una task con ese titulo");
 			} else System.out.println("1");
 		} else System.out.println("2");
+		
+		
+		
 		
 	}
 }
